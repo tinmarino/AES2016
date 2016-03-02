@@ -12,7 +12,13 @@
     },
 
     com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
-		default: { up: white32, down: white32, font: default, pressedOffsetX: 1, pressedOffsetY: -1 },
+		default: { 
+				up: white32, 
+				down: white32, 
+				font: default, 
+				fontColor: grey,
+				pressedOffsetX: 1, 
+				pressedOffsetY: -1 },
     }
 
     com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {

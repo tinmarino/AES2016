@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 
 
-public class MainRenderer extends AbstractScreen
+public class MainRenderer implements Screen
  {
 
 	SpriteBatch batch;
@@ -33,15 +33,8 @@ public class MainRenderer extends AbstractScreen
 
 	Table leftTable; 
 	Table rightTable; 
-	int ibWidth = 200;  
 
 	Color cButton = new Color(0.5f, 0.5f, 0.5f, 1); 
-
-	/**
-	 *
-	 */
-	public MainRenderer() {
-	}
 
 	@Override
 	public void show() {
@@ -66,8 +59,7 @@ public class MainRenderer extends AbstractScreen
     				} 
     			}
 		);
-		//myButton.setFillParent(true);
-
+		myButton.setFillParent(true);
 
 		// BUTTON PARAM  TODO replace wirth a image 
 		TextButton bParam = new TextButton("params", skin); 
@@ -77,11 +69,10 @@ public class MainRenderer extends AbstractScreen
     				public void clicked(InputEvent event, float x, float y) {
     				    super.clicked(event,x,y); 
 		    			Gdx.app.log("MARTIN Stage", "button click"); 
-						routineParam(); 
     				} 
     			}
 		);
-		//bParam.setFillParent(true);
+		bParam.setFillParent(true);
 
 
 
@@ -97,7 +88,7 @@ public class MainRenderer extends AbstractScreen
     				} 
     			}
 		);
-		//bCipher.setFillParent(true); 
+		bCipher.setFillParent(true); 
 
 
 		// ToClipboard button to copy to clipboard 
@@ -111,7 +102,7 @@ public class MainRenderer extends AbstractScreen
     				} 
     			}
 		);
-		//bToClipboard.setFillParent(true); 
+		bToClipboard.setFillParent(true); 
 
 		// TextField1
 		textFieldClear = new TextField("This is a raw input ", skin);
@@ -123,21 +114,19 @@ public class MainRenderer extends AbstractScreen
 		leftTable = new Table(); 
 		rightTable = new Table(); 
 		
-		leftTable.add(textFieldClear).expand().fill();
+		leftTable.add(textFieldClear);
 		leftTable.row();
-		leftTable.add(textFieldCoded).expand().fill();
-		
+		leftTable.add(textFieldCoded);
 
-		// RIGHT 
-    	rightTable.add(myButton		).width(ibWidth).pad(10).expand().fill().row();
-    	rightTable.add(bParam		).width(ibWidth).pad(10).expand().fill().row();
-    	rightTable.add(bCipher		).width(ibWidth).pad(10).expand().fill().row();
-    	rightTable.add(bToClipboard	).width(ibWidth).pad(10).expand().fill().row(); 
+    	rightTable.add(myButton).expandX().row();
+    	rightTable.add(bParam).expandX().row();
+    	rightTable.add(bCipher).expandX().row();
+    	rightTable.add(bToClipboard).expandX().row(); 
 
 
 		
-		table.add(leftTable ).expand().fill(); 
-		table.add(rightTable).expand().fill(); 
+		table.add(leftTable).expand(); 
+		table.add(rightTable).expand(); 
     	table.setFillParent(true);
     	stage.addActor(table);
 		leftTable.debug(); 
@@ -153,6 +142,10 @@ public class MainRenderer extends AbstractScreen
 		Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+		// BATCH 
+		batch.begin();
+		batch.draw(img, 0, 0);
+		batch.end();
 
 		//STAGE 
 		stage.act(delta); 
@@ -168,20 +161,31 @@ public class MainRenderer extends AbstractScreen
 
 	}
 
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+
+	}
 
 
 	@Override
-	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true);
+	public void resize(int arg0, int arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void resume() {
 		// TODO Auto-generated method stub
 
 	}
 
 
 
-	public void routineParam(){
-		AbstractScreen paramScreen = new ParamScreen(skin); 
-		this.goFoward = true; 
-		this.setNextScreen(paramScreen); 
-	}
 }
