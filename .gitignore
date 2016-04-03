@@ -1,4 +1,4 @@
-# Graddle 
+## Graddle 
 *.bin
 
 ## Java
@@ -32,21 +32,6 @@ android/gen/
 out/
 com_crashlytics_export_strings.xml
 
-## Eclipse
-.classpath
-.project
-.metadata
-**/bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.externalToolBuilders/
-*.launch
 
 ## NetBeans
 **/nbproject/private/
@@ -57,11 +42,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 
-## Gradle
-
-.gradle
-gradle-app.setting
-build/
 
 ## OS Specific
 .DS_Store
