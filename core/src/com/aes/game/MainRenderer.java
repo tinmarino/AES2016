@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 
@@ -120,13 +121,33 @@ public class MainRenderer extends AbstractScreen
 		);
 		//bToClipboard.setFillParent(true); 
 
+
+
 		// TextField1
 		textFieldClear = new TextField("This is a raw input ", skin);
 
 		textFieldCoded = new TextField("This will be the crippted text", skin);
 
-		textArea 	= new TextArea("TextAreza", skin); 
+		TextFieldStyle tfStyle = new TextFieldStyle(); 
+		tfStyle.font = skin.getFont("default");
+		tfStyle.fontColor = Color.BLACK ;  
+		//tfStyle.background = skin.getDrawable("white31") ; 
+		//tfStyle.cursor = skin.newDrawable("white32", Color.BLACK);
+		tfStyle.cursor = PixmapFactory.getCursorDrawable();
+		tfStyle.cursor.setMinWidth(2f);
+		
+		tfStyle.selection = PixmapFactory.drawableSelection();
+//skin.newDrawable("dialogDim", 0, 0, 1, 0.5f); //skin.newDrawable("white32", 0.5f, 0.5f, 0.5f, 0.5f);
+
+
+		textArea 	= new TextArea("TextAreza", tfStyle); 
 		textArea.setPrefRows(3); 
+		//textArea.cursor = PixmapFactory.drawableSelection();
+//skin.getFont("default").setScale(0.5f, 0.5f);	
+		//textArea.cursor = skin.newDrawable("up",0,0,1,1 ); 
+		
+
+	
 
     	
 		// TABLE 

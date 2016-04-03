@@ -1,9 +1,29 @@
+
+TEXTT FIELD STYLE
+		public BitmapFont font;
+		public Color fontColor;
+		/** Optional. */
+		public Color focusedFontColor, disabledFontColor;
+		/** Optional. */
+		public Drawable background, focusedBackground, disabledBackground, cursor, selection;
+		/** Optional. */
+		public BitmapFont messageFont;
+		/** Optional. */
+		public Color messageFontColor;
+
+
 receive esc input to go back
     nmap <buffer> <silent> <leader>js :JavaSearch -x declarations -s project<cr> 
 make exc work./gradlew desktop:run
 
 
+GRADLE 
+       println 'compiling source'
 
+	add in anroid build.gradle 
+			dexOptions {
+			    preDexLibraries = false
+			}
 FONT 
   USe Hiero in jar 
 

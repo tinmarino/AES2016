@@ -1,5 +1,7 @@
 {
 
+
+
     com.badlogic.gdx.graphics.Color: {
 		black: { r: 0, g: 0, b: 0, a: 1 },
 		white: { r: 1, g: 1, b: 1, a: 1 },
@@ -24,7 +26,7 @@
     }
 
     com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
-        default: { font: default, fontColor : grey},
+	default: { font: default, fontColor : grey, cursor: white32, selection: white32},
     }
     com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
         default: { font: default, fontColor : grey},
