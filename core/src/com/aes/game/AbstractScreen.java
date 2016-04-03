@@ -15,6 +15,8 @@ public class AbstractScreen implements Screen, InputProcessor
 	 public boolean goBack   = false; 
 	 public boolean goFoward = false; 
 
+	 public String sName = "AbstractScreen";
+
 	 
 
 	 public AbstractScreen getPreviousScreen(){
@@ -24,6 +26,7 @@ public class AbstractScreen implements Screen, InputProcessor
 	 public AbstractScreen getNextScreen(){
 		 return this.nextScreen; 
 	 }
+
 
 	 public void setPreviousScreen(AbstractScreen abstractScreen){
 		 this.previousScreen = abstractScreen;  
@@ -84,22 +87,31 @@ public class AbstractScreen implements Screen, InputProcessor
 
 	@Override
 	public boolean keyDown(int keycode) {
-		Gdx.app.log("Abstract Screen ok I changes things now keydown mother fucker : ", "" + keycode ); 
+		Gdx.app.log("KeyDown : ", "from class " + sName + " for key :" + keycode ); 
 				this.goBack = true; 
 				Gdx.app.log("Key ", "" + this.getPreviousScreen() ); 
 		switch(keycode){
 			case Keys.ESCAPE:
+
+				Gdx.app.log("Key ", "I try to go back " + this.getPreviousScreen() ); 
 				this.goBack = true; 
-				Gdx.app.log("Key ", "" + this.getPreviousScreen() ); 
 				return true;
 			case Keys.F:
+				Gdx.app.log("Key ", "I try to go foward " + this.getPreviousScreen() ); 
 				this.goFoward = true; 
 				return true;
+
+			case Keys.P: 
+				Gdx.app.log("", "PreviousScreen is " + this.getPreviousScreen()); 
+				return true; 
+
+			case Keys.N: 
+				Gdx.app.log("", "Nest Screen is " + this.getNextScreen()); 
+				return true; 
+
 			default: 
-				this.goBack = true; 
-				Gdx.app.log("Key aaaaaaaaas", "" + this.getPreviousScreen() ); 
-				return true;
-				
+				Gdx.app.log("", "Default nothing haappens"); 
+				return false;
 		}
 	}
 

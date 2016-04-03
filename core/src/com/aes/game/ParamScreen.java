@@ -12,6 +12,7 @@ public class ParamScreen extends AbstractScreen {
 
 	ParamScreen(Skin skin){
 		super(); 
+		sName = "ParamScreen";
 	}
 
 
@@ -40,12 +41,14 @@ public class ParamScreen extends AbstractScreen {
 
 	@Override
 	public void dispose() {
+		Gdx.app.log("Param Screen ", "Dispose()"); 
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void hide() {
+		Gdx.app.log("Param Screen ", "Hide()"); 
 		// TODO Auto-generated method stub
 
 	}

@@ -21,6 +21,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class MainRenderer extends AbstractScreen
  {
 
+	
 	SpriteBatch batch;
 	Texture img;
 	Stage stage; 
@@ -41,6 +42,7 @@ public class MainRenderer extends AbstractScreen
 	 *
 	 */
 	public MainRenderer() {
+		sName = "MainRenderer";
 	}
 
 	@Override
@@ -53,11 +55,7 @@ public class MainRenderer extends AbstractScreen
 		// Input 
 		stage = new Stage(); 
 
-		InputMultiplexer inputMultiplexer = new InputMultiplexer();
-		Gdx.input.setInputProcessor(inputMultiplexer);
-		inputMultiplexer.addProcessor(this);
-		inputMultiplexer.addProcessor(stage);
-		Gdx.input.setInputProcessor(inputMultiplexer);
+		Global.inputMultiplexer.addProcessor(stage);
 
 
 
@@ -171,11 +169,14 @@ public class MainRenderer extends AbstractScreen
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		Gdx.app.log("Main Renderer :", "Dispose()"); 
 		if (null != stage){
-			//this.inputMultiplexer.removeProcessor(stage);
+			Global.inputMultiplexer.addProcessor(stage);
 			stage.dispose(); 
 		}
-		skin.dispose();
+		if (null != skin){
+			skin.dispose();
+		}
 
 	}
 	@Override
@@ -195,7 +196,7 @@ public class MainRenderer extends AbstractScreen
 
 
 	public void routineParam(){
-		this.goFoward = true; 
 		this.setNextScreen(new ParamScreen(skin)); 
+		this.goFoward = true; 
 	}
 }
