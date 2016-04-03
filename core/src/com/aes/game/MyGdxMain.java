@@ -1,49 +1,27 @@
 package com.aes.game;
 
-import com.badlogic.gdx.Game;
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class MyGdxMain extends Game {
-	public  AbstractScreen currentScreen; 
-
-	
+public class MyGdxMain extends ApplicationAdapter {
+	SpriteBatch batch;
+	Texture img;
 	
 	@Override
 	public void create () {
-		currentScreen = new MainRenderer(); 
-		currentScreen.show();
+		batch = new SpriteBatch();
+		img = new Texture("badlogic.jpg");
 	}
 
 	@Override
 	public void render () {
-		currentScreen.render(Gdx.graphics.getDeltaTime()); // Calling mainScreen.render()
-
-    	if (currentScreen.goBack) {
-			currentScreen.goBack = false; 
-			
-			Gdx.app.log("MARTIN MyGdx", " try go Back "); 
-			if (null != currentScreen.getPreviousScreen())
-			{
-				AbstractScreen previousScreen = currentScreen.getPreviousScreen();
-				previousScreen.setNextScreen(currentScreen);
-				previousScreen.show(); 
-				currentScreen = previousScreen;
-			}
-    	} 
-
-		else if (currentScreen.goFoward) {
-			currentScreen.goFoward  = false; 
-
-			if (null != currentScreen.getNextScreen())
-			{
-				AbstractScreen nextScreen = currentScreen.getNextScreen();
-				nextScreen.setPreviousScreen(currentScreen);
-				nextScreen.show();
-				currentScreen = nextScreen;
-			}
-    	}
-
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+		batch.draw(img, 0, 0);
+		batch.end();
 	}
-
-
 }
