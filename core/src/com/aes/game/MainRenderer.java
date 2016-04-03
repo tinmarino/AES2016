@@ -2,7 +2,6 @@ package com.aes.game;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -30,6 +30,7 @@ public class MainRenderer extends AbstractScreen
 	private Table table;
 	TextField textFieldClear; 
 	TextField textFieldCoded; 
+	TextArea  textArea;
 
 
 	Table leftTable; 
@@ -121,7 +122,11 @@ public class MainRenderer extends AbstractScreen
 
 		// TextField1
 		textFieldClear = new TextField("This is a raw input ", skin);
+
 		textFieldCoded = new TextField("This will be the crippted text", skin);
+
+		textArea 	= new TextArea("TextAreza", skin); 
+		textArea.setPrefRows(3); 
 
     	
 		// TABLE 
@@ -129,9 +134,9 @@ public class MainRenderer extends AbstractScreen
 		leftTable = new Table(); 
 		rightTable = new Table(); 
 		
-		leftTable.add(textFieldClear).expand().fill();
-		leftTable.row();
-		leftTable.add(textFieldCoded).expand().fill();
+		leftTable.add(textArea).expand().fill();
+		//leftTable.row();
+		//leftTable.add(textFieldCoded).expand().fill();
 		
 
 		// RIGHT 
@@ -156,7 +161,7 @@ public class MainRenderer extends AbstractScreen
 	@Override
 	public void render(float delta) {
 		// CLEAR 
-		Gdx.gl.glClearColor(0, 1, 0, 1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 

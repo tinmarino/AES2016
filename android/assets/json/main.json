@@ -7,8 +7,10 @@
     },
     com.badlogic.gdx.graphics.g2d.BitmapFont: {
         default: { 
-	   file: font/BeyondWonderLand32.fnt, 
-	},
+				//file: font/BeyondWonderLand32.fnt, 
+				file: font/Ubuntu32Black.fnt 
+				
+		},
     },
 
     com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
