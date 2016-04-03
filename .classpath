@@ -13,9 +13,13 @@
 	<classpathentry kind="lib" path="/home2/tourneboeuf/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-android/1.5.5/16bbdb750c6e557693820bbcd31dd992c0f6839f/gdx-backend-android-1.5.5.jar"/>
 	<classpathentry kind="lib" path="/home2/tourneboeuf/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-box2d/1.5.5/8931a097fc80279c6b9ee695560a85c1e280c7ea/gdx-box2d-1.5.5.jar"/>
 
+	<!--  ANDORID --> 
 	<classpathentry kind="lib" path="/home2/tourneboeuf/Software/Android/SDK/android-sdk-linux/platforms/android-22/android.jar"/>
 
-	<classpathentry kind="lib" path="core/build/libs/core-1.0.jar"/>
+
+	<!--  DESKTOP --> 
+	<classpathentry kind="lib" path="/home2/tourneboeuf/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.5.5/3839f73b56e77e2d06cb874952dff466756e1e25/gdx-backend-lwjgl-1.5.5.jar"/>
+
 	<classpathentry kind="lib" path="gradle/wrapper/gradle-wrapper.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="core/build/classes/main"/>
