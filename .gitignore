@@ -1,5 +1,8 @@
-## Java
+# Graddle 
+*.bin
 
+## Java
+*.jar
 *.class
 *.war
 *.ear

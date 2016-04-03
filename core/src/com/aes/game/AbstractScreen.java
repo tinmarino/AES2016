@@ -84,7 +84,7 @@ public class AbstractScreen implements Screen, InputProcessor
 
 	@Override
 	public boolean keyDown(int keycode) {
-		Gdx.app.log("Abstract Screen keydown mother fucker : ", "" + keycode ); 
+		Gdx.app.log("Abstract Screen ok I changes things now keydown mother fucker : ", "" + keycode ); 
 				this.goBack = true; 
 				Gdx.app.log("Key ", "" + this.getPreviousScreen() ); 
 		switch(keycode){
