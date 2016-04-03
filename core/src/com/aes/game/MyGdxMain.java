@@ -3,7 +3,7 @@ package com.aes.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
-public class MyAesGame extends Game {
+public class MyGdxMain extends Game {
 	public  AbstractScreen currentScreen; 
 
 	
