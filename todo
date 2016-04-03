@@ -1,2 +1,3 @@
 receive esc input to go back
-receive esc input to go back
+    nmap <buffer> <silent> <leader>js :JavaSearch -x declarations -s project<cr> 
+make exc work./gradlew desktop:run

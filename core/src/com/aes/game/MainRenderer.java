@@ -2,7 +2,7 @@ package com.aes.game;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -33,7 +33,7 @@ public class MainRenderer extends AbstractScreen
 
 	Table leftTable; 
 	Table rightTable; 
-	int ibWidth = 200;  
+	int ibWidth = 200;
 
 	Color cButton = new Color(0.5f, 0.5f, 0.5f, 1); 
 
@@ -45,12 +45,20 @@ public class MainRenderer extends AbstractScreen
 
 	@Override
 	public void show() {
+		super.show(); 
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		// TODO Auto-generated method stub
 
+		// Input 
 		stage = new Stage(); 
-		Gdx.input.setInputProcessor(stage);
+
+		InputMultiplexer inputMultiplexer = new InputMultiplexer();
+		Gdx.input.setInputProcessor(inputMultiplexer);
+		inputMultiplexer.addProcessor(this);
+		inputMultiplexer.addProcessor(stage);
+		Gdx.input.setInputProcessor(inputMultiplexer);
+
 
 
     	skin = new Skin(Gdx.files.internal("json/main.json") , new TextureAtlas("img/ui/white32_pa.atlas") ); 
@@ -155,7 +163,7 @@ public class MainRenderer extends AbstractScreen
 
 
 		//STAGE 
-		stage.act(delta); 
+		//stage.act(delta); 
 		stage.draw(); 
 		//Table.drawDebug( stage);
 	}
@@ -163,9 +171,16 @@ public class MainRenderer extends AbstractScreen
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		stage.dispose(); 
+		if (null != stage){
+			//this.inputMultiplexer.removeProcessor(stage);
+			stage.dispose(); 
+		}
 		skin.dispose();
 
+	}
+	@Override
+	public void hide() {
+		dispose();
 	}
 
 
@@ -180,8 +195,7 @@ public class MainRenderer extends AbstractScreen
 
 
 	public void routineParam(){
-		AbstractScreen paramScreen = new ParamScreen(skin); 
 		this.goFoward = true; 
-		this.setNextScreen(paramScreen); 
+		this.setNextScreen(new ParamScreen(skin)); 
 	}
 }

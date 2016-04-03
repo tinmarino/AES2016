@@ -1,28 +1,46 @@
 package com.aes.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Gdx;
 
 public class MyGdxMain extends Game {
-	Screen mainScreen; 
+	public  AbstractScreen currentScreen; 
+
+	
 	
 	@Override
 	public void create () {
-		mainScreen = new MainRenderer(); 
-		setScreen(mainScreen);  
+		currentScreen = new MainRenderer(); 
+		currentScreen.show();
 	}
 
 	@Override
 	public void render () {
-		super.render(); // Calling mainScreen.render()
-    	AbstractScreen currentScreen = (AbstractScreen) getScreen();
+		currentScreen.render(Gdx.graphics.getDeltaTime()); // Calling mainScreen.render()
 
     	if (currentScreen.goBack) {
-    	    setScreen(currentScreen.getPreviousScreen());
+			currentScreen.goBack = false; 
+			
+			Gdx.app.log("MARTIN MyGdx", " try go Back "); 
+			if (null != currentScreen.getPreviousScreen())
+			{
+				AbstractScreen previousScreen = currentScreen.getPreviousScreen();
+				previousScreen.setNextScreen(currentScreen);
+				previousScreen.show(); 
+				currentScreen = previousScreen;
+			}
     	} 
 
 		else if (currentScreen.goFoward) {
-    	    setScreen(currentScreen.getNextScreen());
+			currentScreen.goFoward  = false; 
+
+			if (null != currentScreen.getNextScreen())
+			{
+				AbstractScreen nextScreen = currentScreen.getNextScreen();
+				nextScreen.setPreviousScreen(currentScreen);
+				nextScreen.show();
+				currentScreen = nextScreen;
+			}
     	}
 
 	}
