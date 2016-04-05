@@ -27,8 +27,8 @@ allprojects {
 
     repositories {
         mavenCentral()
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        //maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        //maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
 }
 
@@ -56,6 +56,7 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
     }
+
 
 }
 

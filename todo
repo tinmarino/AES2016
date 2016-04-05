@@ -1,3 +1,10 @@
+TODO 
+  cipher, 
+  good buttons
+  test on 2 devices PC + andorid 
+
+
+
 
 TEXTT FIELD STYLE
 		public BitmapFont font;
@@ -18,12 +25,31 @@ make exc work./gradlew desktop:run
 
 
 GRADLE 
+gradlew android:installDebug android:run
+./gradlew app:dependencies
        println 'compiling source'
+
+	defaultConfig {
+	    //applicationId
+	    minSdkVersion 14
+	    targetSdkVersion 22
+	    versionCode 1
+	    versionName "1.0"
+	
+	    multiDexEnabled true
+	}
 
 	add in anroid build.gradle 
 			dexOptions {
 			    preDexLibraries = false
 			}
+
+	//dexOptions {
+	//    preDexLibraries = false
+	//}
+	//multiDexEnabled true
+
+
 FONT 
   USe Hiero in jar 
 

@@ -27,7 +27,6 @@ public class MainRenderer extends AbstractScreen
 	Texture img;
 	Stage stage; 
 	Skin skin;
-	private TextButton myButton;
 	private Table table;
 	TextField textFieldClear; 
 	TextField textFieldCoded; 
@@ -36,8 +35,10 @@ public class MainRenderer extends AbstractScreen
 
 	Table leftTable; 
 	Table rightTable; 
-	int ibWidth = 200;
 
+	// BUTTON params 
+	int ibWidth  = 150;
+	int ibHeight = 50;
 	Color cButton = new Color(0.5f, 0.5f, 0.5f, 1); 
 
 	/**
@@ -63,22 +64,11 @@ public class MainRenderer extends AbstractScreen
 
     	skin = new Skin(Gdx.files.internal("json/main.json") , new TextureAtlas("img/ui/white32_pa.atlas") ); 
     	
-		// BUTTON 1
-    	myButton = new TextButton("Salut les loulou",skin);
-    	myButton.addListener(
-				new ClickListener(){
-    				@Override
-    				public void clicked(InputEvent event, float x, float y) {
-    				    super.clicked(event,x,y); 
-		    			Gdx.app.log("MARTIN Stage", "button click"); 
-    				} 
-    			}
-		);
-		//myButton.setFillParent(true);
 
 
 		// BUTTON PARAM  TODO replace wirth a image 
 		TextButton bParam = new TextButton("params", skin); 
+		bParam.setColor(cButton);
     	bParam.addListener(
 				new ClickListener(){
     				@Override
@@ -96,6 +86,7 @@ public class MainRenderer extends AbstractScreen
 
 		// Cippher
 		TextButton bCipher = new TextButton("Cipher", skin); 
+		bCipher.setColor(cButton);
     	bCipher.addListener(
 				new ClickListener(){
     				@Override
@@ -110,6 +101,7 @@ public class MainRenderer extends AbstractScreen
 
 		// ToClipboard button to copy to clipboard 
 		TextButton bToClipboard = new TextButton("copy", skin); 
+		bToClipboard.setColor(cButton);
     	bToClipboard.addListener(
 				new ClickListener(){
     				@Override
@@ -156,20 +148,23 @@ public class MainRenderer extends AbstractScreen
 		rightTable = new Table(); 
 		
 		leftTable.add(textArea).expand().fill();
+		//leftTable.setFillParent(true); 
 		//leftTable.row();
 		//leftTable.add(textFieldCoded).expand().fill();
 		
 
 		// RIGHT 
-    	rightTable.add(myButton		).width(ibWidth).pad(10).expand().fill().row();
-    	rightTable.add(bParam		).width(ibWidth).pad(10).expand().fill().row();
-    	rightTable.add(bCipher		).width(ibWidth).pad(10).expand().fill().row();
-    	rightTable.add(bToClipboard	).width(ibWidth).pad(10).expand().fill().row(); 
+    	rightTable.add(bParam		).width(ibWidth).height(ibHeight).pad(10).expand().fill().row();
+    	rightTable.add(bCipher		).width(ibWidth).height(ibHeight).pad(10).expand().fill().row();
+    	rightTable.add(bToClipboard	).width(ibWidth).height(ibHeight).pad(10).expand().fill().row(); 
+		//rightTable.setFillParent(true);
 
+		int w1 = Math.round(Gdx.graphics.getWidth() * 0.7f);
+		int w2 = Math.round(Gdx.graphics.getWidth() * 0.3f);
 
 		
-		table.add(leftTable ).expand().fill(); 
-		table.add(rightTable).expand().fill(); 
+		table.add(leftTable ).width(w1).expand().fill(); 
+		table.add(rightTable).width(w2).expand().fill(); 
     	table.setFillParent(true);
     	stage.addActor(table);
 		leftTable.debug(); 
