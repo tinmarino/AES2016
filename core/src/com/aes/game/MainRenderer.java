@@ -1,6 +1,7 @@
 package com.aes.game;
 
 
+import com.aes.game.base64.Base64;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -93,6 +94,7 @@ public class MainRenderer extends AbstractScreen
     				public void clicked(InputEvent event, float x, float y) {
     				    super.clicked(event,x,y); 
 		    			Gdx.app.log("MARTIN Stage", "Cipher clieck"); 
+						routineCipher(); 
     				} 
     			}
 		);
@@ -219,5 +221,23 @@ public class MainRenderer extends AbstractScreen
 	public void routineParam(){
 		this.setNextScreen(new ParamScreen(skin)); 
 		this.goFoward = true; 
+	}
+
+
+	public void routineCipher(){
+		/* Starting with IV1=
+		 *
+		*/
+		String sIn 	= ""; 
+		String sOut = ""; 
+
+		sIn = textArea.getText(); 
+
+		sOut = MyCipher.CipherMain(sIn);
+
+		textArea.setText( sOut );
+
+
+		return; 
 	}
 }
