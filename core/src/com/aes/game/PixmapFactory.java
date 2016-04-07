@@ -29,9 +29,8 @@ public class PixmapFactory{
 		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
 	}
 
-	public static Drawable getCursorDrawable(){
-
-		Pixmap pixmap = monocromaticPixmap(2, 16, Color.BLACK);
+	public static Drawable getDrawableMonocromatic(int x, int y, Color color){
+		Pixmap pixmap = monocromaticPixmap(x, y, color);
 		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
 	}
 

@@ -1,7 +1,7 @@
 package com.aes.game;
 
 
-import com.aes.game.base64.Base64;
+import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -10,13 +10,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
 
 
 
@@ -32,15 +36,18 @@ public class MainRenderer extends AbstractScreen
 	TextField textFieldClear; 
 	TextField textFieldCoded; 
 	TextArea  textArea;
+	ScrollPane scrollPane;
 
 
 	Table leftTable; 
 	Table rightTable; 
 
 	// BUTTON params 
-	int ibWidth  = 150;
-	int ibHeight = 50;
-	Color cButton = new Color(0.5f, 0.5f, 0.5f, 1); 
+	//ibWidth = ibWidth + 1;
+	//if (Global.platformOs.getOs() == OS.ANDROID){
+	//	ibWidth = ibWidth / 2;
+	//}
+
 
 	/**
 	 *
@@ -52,6 +59,8 @@ public class MainRenderer extends AbstractScreen
 	@Override
 	public void show() {
 		super.show(); 
+
+
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
 		// TODO Auto-generated method stub
@@ -66,6 +75,10 @@ public class MainRenderer extends AbstractScreen
     	skin = new Skin(Gdx.files.internal("json/main.json") , new TextureAtlas("img/ui/white32_pa.atlas") ); 
     	
 
+		int ibWidth  = 150;
+		if (Global.platformOs.getOs() == OS.ANDROID){ibWidth /= 2;}
+		int ibHeight = 50;
+		Color cButton = new Color(0.5f, 0.5f, 0.5f, 1); 
 
 		// BUTTON PARAM  TODO replace wirth a image 
 		TextButton bParam = new TextButton("params", skin); 
@@ -110,6 +123,7 @@ public class MainRenderer extends AbstractScreen
     				public void clicked(InputEvent event, float x, float y) {
     				    super.clicked(event,x,y); 
 		    			Gdx.app.log("MARTIN Stage", "click copy "); 
+						routineCopy();
     				} 
     			}
 		);
@@ -117,28 +131,49 @@ public class MainRenderer extends AbstractScreen
 
 
 
-		// TextField1
-		textFieldClear = new TextField("This is a raw input ", skin);
-
-		textFieldCoded = new TextField("This will be the crippted text", skin);
-
+		// TEXT AREA
 		TextFieldStyle tfStyle = new TextFieldStyle(); 
-		tfStyle.font = skin.getFont("default");
+		switch (Global.platformOs.getOs()){
+		case ANDROID : 
+			tfStyle.font = skin.getFont("android");
+			break;
+		default: 
+			tfStyle.font = skin.getFont("default");
+			break;
+
+		}
+
+		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK);
+		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE);
 		tfStyle.fontColor = Color.BLACK ;  
-		//tfStyle.background = skin.getDrawable("white31") ; 
-		//tfStyle.cursor = skin.newDrawable("white32", Color.BLACK);
-		tfStyle.cursor = PixmapFactory.getCursorDrawable();
 		tfStyle.cursor.setMinWidth(2f);
+		//tfStyle.background = skin.getDrawable("white31") ; 
 		
-		tfStyle.selection = PixmapFactory.drawableSelection();
-//skin.newDrawable("dialogDim", 0, 0, 1, 0.5f); //skin.newDrawable("white32", 0.5f, 0.5f, 0.5f, 0.5f);
 
-
-		textArea 	= new TextArea("TextAreza", tfStyle); 
+		textArea 	= new TextArea("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
 		textArea.setPrefRows(3); 
-		//textArea.cursor = PixmapFactory.drawableSelection();
+		textArea.setTextFieldListener(new TextFieldListener()
+		{
+			@Override
+			public void keyTyped(TextField textField, char c)
+			{
+				// Handle a newline properly. If not handled here, the TextField
+				// will advance to the next field.
+					if (c == '\n')
+					{
+						textArea.appendText("\n");
+						stage.setKeyboardFocus(textField);
+						textArea.getOnscreenKeyboard().show(true);
+						scrollPane.layout();
+					}
+				}
+			});
+
+			// TODO Auto-generated method stub
+			//textArea.cursor = PixmapFactory.drawableSelection();
 //skin.getFont("default").setScale(0.5f, 0.5f);	
 		//textArea.cursor = skin.newDrawable("up",0,0,1,1 ); 
+		textArea.setPrefRows(50);
 		
 
 	
@@ -149,10 +184,21 @@ public class MainRenderer extends AbstractScreen
 		leftTable = new Table(); 
 		rightTable = new Table(); 
 		
-		leftTable.add(textArea).expand().fill();
+		leftTable.add(textArea).expand().fill().center().row();
 		//leftTable.setFillParent(true); 
 		//leftTable.row();
 		//leftTable.add(textFieldCoded).expand().fill();
+		
+		//SCROLLPANE 
+		ScrollPaneStyle spStyle = new ScrollPaneStyle();
+		spStyle.vScroll = PixmapFactory.getDrawableMonocromatic(5, 25, Color.GRAY) ;
+		spStyle.vScrollKnob	= PixmapFactory.getDrawableMonocromatic(10, 10, Color.BLUE) ;
+		scrollPane = new ScrollPane(leftTable);
+		scrollPane.setScrollingDisabled(true, false);
+	    scrollPane.setForceScroll(true, false);
+		scrollPane.setOverscroll(false, false);
+		
+
 		
 
 		// RIGHT 
@@ -165,7 +211,7 @@ public class MainRenderer extends AbstractScreen
 		int w2 = Math.round(Gdx.graphics.getWidth() * 0.3f);
 
 		
-		table.add(leftTable ).width(w1).expand().fill(); 
+		table.add(scrollPane).width(w1).expand().fill(); 
 		table.add(rightTable).width(w2).expand().fill(); 
     	table.setFillParent(true);
     	stage.addActor(table);
@@ -184,7 +230,7 @@ public class MainRenderer extends AbstractScreen
 
 
 		//STAGE 
-		//stage.act(delta); 
+		stage.act(); 
 		stage.draw(); 
 		//Table.drawDebug( stage);
 	}
@@ -225,19 +271,21 @@ public class MainRenderer extends AbstractScreen
 
 
 	public void routineCipher(){
-		/* Starting with IV1=
-		 *
-		*/
-		String sIn 	= ""; 
-		String sOut = ""; 
-
-		sIn = textArea.getText(); 
-
-		sOut = MyCipher.CipherMain(sIn);
-
+		String sIn = textArea.getText(); 
+		String sOut = MyCipher.CipherMain(sIn);
 		textArea.setText( sOut );
-
-
 		return; 
+	}
+
+	public void routineCopy(){
+		//this.setNextScreen(new ScrollPaneTest());
+		//this.goFoward = true;
+
+		Gdx.app.log("TBF", "scrollPane" +   scrollPane.getScrollPercentX() );
+		Gdx.app.log("TBF", "text height " +   textArea.getHeight() );
+		Gdx.app.log("TBF", "line number  " +   textArea.getLines() );
+		//textArea.setHeight(1000);
+		//scrollPane.layout();
+		scrollPane.setScrollPercentX( scrollPane.getScrollPercentX() + 10 );
 	}
 }

@@ -11,8 +11,13 @@
         default: { 
 				//file: font/BeyondWonderLand32.fnt, 
 				file: font/Ubuntu32Black.fnt 
-				
 		},
+		//unbutu16white: {
+		android: {
+			file : font/Ubuntu16White.fnt
+		},
+			//file : font/Ubuntu16White.fnt
+		//}
     },
 
     com.badlogic.gdx.scenes.scene2d.ui.TextButton$TextButtonStyle: {
@@ -26,7 +31,8 @@
     }
 
     com.badlogic.gdx.scenes.scene2d.ui.TextField$TextFieldStyle: {
-	default: { font: default, fontColor : grey, cursor: white32, selection: white32},
+		default: { font: default, fontColor : grey, cursor: white32, selection: white32},
+		android: { font: default, fontColor: black, cursor: white32, selection: white32},
     }
     com.badlogic.gdx.scenes.scene2d.ui.Label$LabelStyle: {
         default: { font: default, fontColor : grey},

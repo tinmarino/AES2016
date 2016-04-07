@@ -91,8 +91,9 @@ public class AbstractScreen implements Screen, InputProcessor
 				this.goBack = true; 
 				Gdx.app.log("Key ", "" + this.getPreviousScreen() ); 
 		switch(keycode){
+			// GO BACK 
 			case Keys.ESCAPE:
-
+			case Keys.BACK:
 				Gdx.app.log("Key ", "I try to go back " + this.getPreviousScreen() ); 
 				this.goBack = true; 
 				return true;
@@ -101,10 +102,12 @@ public class AbstractScreen implements Screen, InputProcessor
 				this.goFoward = true; 
 				return true;
 
+			// GO FOWARD 
 			case Keys.P: 
 				Gdx.app.log("", "PreviousScreen is " + this.getPreviousScreen()); 
 				return true; 
 
+			// DEBUG KEYS
 			case Keys.N: 
 				Gdx.app.log("", "Nest Screen is " + this.getNextScreen()); 
 				return true; 

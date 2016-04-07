@@ -1,20 +1,43 @@
 
 package com.aes.game.android;
 
+import com.aes.game.PlatformOs;
+import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.utils.Global.PlatformOs;
-
-
-
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.view.inputmethod.InputMethodManager;
 
 
 public class PlatformAndroid implements PlatformOs {
 	public  Activity activity;
-	private Orientation orientation;
-	String name="android";
+	public Orientation orientation;
+
+	public PlatformAndroid(){
+	}
+
+	@Override
+	public OS getOs(){
+		return OS.ANDROID;
+	}
+
+	public void showKeyboard(){
+		InputMethodManager imm = (InputMethodManager)
+		                                 activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+		if(imm != null){
+		        imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+		}
+    }
+	public void hideKeyboard(){
+		InputMethodManager imm = (InputMethodManager)
+										  activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+		if(imm != null){
+				imm.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+		}
+	}
+
 
 	@Override
 	public void setOrientation(Orientation orientation) {

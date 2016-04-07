@@ -2,11 +2,19 @@
 package com.aes.game.desktop;
 
 
+import com.aes.game.PlatformOs;
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.utils.Global.PlatformOs;
 
 public class PlatformDesktop implements PlatformOs {
-        public Orientation orientation; 
+		
+    public Orientation orientation; 
+
+
+	@Override
+	public OS getOs(){
+		return OS.DESKTOP;
+	}
+
 	@Override
 	public void setOrientation(Orientation orientation) {
 	        this.orientation = orientation; 
