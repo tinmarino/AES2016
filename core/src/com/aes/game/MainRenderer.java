@@ -74,60 +74,16 @@ public class MainRenderer extends AbstractScreen
 
     	skin = new Skin(Gdx.files.internal("json/main.json") , new TextureAtlas("img/ui/white32_pa.atlas") ); 
     	
-
 		int ibWidth  = 150;
 		if (Global.platformOs.getOs() == OS.ANDROID){ibWidth /= 2;}
 		int ibHeight = 50;
-		Color cButton = new Color(0.5f, 0.5f, 0.5f, 1); 
-
-		// BUTTON PARAM  TODO replace wirth a image 
-		TextButton bParam = new TextButton("params", skin); 
-		bParam.setColor(cButton);
-    	bParam.addListener(
-				new ClickListener(){
-    				@Override
-    				public void clicked(InputEvent event, float x, float y) {
-    				    super.clicked(event,x,y); 
-		    			Gdx.app.log("MARTIN Stage", "button click"); 
-						routineParam(); 
-    				} 
-    			}
-		);
-		//bParam.setFillParent(true);
 
 
-
-
-		// Cippher
-		TextButton bCipher = new TextButton("Cipher", skin); 
-		bCipher.setColor(cButton);
-    	bCipher.addListener(
-				new ClickListener(){
-    				@Override
-    				public void clicked(InputEvent event, float x, float y) {
-    				    super.clicked(event,x,y); 
-		    			Gdx.app.log("MARTIN Stage", "Cipher clieck"); 
-						routineCipher(); 
-    				} 
-    			}
-		);
-		//bCipher.setFillParent(true); 
-
-
-		// ToClipboard button to copy to clipboard 
-		TextButton bToClipboard = new TextButton("copy", skin); 
-		bToClipboard.setColor(cButton);
-    	bToClipboard.addListener(
-				new ClickListener(){
-    				@Override
-    				public void clicked(InputEvent event, float x, float y) {
-    				    super.clicked(event,x,y); 
-		    			Gdx.app.log("MARTIN Stage", "click copy "); 
-						routineCopy();
-    				} 
-    			}
-		);
-		//bToClipboard.setFillParent(true); 
+		TextButton bParam 	= CreateTextButton("param", 	RTYPE.PARAM);
+		TextButton bCipher 	= CreateTextButton("Cipher", 	RTYPE.CIPHER); 
+		TextButton bCopy  	= CreateTextButton("copy",		RTYPE.COPY); 
+		TextButton bPaste 	= CreateTextButton("paste",		RTYPE.PASTE); 
+		TextButton bDbg		= CreateTextButton("dbg",		RTYPE.DBG); 
 
 
 
@@ -202,9 +158,11 @@ public class MainRenderer extends AbstractScreen
 		
 
 		// RIGHT 
-    	rightTable.add(bParam		).width(ibWidth).height(ibHeight).pad(10).expand().fill().row();
-    	rightTable.add(bCipher		).width(ibWidth).height(ibHeight).pad(10).expand().fill().row();
-    	rightTable.add(bToClipboard	).width(ibWidth).height(ibHeight).pad(10).expand().fill().row(); 
+    	rightTable.add(bParam	).width(ibWidth).height(ibHeight).pad(10).expand().fill().row();
+    	rightTable.add(bCipher	).width(ibWidth).height(ibHeight).pad(10).expand().fill().row();
+    	rightTable.add(bCopy	).width(ibWidth).height(ibHeight).pad(10).expand().fill().row(); 
+    	rightTable.add(bPaste	).width(ibWidth).height(ibHeight).pad(10).expand().fill().row(); 
+    	rightTable.add(bDbg		).width(ibWidth).height(ibHeight).pad(10).expand().fill().row(); 
 		//rightTable.setFillParent(true);
 
 		int w1 = Math.round(Gdx.graphics.getWidth() * 0.7f);
@@ -263,6 +221,37 @@ public class MainRenderer extends AbstractScreen
 	}
 
 
+		public TextButton CreateTextButton(String label, RTYPE routineType){
+		Color cButton = new Color(0.5f, 0.5f, 0.5f, 1); 
+				// BUTTON PARAM  TODO replace wirth a image 
+				final RTYPE crType = routineType;
+				TextButton bRes = new TextButton(label, skin); 
+				bRes.setColor(cButton);
+    			bRes.addListener(
+						new ClickListener(){
+    						@Override
+    						public void clicked(InputEvent event, float x, float y) {
+    						    super.clicked(event,x,y); 
+				    			Gdx.app.log("MARTIN Stage", "button click"); 
+								routineDispatch(crType); 
+    						} 
+    					}
+				);
+				return bRes;
+		}
+
+	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG}
+	public void routineDispatch(RTYPE routineType){
+		switch (routineType){
+			case PARAM: 	routineParam(); 	break; 
+			case CIPHER:	routineCipher(); 	break; 
+			case CLEAR: 	routineClear(); 	break;
+			case COPY:		routineCopy();		break;
+			case PASTE:		routinePaste();		break;
+			case DBG:		routineDbg();		break;
+		}
+
+	}
 
 	public void routineParam(){
 		this.setNextScreen(new ParamScreen(skin)); 
@@ -277,15 +266,32 @@ public class MainRenderer extends AbstractScreen
 		return; 
 	}
 
-	public void routineCopy(){
 		//this.setNextScreen(new ScrollPaneTest());
 		//this.goFoward = true;
 
+
+	public void routineClear(){
+		textArea.setText("");
+	}
+
+	public void routinePaste(){
+		textArea.appendText(Global.clipboard.getContents());
+	}
+
+	public void routineCopy(){
+		Global.clipboard.setContents(textArea.getText());
+	}
+
+	public void routineDbg(){
 		Gdx.app.log("TBF", "scrollPane" +   scrollPane.getScrollPercentX() );
 		Gdx.app.log("TBF", "text height " +   textArea.getHeight() );
 		Gdx.app.log("TBF", "line number  " +   textArea.getLines() );
+		Gdx.app.log("TBF", "the content of the clipboard is " + Global.clipboard.getContents());
 		//textArea.setHeight(1000);
 		//scrollPane.layout();
 		scrollPane.setScrollPercentX( scrollPane.getScrollPercentX() + 10 );
 	}
+
 }
+
+

@@ -31,5 +31,5 @@ public class AndroidLauncher extends AndroidApplication {
 
 
 
-//this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//Gdx.graphics.setDisplayMode(320,480,false); //boolean for fullscreen yes or no 
+		//this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	    //Gdx.graphics.setDisplayMode(320,480,false); //boolean for fullscreen yes or no 

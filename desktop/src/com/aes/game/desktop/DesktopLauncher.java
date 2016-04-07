@@ -2,6 +2,7 @@ package com.aes.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
 import com.aes.game.Global;
 import com.aes.game.MyAesGame;
 
@@ -14,6 +15,7 @@ public class DesktopLauncher {
 		config.height = 320 * 2; 
 
 		Global.platformOs = new PlatformDesktop();
+		Global.clipboard  = new LwjglClipboard();
 		//cfg.fullscreen = false;
 		new LwjglApplication(new MyAesGame(), config);
 	}

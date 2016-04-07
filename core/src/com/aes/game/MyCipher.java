@@ -1,6 +1,15 @@
 package com.aes.game;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 
 import com.aes.game.base64.Base64;
 import com.badlogic.gdx.Gdx;
@@ -13,10 +22,12 @@ http://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html#sum
 
 
 public class MyCipher{
+
 	static int 		iBlockSize 			= 32;
 	static int  	iBase64BlockSize 	= 43;
 	static byte[] 	IV					= new byte[iBlockSize];  				
 	static byte[]	IV64				= new byte[iBase64BlockSize];
+	static byte[]   key 				= new byte[iBlockSize];
 
 
 	public static String CipherMain(String sIn){
@@ -127,4 +138,34 @@ public class MyCipher{
 		}
 	}
 
+
+	public static byte[] AesCipher(byte[] sClear, Boolean bCipher)
+	{
+		byte[] encryptedData = new byte[10];
+		try{
+			Cipher c = Cipher.getInstance("AES");
+			SecretKeySpec k = new SecretKeySpec(key, "AES");
+			if (bCipher){c.init(Cipher.ENCRYPT_MODE, k);}
+			else {c.init(Cipher.DECRYPT_MODE, k);}
+			encryptedData = c.doFinal(sClear);
+		}
+		catch (NoSuchAlgorithmException e){
+			Gdx.app.log("TBF", "Errror, no AES algo");
+		}
+		catch (NoSuchPaddingException e){
+			Gdx.app.log("TBF", "Errror, no suh padding");
+		}
+		catch (InvalidKeyException e){
+			Gdx.app.log("TBF", "Errror, AES invalid key");
+		}
+		catch (IllegalBlockSizeException e){
+			Gdx.app.log("TBF", "Errror, AES illegal block size ");
+		}
+		catch (BadPaddingException e){
+			Gdx.app.log("TBF", "Errror, badh padding");
+		}
+
+		return encryptedData;
+	}
 }
+
