@@ -21,9 +21,6 @@ package com.aes.game.base64;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -346,127 +343,8 @@ public class Base64 {
 		copy(new Base64InputStream(inputStream), outputStream);
 	}
 
-	/**
-	 * <p>
-	 * Encodes data from the given source file contents and writes them in the
-	 * given target file, wrapping every encoded line every <em>wrapAt</em>
-	 * characters. A <em>wrapAt</em> value less than 1 disables wrapping.
-	 * </p>
-	 * 
-	 * @param source
-	 *            The source file, from which decoded data are read.
-	 * @param target
-	 *            The target file, in which encoded data are written.
-	 * @param wrapAt
-	 *            The max line length for encoded data. If less than 1 no wrap
-	 *            is applied.
-	 * @throws IOException
-	 *             If an I/O error occurs.
-	 * @since 1.3
-	 */
-	public static void encode(File source, File target, int wrapAt)
-			throws IOException {
-		InputStream inputStream = null;
-		OutputStream outputStream = null;
-		try {
-			inputStream = new FileInputStream(source);
-			outputStream = new FileOutputStream(target);
-			Base64.encode(inputStream, outputStream, wrapAt);
-		} finally {
-			if (outputStream != null) {
-				try {
-					outputStream.close();
-				} catch (Throwable t) {
-					;
-				}
-			}
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				} catch (Throwable t) {
-					;
-				}
-			}
-		}
-	}
 
-	/**
-	 * <p>
-	 * Encodes data from the given source file contents and writes them in the
-	 * given target file.
-	 * </p>
-	 * 
-	 * @param source
-	 *            The source file, from which decoded data are read.
-	 * @param target
-	 *            The target file, in which encoded data are written.
-	 * @throws IOException
-	 *             If an I/O error occurs.
-	 * @since 1.3
-	 */
-	public static void encode(File source, File target) throws IOException {
-		InputStream inputStream = null;
-		OutputStream outputStream = null;
-		try {
-			inputStream = new FileInputStream(source);
-			outputStream = new FileOutputStream(target);
-			Base64.encode(inputStream, outputStream);
-		} finally {
-			if (outputStream != null) {
-				try {
-					outputStream.close();
-				} catch (Throwable t) {
-					;
-				}
-			}
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				} catch (Throwable t) {
-					;
-				}
-			}
-		}
-	}
 
-	/**
-	 * <p>
-	 * Decodes data from the given source file contents and writes them in the
-	 * given target file.
-	 * </p>
-	 * 
-	 * @param source
-	 *            The source file, from which encoded data are read.
-	 * @param target
-	 *            The target file, in which decoded data are written.
-	 * @throws IOException
-	 *             If an I/O error occurs.
-	 * @since 1.3
-	 */
-	public static void decode(File source, File target) throws IOException {
-		InputStream inputStream = null;
-		OutputStream outputStream = null;
-		try {
-			inputStream = new FileInputStream(source);
-			outputStream = new FileOutputStream(target);
-			decode(inputStream, outputStream);
-		} finally {
-			if (outputStream != null) {
-				try {
-					outputStream.close();
-				} catch (Throwable t) {
-					;
-				}
-			}
-			if (inputStream != null) {
-				try {
-					inputStream.close();
-				} catch (Throwable t) {
-					;
-				}
-			}
-		}
-	}
 
 	/**
 	 * Copies data from a stream to another.

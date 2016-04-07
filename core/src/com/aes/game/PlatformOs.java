@@ -1,4 +1,5 @@
-package com.mygdx.game.utils.Global;
+
+package com.aes.game;
 
 public interface PlatformOs {
 

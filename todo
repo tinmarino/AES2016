@@ -1,10 +1,21 @@
+
 TODO 
   cipher, 
   good buttons
   test on 2 devices PC + andorid 
 
 
+ECLIM 
+  NEXT ERROR :lnext, :lprev, :lopen, etc.(see :h location-list for more info).
 
+HTML 
+	./gradlew html:dist
+	cd html/build/dist
+	python -m SimpleHTTPServer
+	firefox html/webapp/index.html
+
+It's either in /var/{http,www} or in /srv/{http,www}. Putting it in /var breaks with the FSH, but a lot of especially old distros do not really care.
+https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#running-the-html-project
 
 TEXTT FIELD STYLE
 		public BitmapFont font;
