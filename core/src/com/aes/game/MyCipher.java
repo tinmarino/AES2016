@@ -1,15 +1,15 @@
 package com.aes.game;
 
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+//import java.io.IOException;
+//import java.security.InvalidKeyException;
+//import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
+//import javax.crypto.BadPaddingException;
+//import javax.crypto.Cipher;
+//import javax.crypto.IllegalBlockSizeException;
+//import javax.crypto.NoSuchPaddingException;
+//import javax.crypto.spec.SecretKeySpec;
 
 import com.aes.game.base64.Base64;
 import com.badlogic.gdx.Gdx;
@@ -139,33 +139,33 @@ public class MyCipher{
 	}
 
 
-	public static byte[] AesCipher(byte[] sClear, Boolean bCipher)
-	{
-		byte[] encryptedData = new byte[10];
-		try{
-			Cipher c = Cipher.getInstance("AES");
-			SecretKeySpec k = new SecretKeySpec(key, "AES");
-			if (bCipher){c.init(Cipher.ENCRYPT_MODE, k);}
-			else {c.init(Cipher.DECRYPT_MODE, k);}
-			encryptedData = c.doFinal(sClear);
-		}
-		catch (NoSuchAlgorithmException e){
-			Gdx.app.log("TBF", "Errror, no AES algo");
-		}
-		catch (NoSuchPaddingException e){
-			Gdx.app.log("TBF", "Errror, no suh padding");
-		}
-		catch (InvalidKeyException e){
-			Gdx.app.log("TBF", "Errror, AES invalid key");
-		}
-		catch (IllegalBlockSizeException e){
-			Gdx.app.log("TBF", "Errror, AES illegal block size ");
-		}
-		catch (BadPaddingException e){
-			Gdx.app.log("TBF", "Errror, badh padding");
-		}
+	//public static byte[] AesCipher(byte[] sClear, Boolean bCipher)
+	//{
+	//	byte[] encryptedData = new byte[10];
+	//	try{
+	//		Cipher c = Cipher.getInstance("AES");
+	//		SecretKeySpec k = new SecretKeySpec(key, "AES");
+	//		if (bCipher){c.init(Cipher.ENCRYPT_MODE, k);}
+	//		else {c.init(Cipher.DECRYPT_MODE, k);}
+	//		encryptedData = c.doFinal(sClear);
+	//	}
+	//	catch (NoSuchAlgorithmException e){
+	//		Gdx.app.log("TBF", "Errror, no AES algo");
+	//	}
+	//	catch (NoSuchPaddingException e){
+	//		Gdx.app.log("TBF", "Errror, no suh padding");
+	//	}
+	//	catch (InvalidKeyException e){
+	//		Gdx.app.log("TBF", "Errror, AES invalid key");
+	//	}
+	//	catch (IllegalBlockSizeException e){
+	//		Gdx.app.log("TBF", "Errror, AES illegal block size ");
+	//	}
+	//	catch (BadPaddingException e){
+	//		Gdx.app.log("TBF", "Errror, badh padding");
+	//	}
 
-		return encryptedData;
-	}
+	//	return encryptedData;
+	//}
 }
 

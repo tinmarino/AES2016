@@ -2,9 +2,24 @@ package com.aes.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 
 
@@ -21,38 +36,18 @@ public class ParamScreen extends AbstractScreen {
 	//GEOMETRY 
         float sWidth ;  // slider width 
 	float sHeight;
+	private ScrollPane scrollPane;
 
-	@Override
 	public void render(float delta){
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		//stage.act(delta);
-		//stage.draw();
-		}
+		stage.act(delta);
+		stage.draw();
 		
 	}
-
-
-
-/*	
+	
 	public void show(){
-            stage = new Stage() ;
-	    stage.addListener(new InputListener(){
-               @Override
-	       public boolean keyDown(InputEvent event, int keycode) {
-	           switch (keycode){
-	             case Keys.BACK   : 
-	             case Keys.ESCAPE : 
-	             case Keys.B      : 
-	             case Keys.MENU   :
-		        goOut = true; 
-	                return true;  
-	             default : 
-	                 return false; 
-	           }  
-               } 
-	    });
-	    Gdx.input.setInputProcessor(stage); 
+        stage = new Stage() ;
 
 		
 	    skin = new Skin( Gdx.files.internal("img/game/setting/Setting.json") ,  
@@ -243,4 +238,3 @@ public class ParamScreen extends AbstractScreen {
 
 
 }
-*/

@@ -7,8 +7,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 /*
@@ -17,6 +20,27 @@ import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 
 public class PixmapFactory{
 	
+
+	public static NinePatchDrawable ninePatchDrawableMonochromatci(int width, int height, Color color){
+		final Texture t = new Texture(monocromaticPixmap(width, height, color));
+		return ninePatchFromTexture(t);
+	}
+
+	public static NinePatchDrawable ninePatchDrawableFromFile(String path){
+		final Texture t = new Texture(path);
+		return ninePatchFromTexture(t);
+	}
+
+	public static NinePatchDrawable ninePatchFromTexture(Texture t){
+		final int width = t.getWidth() - 2;
+		final int height = t.getHeight() - 2;
+		NinePatch np = new NinePatch(new TextureRegion(t, 1, 1, width, height), 3, 3, 3, 3);
+		return new NinePatchDrawable(np);
+	}
+
+	public static Drawable drawableFromFile(String path){
+		return new SpriteDrawable(new Sprite(new Texture(path)));
+	}
 
 	public static Drawable drawableSelection(){
 		Pixmap pixmap = monocromaticPixmap(2, 16, Color.BLUE);

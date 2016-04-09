@@ -1,10 +1,12 @@
 
 TODO 
   cipher, 
-  copy in clipboard
   scrollable textentry
   good buttons
   test on 2 devices PC + andorid 
+  In scrollpane, set the textArea Size according to its line number 
+  Put in readonly when cipher, 
+  make a message routine, printing a message on screen 
 
 
 ECLIM 
