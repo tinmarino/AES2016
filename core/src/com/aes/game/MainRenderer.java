@@ -3,7 +3,6 @@ package com.aes.game;
 
 
 
-import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -21,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 
@@ -42,7 +42,7 @@ public class MainRenderer extends AbstractScreen
 	Boolean bAreToolsVisible = false;
 	ImageTextButton bList;
 	
-	int w0, w1, w2;
+	int w0, w1, w2, ibWidth, ibHeight;
 	Table leftTable; 
 	Table rightTable; 
 
@@ -75,11 +75,11 @@ public class MainRenderer extends AbstractScreen
 
 
 
-		int ibWidth  = 75;
-		if (Global.platformOs.getOs() == OS.ANDROID){ibWidth /= 2;}
-		int ibHeight = 75;
+		ibWidth  = Gdx.graphics.getWidth() / 8;
+		ibHeight = ibWidth;
 
 
+		bList					= CreateTextButton("", 			RTYPE.LIST);
 		ImageTextButton bNull 	= CreateTextButton("", 			RTYPE.NULL);
 		ImageTextButton bParam 	= CreateTextButton("param", 	RTYPE.PARAM);
 		ImageTextButton bCipher = CreateTextButton("Cipher", 	RTYPE.CIPHER); 
@@ -132,12 +132,8 @@ public class MainRenderer extends AbstractScreen
 		leftTable = new Table(); 
 		rightTable = new Table(); 
 		
+		// LEFT 
 		leftTable.add(textArea).expand().fill().center();
-		//leftTable.setFillParent(true); 
-		//leftTable.row();
-		//leftTable.add(textFieldCoded).expand().fill();
-		
-		//SCROLLPANE 
 		ScrollPaneStyle spStyle = new ScrollPaneStyle();
 		spStyle.vScroll = PixmapFactory.getDrawableMonocromatic(5, 25, Color.GRAY) ;
 		spStyle.vScrollKnob	= PixmapFactory.getDrawableMonocromatic(10, 10, Color.BLUE) ;
@@ -149,24 +145,25 @@ public class MainRenderer extends AbstractScreen
 		
 
 		// RIGHT 
-    	rightTable.add(bNull	).width(ibWidth).height(ibHeight).pad(2).expand().fill().row();
-    	rightTable.add(bParam	).width(ibWidth).height(ibHeight).pad(2).expand().fill().row();
-    	rightTable.add(bCipher	).width(ibWidth).height(ibHeight).pad(2).expand().fill().row();
-    	rightTable.add(bCopy	).width(ibWidth).height(ibHeight).pad(2).expand().fill().row(); 
-    	rightTable.add(bPaste	).width(ibWidth).height(ibHeight).pad(2).expand().fill().row(); 
-    	rightTable.add(bDbg		).width(ibWidth).height(ibHeight).pad(2).expand().fill().row(); 
+    	rightTable.add(bNull	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row();
+    	rightTable.add(bParam	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row();
+    	rightTable.add(bCipher	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row();
+    	rightTable.add(bCopy	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bPaste	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bDbg		).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 6*(ibHeight+4)).pad(2).align(Align.top).fill().row(); 
+		//scrollPaneRight = new ScrollPane(rightTable)	;
+	    //scrollPaneRight.setScrollingDisabled(true, false);
+		//scrollPaneRight.setFillParent(true);
 
-		scrollPaneRight = new ScrollPane(rightTable)	;
-	    scrollPaneRight.setScrollingDisabled(true, false);
 
+		// PACK 
 		w0 = Math.round(Gdx.graphics.getWidth());
 		w1 = Math.round(Gdx.graphics.getWidth() - ibWidth - 4);
 		w2 = Math.round(ibWidth + 4);
 		
-		bList					= CreateTextButton("", 			RTYPE.LIST);
 
 		table.add(scrollPane).width(w0).expand().fill(); 
-		//table.add(scrollPaneRight).width(w2).expand().fill(); 
     	table.setFillParent(true);
     	stage.addActor(table);
 		stage.addActor(bList);
@@ -177,8 +174,6 @@ public class MainRenderer extends AbstractScreen
 			table.debug();
 		}
 
-		bList.setHeight(ibHeight);
-		bList.setWidth(ibHeight);
 		bList.setX(stage.getWidth() - bList.getWidth());
 		bList.setY(stage.getHeight()- bList.getHeight());
 
@@ -289,6 +284,8 @@ public class MainRenderer extends AbstractScreen
 		final RTYPE crType = routineType;
 		ImageTextButton bRes = new ImageTextButton(label, itbStyle); 
 		bRes.setColor(cButton);
+		bRes.setWidth(ibWidth - 4);
+		bRes.setHeight(ibHeight -4);
 		bRes.addListener(
 				new ClickListener(){
 					@Override
@@ -335,8 +332,8 @@ public class MainRenderer extends AbstractScreen
 		// ADD TOOL ScrollPane
 		else{
 			table.reset();
-			table.add(scrollPane).width(w1).expand().fill(); 
-			table.add(scrollPaneRight).width(w2).expand().fill(); 
+			table.add(scrollPane).width(w1).expandY().fill(); 
+			table.add(rightTable).width(w2).height(Gdx.graphics.getHeight()).expandY().align(Align.top).top().fill(); 
 			bList.remove();
 			stage.addActor(bList);
 		}
