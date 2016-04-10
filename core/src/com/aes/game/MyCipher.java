@@ -14,6 +14,7 @@ import java.util.Random;
 
 import com.aes.game.base64.Base64;
 import com.badlogic.gdx.Gdx;
+import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
 import com.googlecode.gwt.crypto.client.AESCipher;
 
 /*
@@ -37,6 +38,7 @@ public class MyCipher{
 		Boolean bol = false; 
 
 		Gdx.app.log("MainRendered ", "Unciphereing"+ sIn.substring(0,2) ); 
+		key[0] = (byte) 3;
 		
 		// TEST 
 		bol  = 2 < sIn.length() ;
@@ -87,6 +89,8 @@ public class MyCipher{
 		res = tmp[1];
 		res = res.substring(1, res.length()-1); // Delete the /n and /n at begining and end
 
+		res = (MyAesCipher(res, false));
+
 
 		return res; 
 	}
@@ -112,7 +116,7 @@ public class MyCipher{
 		res += "\n------------------------------------";
 		res += "\n";
 		
-		res += text;
+		res += MyAesCipher(text, true);
 
 		res += "\n------------------------------------\n";
 
@@ -141,12 +145,25 @@ public class MyCipher{
 	}
 
 
-	public static byte[] AesCipher(byte[] sClear, Boolean bCipher)
+	public static String MyAesCipher(String sClear, Boolean bCipher)
 	{
-		byte res[] = new byte[sClear.length] ;
-		AESCipher aesChiper = new AESCipher();
+		String res;
+		AESCipher cipher = new AESCipher();
+
 		
 
+        cipher.setKey(key);
+        try {
+			if (bCipher){
+            	res = cipher.encrypt(sClear);
+			}
+			else{
+            	res = cipher.decrypt(sClear);
+			}
+        } 
+		catch (InvalidCipherTextException e) {
+            throw new RuntimeException(e);
+        }
 
 		return res;
 	}
@@ -159,6 +176,8 @@ public class MyCipher{
 /*
  *
 
+		String string = new String(sClear);
+		to string.getBytes()
 
 		SecretKeySpec aesKeySpec = new SecretKeySpec(key, "AES");
 
