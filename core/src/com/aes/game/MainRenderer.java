@@ -68,6 +68,7 @@ public class MainRenderer extends AbstractScreen
 			fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
 			break;
 		}
+		Global.font = font;
 
 		// Input 
 		stage = new Stage(); 
@@ -95,6 +96,7 @@ public class MainRenderer extends AbstractScreen
 		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE);
 		tfStyle.fontColor = Color.BLACK ;  
 		tfStyle.cursor.setMinWidth(2f);
+		Global.tfStyle = tfStyle;
 		//tfStyle.background = skin.getDrawable("white31") ; 
 		
 

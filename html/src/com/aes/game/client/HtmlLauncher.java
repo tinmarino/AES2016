@@ -12,7 +12,7 @@ public class HtmlLauncher extends GwtApplication {
         public GwtApplicationConfiguration getConfig () {
                 //return new GwtApplicationConfiguration(320*2, 480*2);
 				Global.platformOs = new PlatformHtml();
-                return new GwtApplicationConfiguration(480,320);
+                return new GwtApplicationConfiguration(320 * 2, 480 * 2);
         }
 
         @Override

@@ -2,37 +2,93 @@ package com.aes.game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
 
 
 
 public class ParamScreen extends AbstractScreen {
-// DISPOSABLE 
-	Stage stage; 
-	Skin skin; 
-	
-// THE SETTINGS 
-        public static float speed;  
 
-// USED 
-	boolean goOut = false; 
-	//GEOMETRY 
-        float sWidth ;  // slider width 
+	// DISPOSABLE 
+	Stage stage; 
+
+	ScrollPane scrollPane; 
+	Table      table; 
+	
+
+    float sWidth ;  // slider width 
 	float sHeight;
+
+	/**
+	 *
+	 */
+	public ParamScreen() {
+	}
 
 	@Override
 	public void render(float delta){
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		//stage.act(delta);
-		//stage.draw();
-		}
-		
+		stage.act(delta);
+		stage.draw();
 	}
 
+	@Override
+	public void show(){
+		stage = new Stage(); 
+		Global.inputMultiplexer.addProcessor(stage);
+		table = new Table();
 
+		LabelStyle lStyle = new LabelStyle();
+		lStyle.font = Global.font; 
+		lStyle.fontColor = Color.BLACK;
+
+		TextFieldStyle tfStyle = new TextFieldStyle(); 
+		tfStyle.font = Global.font;
+		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK);
+		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE);
+		tfStyle.fontColor = Color.BLACK ;  
+		Texture t = new Texture( PixmapFactory.circle(16,Color.GRAY));
+		tfStyle.background = PixmapFactory.ninePatchFromTexture(t);
+		tfStyle.cursor.setMinWidth(2f);
+
+		Table tKey = new Table(); 
+		tKey.add(new Label("Key:",lStyle)).align(Align.left);
+		tKey.add(new TextField("", tfStyle)).align(Align.left).expandX().fill();
+
+		table.add(tKey).expandX().fill().row();
+
+
+
+
+		for(int  i= 0; i<30; i++){
+			table.add(new Label("Alea jacta est",lStyle)).row();
+		}
+
+
+		scrollPane = new ScrollPane(table); 
+		scrollPane.setFillParent(true);
+		stage.addActor(scrollPane);
+	}
+
+	@Override
+	public void dispose(){
+		if (null != stage){
+			stage.dispose(); 
+			Global.inputMultiplexer.removeProcessor(stage);
+		}
+	}
+
+}
 
 /*	
 	public void show(){

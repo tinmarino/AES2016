@@ -1,0 +1,86 @@
+
+TODO 
+  cipher, 
+  scrollable textentry
+  good buttons
+  test on 2 devices PC + andorid 
+  In scrollpane, set the textArea Size according to its line number 
+  Put in readonly when cipher, 
+  make a message routine, printing a message on screen 
+  When comming back, the boolean of AreTools shhown is nto setted so I have to click twice
+
+
+ECLIM 
+  NEXT ERROR :lnext, :lprev, :lopen, etc.(see :h location-list for more info).
+
+HTML 
+	./gradlew html:dist
+	cd html/build/dist
+	python -m SimpleHTTPServer
+	firefox html/webapp/index.html
+
+It's either in /var/{http,www} or in /srv/{http,www}. Putting it in /var breaks with the FSH, but a lot of especially old distros do not really care.
+https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#running-the-html-project
+
+TEXTT FIELD STYLE
+		public BitmapFont font;
+		public Color fontColor;
+		/** Optional. */
+		public Color focusedFontColor, disabledFontColor;
+		/** Optional. */
+		public Drawable background, focusedBackground, disabledBackground, cursor, selection;
+		/** Optional. */
+		public BitmapFont messageFont;
+		/** Optional. */
+		public Color messageFontColor;
+
+
+receive esc input to go back
+    nmap <buffer> <silent> <leader>js :JavaSearch -x declarations -s project<cr> 
+make exc work./gradlew desktop:run
+
+
+GRADLE 
+gradlew android:installDebug android:run
+./gradlew app:dependencies
+       println 'compiling source'
+
+	defaultConfig {
+	    //applicationId
+	    minSdkVersion 14
+	    targetSdkVersion 22
+	    versionCode 1
+	    versionName "1.0"
+	
+	    multiDexEnabled true
+	}
+
+	add in anroid build.gradle 
+			dexOptions {
+			    preDexLibraries = false
+			}
+
+	//dexOptions {
+	//    preDexLibraries = false
+	//}
+	//multiDexEnabled true
+
+
+FONT 
+  USe Hiero in jar 
+
+# NOTE 
+   And run it by ./gradlew ShowMeCache. It'll print where all your libs are at. Simply add them to .classpath by doing something like this:
+
+
+
+
+    create a new libgdx project with their tools
+    start Eclipse
+    Import --> Gradle Project --> Build Model per usual libgdx project creation
+    shut off Eclipse, start Eclim
+
+Right-Click Project --> Build Path --> Configure Build Path
+
+XML commments 
+   '<!--' ((Char - '-') | ('-' (Char - '-')))* '-->'
