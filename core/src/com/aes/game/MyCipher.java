@@ -1,5 +1,7 @@
 package com.aes.game;
 
+import java.util.ArrayList;
+import java.util.List;
 //import java.io.IOException;
 //import java.security.InvalidKeyException;
 //import java.security.NoSuchAlgorithmException;
@@ -12,9 +14,10 @@ import java.util.Random;
 //import javax.crypto.NoSuchPaddingException;
 //import javax.crypto.spec.SecretKeySpec;
 
-import com.aes.game.base64.Base64;
+//import com.aes.game.base64.Base64;
 import com.badlogic.gdx.Gdx;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
+import com.googlecode.gwt.crypto.bouncycastle.util.encoders.Base64;
 import com.googlecode.gwt.crypto.client.AESCipher;
 
 /*
@@ -147,25 +150,70 @@ public class MyCipher{
 
 	public static String MyAesCipher(String sClear, Boolean bCipher)
 	{
-		String res;
+		Gdx.app.log("TBF", "AES ______________________________________________");
+		String res="";
+		String sTmp="";
+		//byte[] stream;
+		//List<Byte> lByte = new ArrayList<Byte>(); 
 		AESCipher cipher = new AESCipher();
+
 
 		
 
         cipher.setKey(key);
+		Gdx.app.log("TBF", "uinput len " + sClear.length());
         try {
 			if (bCipher){
-            	res = cipher.encrypt(sClear);
+            	sTmp = cipher.encrypt(sClear);
+				res = new String(Base64.encode(sTmp.getBytes())); 
+
+				// HEX PAD for base64 
+				//Gdx.app.log("TBF", "stream before  " + stream.length  );
+				//if (0!= stream.length%3){
+				//	lByte  = toByteList(stream);
+				//	while (0!= lByte.size() % 3){
+				//		lByte.add((byte) 1);
+				//	}
+				//	stream = toByteArray(lByte);
+				//}
+				//Gdx.app.log("TBF", "stream after " + stream.length  );
 			}
 			else{
-            	res = cipher.decrypt(sClear);
+				sTmp = new String(Base64.decode(sClear)); 
+            	res = cipher.decrypt(sTmp);
+				//Gdx.app.log("TBF", "Clear : " + (sClear.length()));
+				//Gdx.app.log("TBF", "hex decode  " + stream.length  );
+				//sTmp = new String(Hex.encode(stream));
+				//Gdx.app.log("TBF", "encrypt size sTmp : " + sTmp.length()  );
+				//Gdx.app.log("TBF", "decrypt size " + res.length()  );
 			}
+				Gdx.app.log("TBF", "mid len " + res.length());
+				Gdx.app.log("TBF", "out len " + res.length());
         } 
 		catch (InvalidCipherTextException e) {
             throw new RuntimeException(e);
         }
 
 		return res;
+	}
+
+
+	public static byte[] toByteArray(List<Byte> in) {
+	    final int n = in.size();
+	    byte ret[] = new byte[n];
+	    for (int i = 0; i < n; i++) {
+	        ret[i] = in.get(i);
+	    }
+	    return ret;
+	}
+
+	public static List<Byte> toByteList(byte[] in){
+	    final int n = in.length;
+	    List<Byte> ret  = new ArrayList<Byte>();
+	    for (int i = 0; i < n; i++) {
+	        ret.add(in[i]);
+	    }
+	    return ret;
 	}
 }
 
@@ -175,6 +223,10 @@ public class MyCipher{
 
 /*
  *
+				Gdx.app.log("TBF", "Clear : " + (sClear.length()));
+				Gdx.app.log("TBF", "encrypt size  : " + sTmp.length()  );
+				Gdx.app.log("TBF", "hex decode  " + stream.length  );
+				Gdx.app.log("TBF", "Bse64 encode " + res.length()  );
 
 		String string = new String(sClear);
 		to string.getBytes()

@@ -230,13 +230,14 @@ public class MainRenderer extends AbstractScreen
 		// NINE PATCH 
 		switch(routineType){
 			case LIST:
-				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,0.2f,1));
+				new Color();
+				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1f,0.01f));
 				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1,0.5f));
 				break;
 			case NULL:
 				break;
 			default:
-			 	Texture t = new Texture(PixmapFactory.circleDrawPixel(64, HtmlColor.MidnightBlue));
+			 	Texture t = new Texture(PixmapFactory.circleDrawPixel(64, HtmlColor.SkyBlue));
 				itbStyle.up   = PixmapFactory.ninePatchFromTexture(t);
 				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,HtmlColor.MidnightBlue);
 				break;
@@ -379,6 +380,7 @@ public class MainRenderer extends AbstractScreen
 		Gdx.app.log("TBF", "scrollPane" +   scrollPane.getScrollPercentX() );
 		Gdx.app.log("TBF", "text height " +   textArea.getHeight() );
 		Gdx.app.log("TBF", "line number  " +   textArea.getLines() );
+		Gdx.app.log("TBF", "Pixel DEnsity  " +   Gdx.graphics.getDensity());
 		//textArea.setHeight(1000);
 		//scrollPane.layout();
 		scrollPane.setScrollPercentX( scrollPane.getScrollPercentX() + 10 );

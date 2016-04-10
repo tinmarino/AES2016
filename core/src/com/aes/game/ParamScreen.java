@@ -25,6 +25,7 @@ public class ParamScreen extends AbstractScreen {
 
 	ScrollPane scrollPane; 
 	Table      table; 
+	CheckBox cb1, cb2, cb3, cb4;
 	
 
     float sWidth ;  // slider width 
@@ -81,8 +82,25 @@ public class ParamScreen extends AbstractScreen {
 
 		table.add(tKey).expandX().fill().row();
 
+		// IV 
+		
 
 
+		// CIPHER type 
+	    cb1 = new CheckBox(" AES ", cbStyle); 
+		cb1.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				routineCipherType(Global.CTYPE.AES);
+			}
+		});
+	    cb2 = new CheckBox(" TBF ", cbStyle); 
+		cb1.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				routineCipherType(Global.CTYPE.TBF);
+			}
+		});
 
 		// IS DEBUGGING 
 	    CheckBox isDebuggingCheckBox = new CheckBox(" Debug ", cbStyle); 
@@ -92,8 +110,18 @@ public class ParamScreen extends AbstractScreen {
 				Gdx.app.log("TBF", "CheckBox IsDebuggin");
 			}
 		});
-		table.add(isDebuggingCheckBox).expandX().fill().row();
 
+
+		// SAVE PARAMS 
+
+		
+		// PACK 
+		Table tCipherType = new Table();
+		tCipherType.add(cb1).expandX().fill().row();
+		tCipherType.add(cb2).expandX().fill().row();
+
+		table.add(tCipherType).expandX().fill().row();
+		table.add(isDebuggingCheckBox).expandX().fill().row();
 		for(int  i= 0; i<30; i++){
 			table.add(new Label("Alea jacta est",lStyle)).row();
 		}
@@ -110,6 +138,11 @@ public class ParamScreen extends AbstractScreen {
 			stage.dispose(); 
 			Global.inputMultiplexer.removeProcessor(stage);
 		}
+	}
+
+	public void routineCipherType(Global.CTYPE cType){
+		Gdx.app.log("TBF", "routine cihper type");
+		
 	}
 
 }
