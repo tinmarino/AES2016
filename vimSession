@@ -12,8 +12,8 @@ inoremap <S-Up> :let tmp=getpos('.') :m-2 : call cursor(tmp[1]-1,tmp[2]) 
 map 	 :bnext
 vnoremap  "+p
 nnoremap  "+p
-vnoremap  :update
 nnoremap  :update
+vnoremap  :update
 onoremap  :update
 vnoremap  "+y
 nnoremap  "+y
@@ -88,7 +88,6 @@ set backupdir=~/.vim/backup//
 set balloonexpr=eclim#util#Balloon(eclim#util#GetLineError(line('.')))
 set completefunc=youcompleteme#Complete
 set completeopt=preview,menuone
-set cpoptions=aAceFsB
 set directory=~/.vim/backup//
 set fileencodings=ucs-bom,utf-8,default,latin1
 set foldlevelstart=30
@@ -112,6 +111,7 @@ set undolevels=100000
 set updatetime=2000
 set wildcharm=26
 set wildmenu
+set window=40
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
@@ -123,25 +123,30 @@ endif
 set shortmess=aoO
 badd +22 core/src/com/aes/game/AbstractScreen.java
 badd +13 core/src/com/aes/game/Global.java
-badd +249 core/src/com/aes/game/MainRenderer.java
+badd +259 core/src/com/aes/game/MainRenderer.java
 badd +1 core/src/com/aes/game/MyAesGame.java
-badd +0 core/src/com/aes/game/MyCipher.java
+badd +28 core/src/com/aes/game/MyCipher.java
 badd +22 core/src/com/aes/game/ParamScreen.java
 badd +158 core/src/com/aes/game/PixmapFactory.java
 badd +1 core/src/com/aes/game/PlatformOs.java
 badd +1 core/src/com/aes/game/HtmlColor.java
 badd +6 todo
-args core/src/com/aes/game/AbstractScreen.java core/src/com/aes/game/base64 core/src/com/aes/game/Global.java core/src/com/aes/game/MainRenderer.java core/src/com/aes/game/MyAesGame.java core/src/com/aes/game/MyCipher.java core/src/com/aes/game/ParamScreen.java core/src/com/aes/game/PixmapFactory.java core/src/com/aes/game/PlatformOs.java
-edit core/src/com/aes/game/MainRenderer.java
+badd +0 html/src/com/aes/game/GdxDefinition.gwt.xml
+args core/src/com/aes/game/AbstractScreen.java core/src/com/aes/game/base64/ core/src/com/aes/game/Global.java core/src/com/aes/game/MainRenderer.java core/src/com/aes/game/MyAesGame.java core/src/com/aes/game/MyCipher.java core/src/com/aes/game/ParamScreen.java core/src/com/aes/game/PixmapFactory.java core/src/com/aes/game/PlatformOs.java
+edit html/src/com/aes/game/GdxDefinition.gwt.xml
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-edit core/src/com/aes/game/MainRenderer.java
-inoreabbr <buffer> logger logger=eclim#java#logging#LoggingInit("logger")
-inoreabbr <buffer> log log=eclim#java#logging#LoggingInit("log")
+edit html/src/com/aes/game/GdxDefinition.gwt.xml
+let s:cpo_save=&cpo
+set cpo&vim
+imap <buffer>  <Plug>SparkupExecute
+imap <buffer>  <Plug>SparkupNext
+let &cpo=s:cpo_save
+unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -150,13 +155,13 @@ setlocal nobinary
 setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
-setlocal cindent
+setlocal nocindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=j1
+setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=//%s
+setlocal comments=sr:<!--,mb:\ ,ex0:-->
+setlocal commentstring=<!--%s-->
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -171,17 +176,17 @@ setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
-setlocal errorformat=%E%f:%l:\ %m,%-Z%p^,%-C%.%#,%-G%.%#
+setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'java'
-setlocal filetype=java
+if &filetype != 'xml'
+setlocal filetype=xml
 endif
 setlocal foldcolumn=0
 setlocal foldenable
 set foldexpr=FoldMethod(v:lnum)
 setlocal foldexpr=FoldMethod(v:lnum)
 setlocal foldignore=#
-setlocal foldlevel=30
+setlocal foldlevel=29
 setlocal foldmarker={{{,}}}
 set foldmethod=expr
 setlocal foldmethod=expr
@@ -194,25 +199,25 @@ setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
-setlocal include=^s*import
-setlocal includeexpr=substitute(v:fname,'\\.','/','g')
-setlocal indentexpr=GetJavaIndent()
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e,0=extends,0=implements
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=EclimGetXmlIndent(v:lnum)
+setlocal indentkeys=o,O,*<Return>,<>>,<<>,/,{,}
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
 setlocal nolist
-setlocal makeprg=javac
+setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal modifiable
 setlocal nrformats=octal,hex
 setlocal nonumber
 setlocal numberwidth=4
-setlocal omnifunc=eclim#java#complete#CodeComplete
-setlocal path=.,/usr/include,,
+setlocal omnifunc=eclim#xml#complete#CodeComplete
+setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -230,11 +235,11 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
-setlocal suffixesadd=.java
+setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'java'
-setlocal syntax=java
+if &syntax != 'xml'
+setlocal syntax=xml
 endif
 setlocal tabstop=4
 setlocal tags=
@@ -245,29 +250,11 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-34
-normal! zo
-68
-normal! zo
-241
-normal! zo
-256
-normal! zo
-297
-normal! zo
-297
-normal! zo
-298
-normal! zo
-311
-normal! zo
-324
-normal! zo
-let s:l = 249 - ((19 * winheight(0) + 19) / 39)
+let s:l = 6 - ((5 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-249
+6
 normal! 0
 tabnext 1
 if exists('s:wipebuf')
