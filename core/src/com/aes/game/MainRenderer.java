@@ -86,6 +86,7 @@ public class MainRenderer extends AbstractScreen
 		ImageTextButton bCipher = CreateTextButton("Cipher", 	RTYPE.CIPHER); 
 		ImageTextButton bCopy  	= CreateTextButton("copy",		RTYPE.COPY); 
 		ImageTextButton bPaste 	= CreateTextButton("paste",		RTYPE.PASTE); 
+		ImageTextButton bClear 	= CreateTextButton("clear",		RTYPE.CLEAR); 
 		ImageTextButton bDbg	= CreateTextButton("dbg",		RTYPE.DBG); 
 
 
@@ -152,8 +153,9 @@ public class MainRenderer extends AbstractScreen
     	rightTable.add(bCipher	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row();
     	rightTable.add(bCopy	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
     	rightTable.add(bPaste	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bClear	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
     	rightTable.add(bDbg		).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 6*(ibHeight+4)).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 7*(ibHeight+4)).pad(2).align(Align.top).fill().row(); 
 		//scrollPaneRight = new ScrollPane(rightTable)	;
 	    //scrollPaneRight.setScrollingDisabled(true, false);
 		//scrollPaneRight.setFillParent(true);
@@ -307,7 +309,7 @@ public class MainRenderer extends AbstractScreen
 		return bRes;
 	}
 
-	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG, LIST,NULL}
+	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG, LIST, NULL}
 	public void routineDispatch(RTYPE routineType){
 		switch (routineType){
 			case LIST: 		routineList(); 		break; 

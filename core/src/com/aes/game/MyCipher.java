@@ -16,7 +16,9 @@ import java.util.Random;
 
 //import com.aes.game.base64.Base64;
 import com.badlogic.gdx.Gdx;
+import com.googlecode.gwt.crypto.bouncycastle.CipherParameters;
 import com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException;
+import com.googlecode.gwt.crypto.bouncycastle.params.ParametersWithIV;
 import com.googlecode.gwt.crypto.bouncycastle.util.encoders.Base64;
 import com.googlecode.gwt.crypto.client.AESCipher;
 
@@ -157,10 +159,15 @@ public class MyCipher{
 		//List<Byte> lByte = new ArrayList<Byte>(); 
 		AESCipher cipher = new AESCipher();
 
+		//CipherParameters cipherParemeters;
 
-		
+		byte[] ivTmp = new byte[16];
 
+		CipherParameters params = new ParametersWithIV(cipher.getParameters(), ivTmp);
+		cipher.setParameters(params);
         cipher.setKey(key);
+		//cipher.i
+		//cipher.write(IV);
 		Gdx.app.log("TBF", "uinput len " + sClear.length());
         try {
 			if (bCipher){
