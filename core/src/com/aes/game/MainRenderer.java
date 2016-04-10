@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 
 
@@ -58,6 +59,11 @@ public class MainRenderer extends AbstractScreen
 	public void show() {
 		super.show(); 
 
+		w0 = Math.round(Gdx.graphics.getWidth());
+		w1 = Math.round(Gdx.graphics.getWidth() - ibWidth - 4);
+		w2 = Math.round(ibWidth + 4);
+		h0 = Math.round(Gdx.graphics.getHeight());
+
 		switch (Global.platformOs.getOs()){
 		case ANDROID : 
 			font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
@@ -72,6 +78,7 @@ public class MainRenderer extends AbstractScreen
 
 		// Input 
 		stage = new Stage(); 
+		stage.setViewport(new StretchViewport(w0, h0));
 		Global.inputMultiplexer.addProcessor(stage);
 
 
@@ -161,10 +168,6 @@ public class MainRenderer extends AbstractScreen
 
 
 		// PACK 
-		w0 = Math.round(Gdx.graphics.getWidth());
-		w1 = Math.round(Gdx.graphics.getWidth() - ibWidth - 4);
-		w2 = Math.round(ibWidth + 4);
-		h0 = Math.round(Gdx.graphics.getHeight());
 		
 
 		table.add(scrollPane).width(w0).expand().fill(); 
@@ -219,14 +222,14 @@ public class MainRenderer extends AbstractScreen
 	@Override
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
-		w0 = Math.round(width);
-		w1 = Math.round(width *7f/8 - 4);
-		w2 = Math.round(width *1f/8 + 4);
+		w0 = Math.round(stage.getWidth());
+		w1 = Math.round(stage.getWidth() *7f/8 - 4);
+		w2 = Math.round(stage.getWidth() *1f/8 + 4);
 		h0 = height;
 		bList.setX(stage.getWidth() - bList.getWidth());
 		bList.setY(stage.getHeight()- bList.getHeight());
-		scrollPane.setHeight(h0);
-		scrollPane.setWidth(w1);
+		scrollPane.setBounds(0, 0, w1, h0);
+		rightTable.setBounds(w1, 0, w0, h0);
 
 		bAreToolsVisible = !bAreToolsVisible;
 		routineList();
