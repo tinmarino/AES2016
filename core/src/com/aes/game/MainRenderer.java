@@ -42,7 +42,7 @@ public class MainRenderer extends AbstractScreen
 	Boolean bAreToolsVisible = false;
 	ImageTextButton bList;
 	
-	int w0, w1, w2, ibWidth, ibHeight;
+	int w0, w1, w2, h0, ibWidth;
 	Table leftTable; 
 	Table rightTable; 
 
@@ -77,7 +77,6 @@ public class MainRenderer extends AbstractScreen
 
 
 		ibWidth  = Gdx.graphics.getWidth() / 8;
-		ibHeight = ibWidth;
 
 
 		bList					= CreateTextButton("", 			RTYPE.LIST);
@@ -148,14 +147,14 @@ public class MainRenderer extends AbstractScreen
 		
 
 		// RIGHT 
-    	rightTable.add(bNull	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row();
-    	rightTable.add(bParam	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row();
-    	rightTable.add(bCipher	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row();
-    	rightTable.add(bCopy	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bPaste	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bClear	).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bDbg		).width(ibWidth).height(ibHeight).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 7*(ibHeight+4)).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bNull	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
+    	rightTable.add(bParam	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
+    	rightTable.add(bCipher	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
+    	rightTable.add(bCopy	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bPaste	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bClear	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightTable.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 7*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
 		//scrollPaneRight = new ScrollPane(rightTable)	;
 	    //scrollPaneRight.setScrollingDisabled(true, false);
 		//scrollPaneRight.setFillParent(true);
@@ -165,12 +164,12 @@ public class MainRenderer extends AbstractScreen
 		w0 = Math.round(Gdx.graphics.getWidth());
 		w1 = Math.round(Gdx.graphics.getWidth() - ibWidth - 4);
 		w2 = Math.round(ibWidth + 4);
+		h0 = Math.round(Gdx.graphics.getHeight());
 		
 
 		table.add(scrollPane).width(w0).expand().fill(); 
     	table.setFillParent(true);
     	stage.addActor(table);
-		stage.addActor(bList);
 
 		if (Global.bIsDebugging){
 			leftTable.debug(); 
@@ -180,6 +179,7 @@ public class MainRenderer extends AbstractScreen
 
 		bList.setX(stage.getWidth() - bList.getWidth());
 		bList.setY(stage.getHeight()- bList.getHeight());
+		routineList();
 
 	}
 
@@ -199,10 +199,9 @@ public class MainRenderer extends AbstractScreen
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		Gdx.app.log("Main Renderer :", "Dispose()"); 
 		if (null != stage){
-			Global.inputMultiplexer.addProcessor(stage);
+			Global.inputMultiplexer.removeProcessor(stage);
 			stage.dispose(); 
 		}
 		if (null != skin){
@@ -220,8 +219,17 @@ public class MainRenderer extends AbstractScreen
 	@Override
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
-		// TODO Auto-generated method stub
+		w0 = Math.round(width);
+		w1 = Math.round(width *7f/8 - 4);
+		w2 = Math.round(width *1f/8 + 4);
+		h0 = height;
+		bList.setX(stage.getWidth() - bList.getWidth());
+		bList.setY(stage.getHeight()- bList.getHeight());
+		scrollPane.setHeight(h0);
+		scrollPane.setWidth(w1);
 
+		bAreToolsVisible = !bAreToolsVisible;
+		routineList();
 	}
 
 
@@ -289,7 +297,7 @@ public class MainRenderer extends AbstractScreen
 		final RTYPE crType = routineType;
 		ImageTextButton bRes = new ImageTextButton(label, itbStyle); 
 		bRes.setWidth(ibWidth - 4);
-		bRes.setHeight(ibHeight -4);
+		bRes.setHeight(ibWidth -4);
 		bRes.addListener(
 				new ClickListener(){
 					@Override
@@ -325,28 +333,24 @@ public class MainRenderer extends AbstractScreen
 	}
 
 	public void routineList(){
+		// SET Button postion 
+		Gdx.app.log("RESIZE", textArea.getLines()+ ", " + textArea.getHeight() +", "+  scrollPane.getHeight());
+		
 		// DELETE TOOL scrollpane
 		if (bAreToolsVisible){
 			table.reset();
-			table.add(scrollPane).width(w0).expand().fill(); 
-			bList.remove();
-			stage.addActor(bList);
-			
+			table.add(scrollPane).width(w0).expandY().fill(); 
 		}
+
 		// ADD TOOL ScrollPane
 		else{
 			table.reset();
 			table.add(scrollPane).width(w1).expandY().fill(); 
-			table.add(rightTable).width(w2).height(Gdx.graphics.getHeight()).expandY().align(Align.top).top().fill(); 
-			bList.remove();
-			stage.addActor(bList);
+			table.add(rightTable).width(w2).height(h0).expandY().align(Align.top).top().fill(); 
 		}
+		bList.remove();
+		stage.addActor(bList);
 		bAreToolsVisible = !bAreToolsVisible;
-
-		//bList.setHeight(ibHeight);
-		//bList.setWidth(ibHeight);
-		//bList.setX(stage.getWidth() - bList.getWidth());
-		//bList.setY(stage.getHeight()- bList.getHeight());
 	}
 
 	public void routineParam(){

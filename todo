@@ -1,11 +1,21 @@
 
 TODO 
-Start with buttons showed
+
+	Handle null text exception when ciphering or unciphering. 
+	Remove useless logs
+	Make an exit button
+	Make cipher, uncipher with different images
+	android, come back not working
+	Clean all, comment
+	Dispose everything you can. 
+	Param Screen
+	Start with buttons showed
   cipher, 
   In scrollpane, set the textArea Size according to its line number 
   Put in readonly when cipher, 
   make a message routine, printing a message on screen 
   When comming back, the boolean of AreTools shhown is nto setted so I have to click twice
+  Make a nice README, GITHUB, clean the git, make a readme libgdx, and import jars...  
 
 
 ECLIM 
@@ -39,8 +49,9 @@ make exc work./gradlew desktop:run
 
 
 GRADLE 
-gradlew android:installDebug android:run
-./gradlew app:dependencies
+	NB : on android if double Dex defined, clean the core 
+	gradlew android:installDebug android:run
+	./gradlew app:dependencies
        println 'compiling source'
 
 	defaultConfig {

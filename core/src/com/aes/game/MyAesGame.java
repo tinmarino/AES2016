@@ -69,5 +69,25 @@ public class MyAesGame extends Game {
 
 	}
 
+	@Override
+	public void resize (int width, int height) {
+		if (currentScreen != null) {currentScreen.resize(width, height);}
+	}
+
+
+	@Override
+	public void dispose () {
+		if (currentScreen != null) currentScreen.hide();
+	}
+
+	@Override
+	public void pause () {
+		if (currentScreen != null) currentScreen.pause();
+	}
+
+	@Override
+	public void resume () {
+		if (currentScreen != null) currentScreen.resume();
+	}
 
 }
