@@ -1,5 +1,6 @@
 package com.aes.game.desktop;
 
+import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglClipboard;
@@ -13,6 +14,11 @@ public class DesktopLauncher {
 		config.vSyncEnabled = true;
 		config.width  = 240 * 2; 
 		config.height = 320 * 2; 
+
+		config.addIcon("img/icon/crypto256.png", FileType.Internal);
+		config.addIcon("img/icon/crypto128.png", FileType.Internal);
+		config.addIcon("img/icon/crypto64.png", FileType.Internal);
+		config.addIcon("img/icon/crypto32.png", FileType.Internal);
 
 		Global.platformOs = new PlatformDesktop();
 		Global.clipboard  = new LwjglClipboard();

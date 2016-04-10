@@ -225,20 +225,20 @@ public class MainRenderer extends AbstractScreen
 
 	public ImageTextButton CreateTextButton(String label, RTYPE routineType){
 
-		Color cButton = new Color(0.5f, 0.5f, 0.5f, 1); 
+		//Color cButton = HtmlColor.MidnightBlue; 
 		ImageTextButtonStyle itbStyle = new ImageTextButtonStyle(); 
 		// NINE PATCH 
 		switch(routineType){
 			case LIST:
-				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1,0));
+				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,0.2f,1));
 				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1,0.5f));
 				break;
 			case NULL:
 				break;
 			default:
-			 	Texture t = new Texture(PixmapFactory.circle(64, HtmlColor.AliceBlue));
+			 	Texture t = new Texture(PixmapFactory.circleDrawPixel(64, HtmlColor.MidnightBlue));
 				itbStyle.up   = PixmapFactory.ninePatchFromTexture(t);
-				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,Color.LIGHT_GRAY);
+				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,HtmlColor.MidnightBlue);
 				break;
 		}
 		itbStyle.font = fontButton; 
@@ -285,7 +285,6 @@ public class MainRenderer extends AbstractScreen
 		// BUTTON PARAM  TODO replace wirth a image 
 		final RTYPE crType = routineType;
 		ImageTextButton bRes = new ImageTextButton(label, itbStyle); 
-		bRes.setColor(cButton);
 		bRes.setWidth(ibWidth - 4);
 		bRes.setHeight(ibHeight -4);
 		bRes.addListener(

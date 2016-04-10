@@ -5,7 +5,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
@@ -13,8 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
-
-
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 public class ParamScreen extends AbstractScreen {
 
@@ -48,6 +50,7 @@ public class ParamScreen extends AbstractScreen {
 		Global.inputMultiplexer.addProcessor(stage);
 		table = new Table();
 
+		// STYLES 
 		LabelStyle lStyle = new LabelStyle();
 		lStyle.font = Global.font; 
 		lStyle.fontColor = Color.BLACK;
@@ -61,6 +64,17 @@ public class ParamScreen extends AbstractScreen {
 		tfStyle.background = PixmapFactory.ninePatchFromTexture(t);
 		tfStyle.cursor.setMinWidth(2f);
 
+		CheckBoxStyle cbStyle = new CheckBoxStyle();
+		cbStyle.font = Global.font; 
+		cbStyle.fontColor = Color.BLACK;
+		cbStyle.checkboxOff = PixmapFactory.drawableCheckBoxOff();
+		cbStyle.checkboxOn = PixmapFactory.drawableCheckBoxOn();
+
+
+
+
+
+		// KEY 
 		Table tKey = new Table(); 
 		tKey.add(new Label("Key:",lStyle)).align(Align.left);
 		tKey.add(new TextField("", tfStyle)).align(Align.left).expandX().fill();
@@ -69,6 +83,16 @@ public class ParamScreen extends AbstractScreen {
 
 
 
+
+		// IS DEBUGGING 
+	    CheckBox isDebuggingCheckBox = new CheckBox(" Debug ", cbStyle); 
+		isDebuggingCheckBox.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				Gdx.app.log("TBF", "CheckBox IsDebuggin");
+			}
+		});
+		table.add(isDebuggingCheckBox).expandX().fill().row();
 
 		for(int  i= 0; i<30; i++){
 			table.add(new Label("Alea jacta est",lStyle)).row();

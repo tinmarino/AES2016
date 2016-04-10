@@ -50,8 +50,48 @@ public class PixmapFactory{
 
 	public static Drawable drawableOneBlue(){
 		Pixmap pixmap = monocromaticPixmap(1, 1, Color.BLUE);
+		for (int i = 0; i<32; i++){
+			for (int j=-1; j<=1; j++){
+				pixmap.drawPixel(i,i+j);
+				pixmap.drawPixel(i,32-i-j);
+			}
+		}
 		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
 	}
+
+	public static Drawable drawableCheckBoxOn(){
+		Pixmap pixmap = pixmapCheckBox();
+		// Cross
+		pixmap.setColor(Color.RED);
+		for (int i = 0; i<32; i++){
+			for (int j=-1; j<=1; j++){
+				pixmap.drawPixel(i,i+j);
+				pixmap.drawPixel(i,32-i-j);
+			}
+		}
+		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
+	}
+
+	public static Drawable drawableCheckBoxOff(){
+		Pixmap pixmap = pixmapCheckBox();
+		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
+	}
+
+	public static Pixmap pixmapCheckBox(){
+		Pixmap pixmap = monocromaticPixmap(32, 32, Color.WHITE);
+		pixmap.setColor(Color.BLACK);
+		// square
+		for (int i = 0; i<32; i++){
+			for (int j=0; j<=4; j++){
+				pixmap.drawPixel(i,j);				// BOT
+				pixmap.drawPixel(i,32-j);			// TOP
+				pixmap.drawPixel(j,i);				// LEFT 
+				pixmap.drawPixel(32-j,i);				// RIGHT 
+			}
+		}
+		return pixmap;
+	}
+
 
 	public static Drawable getDrawableMonocromatic(int x, int y, Color color){
 		Pixmap pixmap = monocromaticPixmap(x, y, color);
@@ -160,6 +200,24 @@ public class PixmapFactory{
 		
 		res.setColor(color);
 		res.fillCircle(radius/2, radius/2, radius/2);
+		
+		return res; 
+	}
+
+	public static Pixmap circleDrawPixel(int diameter, Color color){
+		Pixmap res = new Pixmap( diameter , diameter , Format.RGBA8888);
+		int r1 = (diameter/2);
+		int r2 = r1*r1;
+
+		res.setColor(color);
+		for (int i=0; i<diameter; i++){
+			for (int j=0; j<diameter; j++){
+				if( (i-r1)*(i-r1) + (j-r1)*(j-r1)  < r2){
+					res.drawPixel(i,j);
+				}
+			}
+		}
+
 		
 		return res; 
 	}
