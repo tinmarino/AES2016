@@ -40,6 +40,7 @@ project(":desktop") {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
     }
 }
 
@@ -93,6 +94,7 @@ project(":core") {
 
 
     dependencies {
+	    compile files('/home2/tourneboeuf/Software/Java/Jar/gwt-crypto-2.3.0.jar')
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
     }
 }

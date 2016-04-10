@@ -21,6 +21,11 @@
 	<!--  DESKTOP --> 
 	<classpathentry kind="lib" path="/home2/tourneboeuf/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-lwjgl/1.5.5/3839f73b56e77e2d06cb874952dff466756e1e25/gdx-backend-lwjgl-1.5.5.jar"/>
 
+	
+	<!--  CRYPTO  
+	<classpathentry kind="lib" path="/home2/tourneboeuf/Software/Java/Jar/bcprov-jdk15on-154.jar"/>
+	-->
+	<classpathentry kind="lib" path="/home2/tourneboeuf/Software/Java/Jar/gwt-crypto-2.3.0.jar"/>
 
 	<!--  HTML    --> 
 	<classpathentry kind="lib" path="/home2/tourneboeuf/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx-backend-gwt/1.5.5/30566300f1d4c4fb5b5af993f05e9fd7fa73934/gdx-backend-gwt-1.5.5.jar"/>

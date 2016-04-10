@@ -5,6 +5,7 @@ package com.aes.game;
 //import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
+
 //import javax.crypto.BadPaddingException;
 //import javax.crypto.Cipher;
 //import javax.crypto.IllegalBlockSizeException;
@@ -13,6 +14,7 @@ import java.util.Random;
 
 import com.aes.game.base64.Base64;
 import com.badlogic.gdx.Gdx;
+import com.googlecode.gwt.crypto.client.AESCipher;
 
 /*
  * 32 bytes encryption is 256 bits 
@@ -139,8 +141,47 @@ public class MyCipher{
 	}
 
 
-	//public static byte[] AesCipher(byte[] sClear, Boolean bCipher)
-	//{
+	public static byte[] AesCipher(byte[] sClear, Boolean bCipher)
+	{
+		byte res[] = new byte[sClear.length] ;
+		AESCipher aesChiper = new AESCipher();
+		
+
+
+		return res;
+	}
+}
+
+
+
+
+
+/*
+ *
+
+
+		SecretKeySpec aesKeySpec = new SecretKeySpec(key, "AES");
+
+		Cipher aesCipher = Cipher.getInstance("AES");
+		aesCipher.init(Cipher.ENCRYPT_MODE, aesKeySpec);
+
+		res  = aesCipher.doFinal(sClear);
+
+		AESCipher cipher = new AESCipher();
+
+        cipher.setKey(key);
+		String string = new String(sClear);
+        try {
+            res = cipher.encrypt(string).getBytes();
+        } 
+		catch (InvalidCipherTextException e) {
+            throw new RuntimeException(e);
+        }
+
+ *
+ *
+ * */
+
 	//	byte[] encryptedData = new byte[10];
 	//	try{
 	//		Cipher c = Cipher.getInstance("AES");
@@ -166,6 +207,4 @@ public class MyCipher{
 	//	}
 
 	//	return encryptedData;
-	//}
-}
 
