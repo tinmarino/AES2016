@@ -56,6 +56,11 @@ public class MainRenderer extends AbstractScreen
 	public void show() {
 		super.show(); 
 
+
+
+
+		//
+
 		//ibWidth  = Math.max(64, Math.round(Gdx.graphics.getWidth() / 8));
 		//ibWidth  = Math.round(Gdx.graphics.getWidth()/8);
 		ibWidth  = Math.max(40, Math.round(Gdx.graphics.getWidth() / 8));
@@ -412,13 +417,25 @@ public class MainRenderer extends AbstractScreen
 	}
 
 	public void routineDbg(){
-		Gdx.app.log("TBF", "scrollPane" +   scrollPane.getScrollPercentX() );
-		Gdx.app.log("TBF", "text height " +   textArea.getHeight() );
-		Gdx.app.log("TBF", "line number  " +   textArea.getLines() );
-		Gdx.app.log("TBF", "Pixel DEnsity  " +   Gdx.graphics.getDensity());
-		//textArea.setHeight(1000);
-		//scrollPane.layout();
-		scrollPane.setScrollPercentX( scrollPane.getScrollPercentX() + 10 );
+		//Gdx.app.log("TBF", "scrollPane" +   scrollPane.getScrollPercentX() );
+		//Gdx.app.log("TBF", "text height " +   textArea.getHeight() );
+		//Gdx.app.log("TBF", "line number  " +   textArea.getLines() );
+		//Gdx.app.log("TBF", "Pixel DEnsity  " +   Gdx.graphics.getDensity());
+		////textArea.setHeight(1000);
+		////scrollPane.layout();
+		//scrollPane.setScrollPercentX( scrollPane.getScrollPercentX() + 10 );
+
+		if (null == Global.preferenceSaved){
+			Global.preferenceSaved = new PreferenceSaved();	
+			Gdx.app.log("TBF", "PreferencesSaved is null");
+		}
+
+		KeyObject toAdd = new KeyObject();
+		toAdd.cipheredKey = new byte[10]; 
+		toAdd.label = "This is the label I want to see";
+		Global.preferenceSaved.keyList.add(toAdd);
+		Global.writePref();
+	
 	}
 
 }

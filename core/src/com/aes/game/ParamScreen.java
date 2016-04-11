@@ -28,9 +28,9 @@ public class ParamScreen extends AbstractScreen {
 	Stage stage; 
 	List<Disposable> disposableList = new ArrayList<Disposable>();
 
-	ScrollPane scrollPane; 
-	Table      table; 
-	CheckBox cb1, cb2, cb3, cb4;
+	ScrollPane 	scrollPane, keyScrollPane;  
+	Table      	table, keyTable;
+	CheckBox 	cb1, cb2, cb3, cb4;
 	
 
     float sWidth ;  // slider width 

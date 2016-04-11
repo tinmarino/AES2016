@@ -4,8 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.utils.Clipboard;
+import com.badlogic.gdx.utils.Json;
 
 /*	Here I declare some global variables. They are accesible from anywhere. 
     They correspond to settings, parameters... 
@@ -39,7 +41,7 @@ public class Global{
 
 	/* My keyList, thiese are saved in the game preferences
 	*/
-	public static KeyElt[]			keyList; 
+	public static List<KeyObject>			keyList; 
 
 	/* The ciphering type, AES? RSA TRIPLEDES or TBF, my own type laying on AES256
 	*/
@@ -51,20 +53,33 @@ public class Global{
 	public static MyCipher 			myCipher; 
 
 
-	public void safePref(){
-     	Preferences preferences = Gdx.app.getPreferences("v1"); 
-     //if (!preferences.get().containsKey(VOLUME))     {preferences.putFloat  (VOLUME  , 0.5f);}
-     //if (!preferences.get().containsKey(IS_MUTE))    {preferences.putBoolean(IS_MUTE ,false);}
-     //if (!preferences.get().containsKey(DEBUG))      {preferences.putBoolean(DEBUG   ,false);}
-     //if (!preferences.get().containsKey(TIMESTEP))   {preferences.putInteger(TIMESTEP,5    );}
+	public static PreferenceSaved  	preferenceSaved; 
+
+
+	public static void writePref(){
+		Json json = new Json();
+		String sTosave = json.toJson(preferenceSaved);
+		Gdx.app.log("TBF", "Global.writePref : " + sTosave);
+     	Preferences preferences = Gdx.app.getPreferences("v1"); // v1 for version 1 
+		preferences.putString("jsonKey1", sTosave);
+		preferences.flush();
 	}
 
-	public void loadPref(){
+	public static void readPref(){
+		Json json = new Json(); 
+     	Preferences preferences = Gdx.app.getPreferences("v1"); // v1 for version 1 
+		if (preferences.get().containsKey("jsonKey1")) {
+			String sToLoad = preferences.getString("jsonKey1");
+			preferenceSaved = json.fromJson(PreferenceSaved.class, sToLoad );
+			Gdx.app.log("TBF", "Global.readPref : " + sToLoad);
+		}
+		else{
+			Gdx.app.log("TBF", "Global.readPref : NULL !!! ");
+		}
 	}
 
-	public class KeyElt{
-		public String label; 
-		public byte[] cipheredKey;
+	public void clearPref(){
 	}
+
 	public enum CTYPE{AES, TBF, RSA, TRIPLEDES}
 }
