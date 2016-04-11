@@ -27,7 +27,7 @@ public class Global{
 
 	/* Is debbuging boolean, to check or uncheck the debug view
 	*/
-	public static Boolean 			bIsDebugging = true;
+	public static Boolean 			bIsDebugging = false;
 
 	/* My main font, I don't want to pass it in all classes 
 	*/

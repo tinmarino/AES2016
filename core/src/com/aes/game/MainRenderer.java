@@ -1,8 +1,10 @@
 package com.aes.game;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
-
+import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -14,7 +16,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
@@ -22,6 +23,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 
@@ -30,22 +32,17 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class MainRenderer extends AbstractScreen
  {
-	Stage stage; 
-	Skin skin;
-	private Table table;
-	TextField textFieldClear; 
-	TextField textFieldCoded; 
-	TextArea  textArea;
-	ScrollPane scrollPane;
-	ScrollPane scrollPaneRight;
-	BitmapFont font; 
-	BitmapFont fontButton; 
-	Boolean bAreToolsVisible = false;
+	Stage 			stage; 
+	TextArea  		textArea;
+	ScrollPane 		scrollPane, scrollPaneRight;
+	Table 			table, leftTable, rightTable, rightTopTable, rightBottomTable; 
+	BitmapFont 		font, fontButton; 
+	Boolean 		bAreToolsVisible = false;
 	ImageTextButton bList;
+	List<Disposable> disposableList = new ArrayList<Disposable>();
+
 	
 	int w0, w1, w2, h0, ibWidth;
-	Table leftTable; 
-	Table rightTable; 
 
 
 	/**
@@ -58,6 +55,9 @@ public class MainRenderer extends AbstractScreen
 	@Override
 	public void show() {
 		super.show(); 
+
+		//ibWidth  = Math.max(64, Math.round(Gdx.graphics.getWidth() / 8));
+		ibWidth  = Math.round(Gdx.graphics.getWidth()/8);
 
 		w0 = Math.round(Gdx.graphics.getWidth());
 		w1 = Math.round(Gdx.graphics.getWidth() - ibWidth - 4);
@@ -80,10 +80,10 @@ public class MainRenderer extends AbstractScreen
 		stage = new Stage(); 
 		stage.setViewport(new StretchViewport(w0, h0));
 		Global.inputMultiplexer.addProcessor(stage);
+		//disposableList.add(stage);
 
 
 
-		ibWidth  = Gdx.graphics.getWidth() / 8;
 
 
 		bList					= CreateTextButton("", 			RTYPE.LIST);
@@ -94,14 +94,17 @@ public class MainRenderer extends AbstractScreen
 		ImageTextButton bPaste 	= CreateTextButton("paste",		RTYPE.PASTE); 
 		ImageTextButton bClear 	= CreateTextButton("clear",		RTYPE.CLEAR); 
 		ImageTextButton bDbg	= CreateTextButton("dbg",		RTYPE.DBG); 
+		ImageTextButton bExit	= CreateTextButton("exit",		RTYPE.EXIT); 
 
 
 		// TEXT AREA
 		TextFieldStyle tfStyle = new TextFieldStyle(); 
 		tfStyle.font = font;
+		tfStyle.fontColor = Color.BLACK;
 		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK);
 		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE);
-		tfStyle.fontColor = Color.BLACK ;  
+		//disposableList.add((Disposable)tfStyle.cursor);
+		//disposableList.add((Disposable)tfStyle.selection);
 		tfStyle.cursor.setMinWidth(2f);
 		Global.tfStyle = tfStyle;
 		//tfStyle.background = skin.getDrawable("white31") ; 
@@ -126,10 +129,6 @@ public class MainRenderer extends AbstractScreen
 				}
 			});
 
-			// TODO Auto-generated method stub
-			//textArea.cursor = PixmapFactory.drawableSelection();
-//skin.getFont("default").setScale(0.5f, 0.5f);	
-		//textArea.cursor = skin.newDrawable("up",0,0,1,1 ); 
 		textArea.setPrefRows(50);
 		
 
@@ -140,13 +139,15 @@ public class MainRenderer extends AbstractScreen
     	table = new Table(); 
 		leftTable = new Table(); 
 		rightTable = new Table(); 
+		rightBottomTable = new Table(); 
+		rightTopTable = new Table(); 
 		
 		// LEFT 
 		leftTable.add(textArea).expand().fill().center();
 		ScrollPaneStyle spStyle = new ScrollPaneStyle();
 		spStyle.vScroll = PixmapFactory.getDrawableMonocromatic(5, 25, Color.GRAY) ;
 		spStyle.vScrollKnob	= PixmapFactory.getDrawableMonocromatic(10, 10, Color.BLUE) ;
-		scrollPane = new ScrollPane(leftTable);
+		scrollPane = new ScrollPane(textArea);
 		scrollPane.setScrollingDisabled(true, false);
 	    scrollPane.setForceScroll(true, false);
 		scrollPane.setOverscroll(false, false);
@@ -154,15 +155,16 @@ public class MainRenderer extends AbstractScreen
 		
 
 		// RIGHT 
-    	rightTable.add(bNull	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
-    	rightTable.add(bParam	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
-    	rightTable.add(bCipher	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
-    	rightTable.add(bCopy	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bPaste	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bClear	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightTable.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 7*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
-		//scrollPaneRight = new ScrollPane(rightTable)	;
+    	rightBottomTable.add(bNull		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
+    	rightBottomTable.add(bParam		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
+    	rightBottomTable.add(bCipher	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
+    	rightBottomTable.add(bCopy		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightBottomTable.add(bPaste		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightBottomTable.add(bClear		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightBottomTable.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightBottomTable.add(bExit		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	rightBottomTable.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 8*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
+		//scrollPaneRight = new ScrollPane(rightBottomTable)	;
 	    //scrollPaneRight.setScrollingDisabled(true, false);
 		//scrollPaneRight.setFillParent(true);
 
@@ -177,6 +179,8 @@ public class MainRenderer extends AbstractScreen
 		if (Global.bIsDebugging){
 			leftTable.debug(); 
 			rightTable.debug(); 
+			rightBottomTable.debug(); 
+			rightTopTable.debug(); 
 			table.debug();
 		}
 
@@ -207,14 +211,23 @@ public class MainRenderer extends AbstractScreen
 			Global.inputMultiplexer.removeProcessor(stage);
 			stage.dispose(); 
 		}
-		if (null != skin){
-			skin.dispose();
-		}
 
 	}
+
 	@Override
-	public void hide() {
-		dispose();
+	public void pause(){
+		super.pause();
+		if (null != stage){
+			Global.inputMultiplexer.removeProcessor(stage);
+		}
+	}
+
+	@Override
+	public void resume(){
+		super.resume(); 
+		if (null != stage){
+			Global.inputMultiplexer.addProcessor(stage);
+		}
 	}
 
 
@@ -223,13 +236,13 @@ public class MainRenderer extends AbstractScreen
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
 		w0 = Math.round(stage.getWidth());
-		w1 = Math.round(stage.getWidth() *7f/8 - 4);
-		w2 = Math.round(stage.getWidth() *1f/8 + 4);
+		w1 = Math.round(stage.getWidth() - ibWidth - 4);
+		w2 = Math.round(ibWidth + 4);
 		h0 = height;
 		bList.setX(stage.getWidth() - bList.getWidth());
 		bList.setY(stage.getHeight()- bList.getHeight());
 		scrollPane.setBounds(0, 0, w1, h0);
-		rightTable.setBounds(w1, 0, w0, h0);
+		rightBottomTable.setBounds(w1, 0, w0, h0-3*ibWidth);
 
 		bAreToolsVisible = !bAreToolsVisible;
 		routineList();
@@ -250,34 +263,40 @@ public class MainRenderer extends AbstractScreen
 			case NULL:
 				break;
 			default:
-			 	Texture t = new Texture(PixmapFactory.circleDrawPixel(64, HtmlColor.SkyBlue));
+			 	Texture t = new Texture(PixmapFactory.circle(16, HtmlColor.SkyBlue));
 				itbStyle.up   = PixmapFactory.ninePatchFromTexture(t);
 				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,HtmlColor.MidnightBlue);
 				break;
 		}
 		itbStyle.font = fontButton; 
 		itbStyle.fontColor = Color.BLACK;
+		String suffix = "128.png";
+		if (Global.platformOs.getOs() == OS.ANDROID){suffix = "32.png";}
+		Gdx.app.log("TBF", "size suffix" + suffix);
 		switch (routineType){
 			case PARAM: 	
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool128.png");
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool" + suffix);
 				break; 
 			case CIPHER:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/key128.png");
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/key" + suffix);
 				break; 
 			case CLEAR:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/trash128.png");
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/trash" + suffix);
 				break;
 			case COPY:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/copy128.png");
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/copy" + suffix);
 				break;
 			case PASTE:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/paste128.png");
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/paste" + suffix);
 				break;
 			case DBG:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool128.png");
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool" + suffix);
 				break;
 			case LIST:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/list128.png");
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/list" + suffix);
+				break;
+			case EXIT:
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/exit" + suffix);
 				break;
 			case NULL:
 				break;
@@ -320,7 +339,7 @@ public class MainRenderer extends AbstractScreen
 		return bRes;
 	}
 
-	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG, LIST, NULL}
+	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG, LIST, NULL, EXIT}
 	public void routineDispatch(RTYPE routineType){
 		switch (routineType){
 			case LIST: 		routineList(); 		break; 
@@ -331,6 +350,7 @@ public class MainRenderer extends AbstractScreen
 			case PASTE:		routinePaste();		break;
 			case DBG:		routineDbg();		break;
 			case NULL:		routineDbg();		break;
+			case EXIT:		routineExit();		break;
 		}
 
 	}
@@ -348,12 +368,19 @@ public class MainRenderer extends AbstractScreen
 		// ADD TOOL ScrollPane
 		else{
 			table.reset();
+			rightTable.reset();
+			rightTable.add(rightTopTable).width(w2).height(ibWidth+4).fill().row(); 
+			rightTable.add(rightBottomTable).width(w2).height(h0-ibWidth-4).fill().row(); 
 			table.add(scrollPane).width(w1).expandY().fill(); 
-			table.add(rightTable).width(w2).height(h0).expandY().align(Align.top).top().fill(); 
+			table.add(rightTable).width(w2).height(h0- ibWidth-4).expandY().align(Align.top).top().fill(); 
 		}
 		bList.remove();
 		stage.addActor(bList);
 		bAreToolsVisible = !bAreToolsVisible;
+	}
+
+	public void routineExit(){
+		Gdx.app.exit();
 	}
 
 	public void routineParam(){
@@ -368,10 +395,6 @@ public class MainRenderer extends AbstractScreen
 		textArea.setText( sOut );
 		return; 
 	}
-
-		//this.setNextScreen(new ScrollPaneTest());
-		//this.goFoward = true;
-
 
 	public void routineClear(){
 		textArea.setText("");

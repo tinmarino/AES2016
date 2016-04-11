@@ -16,8 +16,11 @@ public class AbstractScreen implements Screen, InputProcessor
 	 public boolean goFoward = false; 
 
 	 public String sName = "AbstractScreen";
+	 public STATE state = STATE.UNINITIALISED;
 
-	 
+	 public enum STATE{PAUSE, UNINITIALISED, RUN}
+
+
 
 	 public AbstractScreen getPreviousScreen(){
 		 return this.previousScreen; 
@@ -38,19 +41,13 @@ public class AbstractScreen implements Screen, InputProcessor
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-
+		state = STATE.UNINITIALISED;
 	}
 
-	@Override
-	public void hide() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void pause() {
-		// TODO Auto-generated method stub
+		this.state = STATE.PAUSE;
 
 	}
 
@@ -68,12 +65,13 @@ public class AbstractScreen implements Screen, InputProcessor
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
+		state = STATE.RUN;
 
 	}
 
 	@Override
 	public void show() {
+		state = STATE.RUN;
 	}
 
 	public void onClick(){
@@ -87,31 +85,29 @@ public class AbstractScreen implements Screen, InputProcessor
 
 	@Override
 	public boolean keyDown(int keycode) {
-		Gdx.app.log("KeyDown : ", "from class " + sName + " for key :" + keycode ); 
+		Gdx.app.log("TBF", "Key down from class " + sName + " for key :" + keycode ); 
 		switch(keycode){
 			// GO BACK 
-			case Keys.ESCAPE:
 			case Keys.BACK:
-				Gdx.app.log("Key ", "I try to go back " + this.getPreviousScreen() ); 
+			case Keys.ESCAPE:
 				this.goBack = true; 
 				return true;
 			case Keys.F:
-				Gdx.app.log("Key ", "I try to go foward " + this.getPreviousScreen() ); 
 				this.goFoward = true; 
 				return true;
 
 			// GO FOWARD 
 			case Keys.P: 
-				Gdx.app.log("", "PreviousScreen is " + this.getPreviousScreen()); 
+				Gdx.app.log("TBF", "PreviousScreen is " + this.getPreviousScreen()); 
 				return true; 
 
 			// DEBUG KEYS
 			case Keys.N: 
-				Gdx.app.log("", "Nest Screen is " + this.getNextScreen()); 
+				Gdx.app.log("TBF", "Nest Screen is " + this.getNextScreen()); 
 				return true; 
 
 			default: 
-				Gdx.app.log("", "Default nothing haappens"); 
+				Gdx.app.log("TBF", "Default nothing haappens"); 
 				return false;
 		}
 	}
@@ -158,6 +154,12 @@ public class AbstractScreen implements Screen, InputProcessor
 	public boolean scrolled(int amount) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+
 	}
 
 	///////////////////////////////////////////////:

@@ -121,32 +121,31 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +22 core/src/com/aes/game/AbstractScreen.java
-badd +13 core/src/com/aes/game/Global.java
-badd +259 core/src/com/aes/game/MainRenderer.java
-badd +1 core/src/com/aes/game/MyAesGame.java
-badd +28 core/src/com/aes/game/MyCipher.java
-badd +22 core/src/com/aes/game/ParamScreen.java
-badd +158 core/src/com/aes/game/PixmapFactory.java
+badd +20 core/src/com/aes/game/AbstractScreen.java
+badd +49 core/src/com/aes/game/Global.java
+badd +224 core/src/com/aes/game/MainRenderer.java
+badd +79 core/src/com/aes/game/MyAesGame.java
+badd +119 core/src/com/aes/game/MyCipher.java
+badd +145 core/src/com/aes/game/ParamScreen.java
+badd +216 core/src/com/aes/game/PixmapFactory.java
 badd +1 core/src/com/aes/game/PlatformOs.java
-badd +1 core/src/com/aes/game/HtmlColor.java
-badd +6 todo
-badd +0 html/src/com/aes/game/GdxDefinition.gwt.xml
+badd +133 core/src/com/aes/game/HtmlColor.java
+badd +6 html/src/com/aes/game/GdxDefinition.gwt.xml
+badd +19 html/src/com/aes/game/client/HtmlLauncher.java
+badd +11 android/AndroidManifest.xml
+badd +19 desktop/src/com/aes/game/desktop/DesktopLauncher.java
+badd +1 tmp
 args core/src/com/aes/game/AbstractScreen.java core/src/com/aes/game/base64/ core/src/com/aes/game/Global.java core/src/com/aes/game/MainRenderer.java core/src/com/aes/game/MyAesGame.java core/src/com/aes/game/MyCipher.java core/src/com/aes/game/ParamScreen.java core/src/com/aes/game/PixmapFactory.java core/src/com/aes/game/PlatformOs.java
-edit html/src/com/aes/game/GdxDefinition.gwt.xml
+edit core/src/com/aes/game/MainRenderer.java
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-edit html/src/com/aes/game/GdxDefinition.gwt.xml
-let s:cpo_save=&cpo
-set cpo&vim
-imap <buffer>  <Plug>SparkupExecute
-imap <buffer>  <Plug>SparkupNext
-let &cpo=s:cpo_save
-unlet s:cpo_save
+edit core/src/com/aes/game/MainRenderer.java
+inoreabbr <buffer> logger logger=eclim#java#logging#LoggingInit("logger")
+inoreabbr <buffer> log log=eclim#java#logging#LoggingInit("log")
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -155,13 +154,13 @@ setlocal nobinary
 setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
-setlocal nocindent
+setlocal cindent
 setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
-setlocal cinoptions=
+setlocal cinoptions=j1
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=sr:<!--,mb:\ ,ex0:-->
-setlocal commentstring=<!--%s-->
+setlocal comments=sO:*\ -,mO:*\ \ ,exO:*/,s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=//%s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -176,17 +175,17 @@ setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
-setlocal errorformat=
+setlocal errorformat=%E%f:%l:\ %m,%-Z%p^,%-C%.%#,%-G%.%#
 setlocal noexpandtab
-if &filetype != 'xml'
-setlocal filetype=xml
+if &filetype != 'java'
+setlocal filetype=java
 endif
 setlocal foldcolumn=0
 setlocal foldenable
 set foldexpr=FoldMethod(v:lnum)
 setlocal foldexpr=FoldMethod(v:lnum)
 setlocal foldignore=#
-setlocal foldlevel=29
+setlocal foldlevel=6
 setlocal foldmarker={{{,}}}
 set foldmethod=expr
 setlocal foldmethod=expr
@@ -199,25 +198,26 @@ setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=EclimGetXmlIndent(v:lnum)
-setlocal indentkeys=o,O,*<Return>,<>>,<<>,/,{,}
+setlocal include=^s*import
+setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+setlocal indentexpr=GetJavaIndent()
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e,0=extends,0=implements
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
 setlocal nolinebreak
 setlocal nolisp
 setlocal nolist
-setlocal makeprg=
+setlocal makeprg=javac
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
 setlocal modifiable
 setlocal nrformats=octal,hex
-setlocal nonumber
+set number
+setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=eclim#xml#complete#CodeComplete
-setlocal path=
+setlocal omnifunc=eclim#java#complete#CodeComplete
+setlocal path=.,/usr/include,,
 setlocal nopreserveindent
 setlocal nopreviewwindow
 setlocal quoteescape=\\
@@ -235,27 +235,31 @@ setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=
-setlocal suffixesadd=
+setlocal suffixesadd=.java
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'xml'
-setlocal syntax=xml
+if &syntax != 'java'
+setlocal syntax=java
 endif
 setlocal tabstop=4
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal undofile
-setlocal nowinfixheight
+setlocal winfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 6 - ((5 * winheight(0) + 20) / 40)
+33
+normal! zo
+60
+normal! zo
+let s:l = 22 - ((21 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
-normal! 0
+22
+normal! 051|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

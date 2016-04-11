@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Pixmap.Format;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
@@ -32,9 +31,10 @@ public class PixmapFactory{
 	}
 
 	public static NinePatchDrawable ninePatchFromTexture(Texture t){
-		final int width = t.getWidth() - 2;
-		final int height = t.getHeight() - 2;
-		NinePatch np = new NinePatch(new TextureRegion(t, 1, 1, width, height), 3, 3, 3, 3);
+		final int width = t.getWidth() / 2;
+		final int height = t.getHeight() /2 ;
+		// ------>width1    width2<--------- i define the stretchable region
+		NinePatch np = new NinePatch(t, width-1, width-1, height-1,height-1);
 		return new NinePatchDrawable(np);
 	}
 

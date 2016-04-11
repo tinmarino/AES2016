@@ -13,7 +13,8 @@ public class MyAesGame extends Game {
 	public void create () {
 
 		Global.inputMultiplexer = new InputMultiplexer();
-		Gdx.input.setInputProcessor(Global.inputMultiplexer);
+		// To prevent backKey from returning
+		Gdx.input.setCatchBackKey(true);
 		Gdx.input.setInputProcessor(Global.inputMultiplexer);
 
 
@@ -28,42 +29,47 @@ public class MyAesGame extends Game {
     	if (currentScreen.goBack) {
 			currentScreen.goBack = false; 
 			
-			Gdx.app.log("MARTIN MyGdx", " try go Back "); 
+			Gdx.app.log("TBF MyGdx", " try go Back "+ currentScreen.getPreviousScreen()); 
 			if (null != currentScreen.getPreviousScreen())
 			{
 				// Create Future screen 
 				AbstractScreen previousScreen = currentScreen.getPreviousScreen();
 				previousScreen.setNextScreen(currentScreen);
 				Global.inputMultiplexer.addProcessor(previousScreen);
-				previousScreen.show(); 
 
 				// Delete Old Scren 
-				currentScreen.dispose();
+				currentScreen.pause();
 				Global.inputMultiplexer.removeProcessor(currentScreen);
 
 				// Set new screen 
 				currentScreen = previousScreen;
-				
+				if (currentScreen.state == AbstractScreen.STATE.PAUSE){
+					currentScreen.resume();
+				}
+				else{
+					currentScreen.show();
+				}
 			}
     	} 
 
 		else if (currentScreen.goFoward) {
 			currentScreen.goFoward  = false; 
 
+			Gdx.app.log("TBF MyGdx", " try go foward"+ currentScreen.getNextScreen()); 
 			if (null != currentScreen.getNextScreen())
 			{
 				// Create future screen 
 				AbstractScreen nextScreen = currentScreen.getNextScreen();
 				nextScreen.setPreviousScreen(currentScreen);
 				Global.inputMultiplexer.addProcessor(nextScreen);
-				nextScreen.show();
 
 				// Remove old screen 
-				currentScreen.dispose();
+				currentScreen.pause();
 				Global.inputMultiplexer.removeProcessor(currentScreen);
 
 				// Set the new screen 
 				currentScreen = nextScreen;
+				currentScreen.show();
 			}
     	}
 
