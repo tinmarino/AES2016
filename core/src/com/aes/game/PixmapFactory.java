@@ -1,5 +1,6 @@
 package com.aes.game;
 
+import java.util.List;
 import java.util.Random;
 
 import com.badlogic.gdx.files.FileHandle;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
+import com.badlogic.gdx.utils.Disposable;
 
 /*
  * WARNING, pixmaps must be disposed
@@ -38,8 +40,10 @@ public class PixmapFactory{
 		return new NinePatchDrawable(np);
 	}
 
-	public static Drawable drawableFromFile(String path){
-		return new SpriteDrawable(new Sprite(new Texture(path)));
+	public static Drawable drawableFromFile(String path, List<Disposable> disposableList){
+		Texture t = new Texture(path);
+		disposableList.add(t);
+		return new SpriteDrawable(new Sprite(t));
 	}
 
 	public static Drawable drawableSelection(){
@@ -59,7 +63,7 @@ public class PixmapFactory{
 		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
 	}
 
-	public static Drawable drawableCheckBoxOn(){
+	public static Drawable drawableCheckBoxOn(List<Disposable> disposableList){
 		Pixmap pixmap = pixmapCheckBox();
 		// Cross
 		pixmap.setColor(Color.RED);
@@ -69,11 +73,13 @@ public class PixmapFactory{
 				pixmap.drawPixel(i,32-i-j);
 			}
 		}
+		disposableList.add(pixmap);
 		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
 	}
 
-	public static Drawable drawableCheckBoxOff(){
+	public static Drawable drawableCheckBoxOff(List<Disposable> disposableList){
 		Pixmap pixmap = pixmapCheckBox();
+		disposableList.add(pixmap);
 		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
 	}
 
@@ -93,8 +99,9 @@ public class PixmapFactory{
 	}
 
 
-	public static Drawable getDrawableMonocromatic(int x, int y, Color color){
+	public static Drawable getDrawableMonocromatic(int x, int y, Color color, List<Disposable> disposableList){
 		Pixmap pixmap = monocromaticPixmap(x, y, color);
+		disposableList.add(pixmap);
 		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
 	}
 

@@ -1,6 +1,9 @@
 package com.aes.game;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -17,11 +20,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Disposable;
 
 public class ParamScreen extends AbstractScreen {
 
 	// DISPOSABLE 
 	Stage stage; 
+	List<Disposable> disposableList = new ArrayList<Disposable>();
 
 	ScrollPane scrollPane; 
 	Table      table; 
@@ -58,18 +63,19 @@ public class ParamScreen extends AbstractScreen {
 
 		TextFieldStyle tfStyle = new TextFieldStyle(); 
 		tfStyle.font = Global.font;
-		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK);
-		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE);
+		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK, disposableList);
+		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE, disposableList);
 		tfStyle.fontColor = Color.BLACK ;  
 		Texture t = new Texture( PixmapFactory.circle(16,Color.GRAY));
+		disposableList.add(t);
 		tfStyle.background = PixmapFactory.ninePatchFromTexture(t);
 		tfStyle.cursor.setMinWidth(2f);
 
 		CheckBoxStyle cbStyle = new CheckBoxStyle();
 		cbStyle.font = Global.font; 
 		cbStyle.fontColor = Color.BLACK;
-		cbStyle.checkboxOff = PixmapFactory.drawableCheckBoxOff();
-		cbStyle.checkboxOn = PixmapFactory.drawableCheckBoxOn();
+		cbStyle.checkboxOff = PixmapFactory.drawableCheckBoxOff(disposableList);
+		cbStyle.checkboxOn =  PixmapFactory.drawableCheckBoxOn(disposableList);
 
 
 
@@ -134,9 +140,15 @@ public class ParamScreen extends AbstractScreen {
 
 	@Override
 	public void dispose(){
+		super.dispose();
 		if (null != stage){
 			stage.dispose(); 
 			Global.inputMultiplexer.removeProcessor(stage);
+		}
+		for (Disposable d : disposableList){
+			if (null != d){
+				d.dispose();
+			}
 		}
 	}
 

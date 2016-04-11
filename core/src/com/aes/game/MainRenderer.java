@@ -101,14 +101,10 @@ public class MainRenderer extends AbstractScreen
 		TextFieldStyle tfStyle = new TextFieldStyle(); 
 		tfStyle.font = font;
 		tfStyle.fontColor = Color.BLACK;
-		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK);
-		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE);
-		//disposableList.add((Disposable)tfStyle.cursor);
-		//disposableList.add((Disposable)tfStyle.selection);
+		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK, disposableList);
+		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE, disposableList);
 		tfStyle.cursor.setMinWidth(2f);
 		Global.tfStyle = tfStyle;
-		//tfStyle.background = skin.getDrawable("white31") ; 
-		
 
 		textArea 	= new TextArea("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
 		textArea.setPrefRows(3); 
@@ -145,8 +141,8 @@ public class MainRenderer extends AbstractScreen
 		// LEFT 
 		leftTable.add(textArea).expand().fill().center();
 		ScrollPaneStyle spStyle = new ScrollPaneStyle();
-		spStyle.vScroll = PixmapFactory.getDrawableMonocromatic(5, 25, Color.GRAY) ;
-		spStyle.vScrollKnob	= PixmapFactory.getDrawableMonocromatic(10, 10, Color.BLUE) ;
+		spStyle.vScroll = PixmapFactory.getDrawableMonocromatic(5, 25, Color.GRAY, disposableList) ;
+		spStyle.vScrollKnob	= PixmapFactory.getDrawableMonocromatic(10, 10, Color.BLUE, disposableList) ;
 		scrollPane = new ScrollPane(textArea);
 		scrollPane.setScrollingDisabled(true, false);
 	    scrollPane.setForceScroll(true, false);
@@ -211,6 +207,11 @@ public class MainRenderer extends AbstractScreen
 			Global.inputMultiplexer.removeProcessor(stage);
 			stage.dispose(); 
 		}
+		for (Disposable d : disposableList){
+			if (null != d){
+				d.dispose();
+			}
+		}
 
 	}
 
@@ -257,15 +258,16 @@ public class MainRenderer extends AbstractScreen
 		switch(routineType){
 			case LIST:
 				new Color();
-				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1f,0.01f));
-				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1,0.5f));
+				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1f,0.01f), disposableList);
+				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1,0.5f), disposableList);
 				break;
 			case NULL:
 				break;
 			default:
 			 	Texture t = new Texture(PixmapFactory.circle(16, HtmlColor.SkyBlue));
+				disposableList.add(t);
 				itbStyle.up   = PixmapFactory.ninePatchFromTexture(t);
-				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,HtmlColor.MidnightBlue);
+				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,HtmlColor.MidnightBlue, disposableList);
 				break;
 		}
 		itbStyle.font = fontButton; 
@@ -275,28 +277,28 @@ public class MainRenderer extends AbstractScreen
 		Gdx.app.log("TBF", "size suffix" + suffix);
 		switch (routineType){
 			case PARAM: 	
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool" + suffix);
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool" + suffix, disposableList);
 				break; 
 			case CIPHER:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/key" + suffix);
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/key" + suffix, disposableList);
 				break; 
 			case CLEAR:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/trash" + suffix);
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/trash" + suffix, disposableList);
 				break;
 			case COPY:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/copy" + suffix);
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/copy" + suffix, disposableList);
 				break;
 			case PASTE:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/paste" + suffix);
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/paste" + suffix, disposableList);
 				break;
 			case DBG:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool" + suffix);
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool" + suffix, disposableList);
 				break;
 			case LIST:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/list" + suffix);
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/list" + suffix, disposableList);
 				break;
 			case EXIT:
-				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/exit" + suffix);
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/exit" + suffix, disposableList);
 				break;
 			case NULL:
 				break;
