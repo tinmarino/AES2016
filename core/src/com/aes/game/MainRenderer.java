@@ -57,7 +57,8 @@ public class MainRenderer extends AbstractScreen
 		super.show(); 
 
 		//ibWidth  = Math.max(64, Math.round(Gdx.graphics.getWidth() / 8));
-		ibWidth  = Math.round(Gdx.graphics.getWidth()/8);
+		//ibWidth  = Math.round(Gdx.graphics.getWidth()/8);
+		ibWidth  = Math.max(40, Math.round(Gdx.graphics.getWidth() / 8));
 
 		w0 = Math.round(Gdx.graphics.getWidth());
 		w1 = Math.round(Gdx.graphics.getWidth() - ibWidth - 4);

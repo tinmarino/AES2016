@@ -2,17 +2,11 @@ TODO
 
 	Resize also the rightTabel 
 	Handle null text exception when ciphering or unciphering. 
-	Dispose texture to exit properly 
 	Make cipher, uncipher with different images
-	android, come back not working
-	Clean all, comment
-	Dispose everything you can. 
 	Param Screen
   cipher, 
   In scrollpane, set the textArea Size according to its line number 
-  Put in readonly when cipher, 
   make a message routine, printing a message on screen 
-  When comming back, the boolean of AreTools shhown is nto setted so I have to click twice
   Make a nice README, GITHUB, clean the git, make a readme libgdx, and import jars...  
 
 
@@ -20,6 +14,13 @@ TODO
 
 ECLIM 
   NEXT ERROR :lnext, :lprev, :lopen, etc.(see :h location-list for more info).
+
+
+SOLVED 
+  When comming back, the boolean of AreTools shhown is nto setted so I have to click twice
+     -> Normal, that was my default screen, now my default screen is with buttons 
+
+
 
 HTML 
 	./gradlew html:dist
