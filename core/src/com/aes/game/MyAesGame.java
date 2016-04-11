@@ -1,5 +1,6 @@
 package com.aes.game;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
@@ -16,6 +17,7 @@ public class MyAesGame extends Game {
 		// To prevent backKey from returning
 		Gdx.input.setCatchBackKey(true);
 		Gdx.input.setInputProcessor(Global.inputMultiplexer);
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
 
 		currentScreen = new MainRenderer(); 
