@@ -113,25 +113,29 @@ public class MainRenderer extends AbstractScreen
 		Global.tfStyle = tfStyle;
 
 		textArea 	= new TextArea("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
-		textArea.setPrefRows(3); 
+		//textArea.setFillParent(true);
 		textArea.setTextFieldListener(new TextFieldListener()
 		{
 			@Override
-			public void keyTyped(TextField textField, char c)
+			public void keyTyped(TextField textArea, char c)
 			{
 				// Handle a newline properly. If not handled here, the TextField
 				// will advance to the next field.
-					if (c == '\n')
+					Gdx.app.log("TBF", "Key pressed in textArea :" + c +  "+ " +((int) c) +"+"+ ((int)'\n')  );
+					if (c == '\n' || c == '\r')
 					{
-						textArea.appendText("\n");
-						stage.setKeyboardFocus(textField);
+						int i = textArea.getCursorPosition();
+						stage.setKeyboardFocus(textArea);
 						textArea.getOnscreenKeyboard().show(true);
+						textArea.appendText("\n");
+						((TextArea)textArea).setPrefRows(((TextArea)textArea).getLines()+4);
 						scrollPane.layout();
+						textArea.setCursorPosition(i);
+						Gdx.app.log("TBF", "Enter pressed in textArea" + textArea.getHeight() + "+" + textArea.getY());
 					}
-				}
-			});
+			}
+		});
 
-		textArea.setPrefRows(50);
 		
 
 	

@@ -8,9 +8,12 @@ TODO
   In scrollpane, set the textArea Size according to its line number 
   make a message routine, printing a message on screen 
   cannot exit ith html 
+  grep the entre also in html, because a cannot make a newLine
+  log with buttons to see if the preferences works with html
 
 
 TOREAD  (and todo less important)
+  Vim, make a nice buffer go backward and foward., make a list of buffer 
   REad json and serailisation 
   REad all your bookmarks
 	Make cipher, uncipher with different images

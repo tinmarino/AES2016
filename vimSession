@@ -111,7 +111,7 @@ set undolevels=100000
 set updatetime=2000
 set wildcharm=26
 set wildmenu
-set window=40
+set window=38
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
@@ -121,29 +121,32 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +20 core/src/com/aes/game/AbstractScreen.java
-badd +49 core/src/com/aes/game/Global.java
-badd +224 core/src/com/aes/game/MainRenderer.java
-badd +79 core/src/com/aes/game/MyAesGame.java
-badd +119 core/src/com/aes/game/MyCipher.java
-badd +145 core/src/com/aes/game/ParamScreen.java
-badd +216 core/src/com/aes/game/PixmapFactory.java
+badd +10 core/src/com/aes/game/AbstractScreen.java
+badd +70 core/src/com/aes/game/Global.java
+badd +436 core/src/com/aes/game/MainRenderer.java
+badd +22 core/src/com/aes/game/MyAesGame.java
+badd +35 core/src/com/aes/game/MyCipher.java
+badd +34 core/src/com/aes/game/ParamScreen.java
+badd +104 core/src/com/aes/game/PixmapFactory.java
 badd +1 core/src/com/aes/game/PlatformOs.java
 badd +133 core/src/com/aes/game/HtmlColor.java
-badd +6 html/src/com/aes/game/GdxDefinition.gwt.xml
+badd +11 html/src/com/aes/game/GdxDefinition.gwt.xml
 badd +19 html/src/com/aes/game/client/HtmlLauncher.java
 badd +11 android/AndroidManifest.xml
 badd +19 desktop/src/com/aes/game/desktop/DesktopLauncher.java
 badd +1 tmp
+badd +6 core/src/com/aes/game/KeyObject.java
+badd +12 core/src/com/aes/game/PreferenceSaved.java
+badd +13 html/src/com/aes/game/GdxDefinitionSuperdev.gwt.xml
 args core/src/com/aes/game/AbstractScreen.java core/src/com/aes/game/base64/ core/src/com/aes/game/Global.java core/src/com/aes/game/MainRenderer.java core/src/com/aes/game/MyAesGame.java core/src/com/aes/game/MyCipher.java core/src/com/aes/game/ParamScreen.java core/src/com/aes/game/PixmapFactory.java core/src/com/aes/game/PlatformOs.java
-edit core/src/com/aes/game/MainRenderer.java
+edit core/src/com/aes/game/MyAesGame.java
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-edit core/src/com/aes/game/MainRenderer.java
+edit core/src/com/aes/game/MyAesGame.java
 inoreabbr <buffer> logger logger=eclim#java#logging#LoggingInit("logger")
 inoreabbr <buffer> log log=eclim#java#logging#LoggingInit("log")
 setlocal keymap=
@@ -185,7 +188,7 @@ setlocal foldenable
 set foldexpr=FoldMethod(v:lnum)
 setlocal foldexpr=FoldMethod(v:lnum)
 setlocal foldignore=#
-setlocal foldlevel=6
+setlocal foldlevel=30
 setlocal foldmarker={{{,}}}
 set foldmethod=expr
 setlocal foldmethod=expr
@@ -250,16 +253,14 @@ setlocal winfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-33
+9
 normal! zo
-60
-normal! zo
-let s:l = 22 - ((21 * winheight(0) + 19) / 39)
+let s:l = 12 - ((11 * winheight(0) + 18) / 37)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-22
-normal! 051|
+12
+normal! 0
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
