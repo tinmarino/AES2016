@@ -122,7 +122,7 @@ public class MainRenderer extends AbstractScreen
 				// Handle a newline properly. If not handled here, the TextField
 				// will advance to the next field.
 					Gdx.app.log("TBF", "Key pressed in textArea :" + c +  "+ " +((int) c) +"+"+ ((int)'\n')  );
-					if (c == '\n' || c == '\r')
+					if (c == '\n' || c == '\r' || 8 == c || 127 == c)
 					{
 						int i = textArea.getCursorPosition();
 						stage.setKeyboardFocus(textArea);

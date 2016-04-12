@@ -70,17 +70,17 @@ public class MyCipher{
 		String 	res = ""; 
 		Boolean bol = false ; 
 
-		// TEST INPUT 
+		// TEST if starting by IV (again)
 		bol  = 2 < text.length() ;
-		bol &=  !"IV".equals(text.substring(0,2)) ;
-		if (bol){
-			Gdx.app.log("MyCipher", "No IV, I cannot uncipher");
+		if (bol){bol &= "IV".equals(text.substring(0,2)) ;}
+		if (!bol){
+			Gdx.app.log("MyCipher", "No IV, I cannot uncipher :" + text);
 			return "No IV I cannot uncipher !!";
 		}
 
 
 		// GET IV 
-		String ivString = text.substring(4,12); 
+		String ivString = text.split("=")[1].split("\n")[0].split("\r")[0]; 
 		byte[] IVshowed  = Base64.decode(ivString);
 		for (int i=0; IVshowed.length > i; i++){
 			IV[i] = IVshowed[i];
