@@ -1,15 +1,12 @@
 TODO 
 
-	Save Key, good looking param 
-	Resize also the rightTabel 
-	Handle null text exception when ciphering or unciphering. 
-	Param Screen
-  cipher, 
-  In scrollpane, set the textArea Size according to its line number 
-  make a message routine, printing a message on screen 
-  cannot exit ith html 
-  grep the entre also in html, because a cannot make a newLine
-  log with buttons to see if the preferences works with html
+  	Resize also the rightTabel 
+	PARAM : add button back. EXIt, 
+			AddNewKey expanding dialog
+			and a scrollpane of size two field with the labels of existing keys
+  	HTML :	log with buttons to see if the preferences works with html
+  			Warning cannot add new line  in html
+  			grep the entre also in html, because a cannot make a newLine
 
 
 TOREAD  (and todo less important)
@@ -17,14 +14,16 @@ TOREAD  (and todo less important)
   REad json and serailisation 
   REad all your bookmarks
 	Make cipher, uncipher with different images
+  make a message routine, printing a message on screen 
 
 
 
 
 SOLVED 
   When comming back, the boolean of AreTools shhown is nto setted so I have to click twice
-     -> Normal, that was my default screen, now my default screen is with buttons 
-
+     	-> Normal, that was my default screen, now my default screen is with buttons 
+  cannot exit ith html 
+		-> nevermind
 
 
 
