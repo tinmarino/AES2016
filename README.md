@@ -12,7 +12,8 @@ With libgdx
 ### FASTLY 
 
 
-### LONGER
+### SPECS
+	* If the Text is starting by IV, the Cipher button will uncipher it. Otherwise, it will cypher it. So I can only uncipher a text starting by the word IV.
 	
 
 

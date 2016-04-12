@@ -45,12 +45,10 @@ public class MyCipher{
 		String sOut = "";
 		Boolean bol = false; 
 
-		Gdx.app.log("MainRendered ", "Unciphereing"+ sIn.substring(0,2) ); 
-		key[0] = (byte) 3;
 		
-		// TEST 
+		// TEST if starting by IV
 		bol  = 2 < sIn.length() ;
-		bol &= "IV".equals(sIn.substring(0,2)) ;
+		if (bol){bol &= "IV".equals(sIn.substring(0,2)) ;}
 
 		// UNCIPHER
 		if (bol){

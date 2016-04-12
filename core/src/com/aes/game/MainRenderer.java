@@ -113,7 +113,7 @@ public class MainRenderer extends AbstractScreen
 		Global.tfStyle = tfStyle;
 
 		textArea 	= new TextArea("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
-		//textArea.setFillParent(true);
+		textArea.setPrefRows(textArea.getLines());
 		textArea.setTextFieldListener(new TextFieldListener()
 		{
 			@Override
