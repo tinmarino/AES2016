@@ -65,6 +65,10 @@ public class ParamScreen extends AbstractScreen {
 		lStyle.font = Global.font; 
 		lStyle.fontColor = Color.BLACK;
 
+		LabelStyle lStyleChapter = new LabelStyle();
+		lStyleChapter.font = Global.font; 
+		lStyleChapter.fontColor = Color.BLUE;
+
 		TextFieldStyle tfStyle = new TextFieldStyle(); 
 		tfStyle.font = Global.font;
 		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK, disposableList);
@@ -202,13 +206,18 @@ public class ParamScreen extends AbstractScreen {
 		tCipherType.add(cb1).expandX().fill().row();
 		tCipherType.add(cb2).expandX().fill().row();
 
-		table.add(keyScrollPane).height(lNewKey.getHeight()*3).expandX().fill().row();
+		int iKeyScrollPaneHeight = (int) Math.max(Gdx.graphics.getWidth()/4, lNewKey.getHeight()*5) ;
+		table.add(new Label("Key---------------------------------", lStyleChapter) ).expandX().fill().row();
+		table.add(keyScrollPane).height(iKeyScrollPaneHeight).expandX().fill().row();
+		table.add(new Label("Misc--------------------------------", lStyleChapter) ).expandX().fill().row();
 		table.add(tCipherType).expandX().fill().row();
 		table.add(isDebuggingCheckBox).expandX().fill().row();
+		table.add(new Label("Return------------------------------", lStyleChapter) ).expandX().fill().row();
 		table.add(tBackExit).row();
-		for(int  i= 0; i<30; i++){
-			table.add(new Label("Alea jacta est",lStyle)).row();
-		}
+		table.add(new Label("------", lStyleChapter) ).expandX().fill().row();
+		//for(int  i= 0; i<30; i++){
+		//	table.add(new Label("Alea jacta est",lStyle)).row();
+		//}
 
 
 		scrollPane = new ScrollPane(table); 

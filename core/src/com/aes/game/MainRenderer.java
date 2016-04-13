@@ -109,7 +109,7 @@ public class MainRenderer extends AbstractScreen
 					if (c == '\n' || c == '\r' || 8 == c || 127 == c)
 					{
 						int i = textArea.getCursorPosition();
-						//stage.setKeyboardFocus(textArea);
+						stage.setKeyboardFocus(textArea);
 						textArea.getOnscreenKeyboard().show(true);
 						if (c == '\n' || c == '\r'){textArea.appendText("\n");} // otherwise, adding 2 lines
 						else{textArea.appendText("\b");}

@@ -73,7 +73,7 @@ public class Global{
 			fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu8White.fnt"));
 			break;
 		default: 
-			font = new BitmapFont(Gdx.files.internal("font/Ubuntu32Black.fnt"));
+			font = new BitmapFont(Gdx.files.internal("font/Ubuntu32White.fnt"));
 			fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
 			break;
 		}
