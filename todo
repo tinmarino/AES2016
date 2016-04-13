@@ -7,6 +7,7 @@ TODO
   	HTML :	log with buttons to see if the preferences works with html
   			Warning cannot add new line  in html
   			grep the entre also in html, because a cannot make a newLine
+
 	GLOBAL : pretty print 
 
 
@@ -20,6 +21,7 @@ TOREAD  (and todo less important)
   make a message routine, printing a message on screen 
   REISZE  pretty for desktop, like a pretty hmtl page or so on. 
   BUG : textArea, never go to and hide the text outside of that textArea 
+  TExtArea issue, do you really whant to extend this calls
 
 
 

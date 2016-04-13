@@ -109,9 +109,13 @@ public class MainRenderer extends AbstractScreen
 					if (c == '\n' || c == '\r' || 8 == c || 127 == c)
 					{
 						int i = textArea.getCursorPosition();
-						stage.setKeyboardFocus(textArea);
+						stage.setKeyboardFocus(textArea);;
 						textArea.getOnscreenKeyboard().show(true);
-						if (c == '\n' || c == '\r'){textArea.appendText("\n");} // otherwise, adding 2 lines
+						if (c == '\n' || c == '\r'){
+							if (Global.platformOs.getOs() != OS.DESKTOP){
+								textArea.appendText("\n");
+							} // otherwise, adding 2 lines
+						}
 						else{textArea.appendText("\b");}
 						((TextArea)textArea).setPrefRows(((TextArea)textArea).getLines() +1);
 						scrollPane.layout();
@@ -132,7 +136,6 @@ public class MainRenderer extends AbstractScreen
 		
 
 		// PACK RIGHT TABLE
-		// T
 		Table tButton = new Table();
     	tButton.add(bParam		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
     	tButton.add(bCipher	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
@@ -252,7 +255,6 @@ public class MainRenderer extends AbstractScreen
 		}
 		String suffix = "128.png";
 		if (Global.platformOs.getOs() == OS.ANDROID){suffix = "32.png";}
-		Gdx.app.log("TBF", "size suffix" + suffix);
 		switch (routineType){
 			case PARAM: 	
 				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/tool" + suffix, disposableList);
@@ -292,7 +294,6 @@ public class MainRenderer extends AbstractScreen
 					@Override
 					public void clicked(InputEvent event, float x, float y) {
 						super.clicked(event,x,y); 
-						Gdx.app.log("MARTIN Stage", "button click"); 
 						routineDispatch(crType); 
 					} 
 				}
@@ -308,6 +309,7 @@ public class MainRenderer extends AbstractScreen
 
 	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG, LIST, NULL, EXIT}
 	public void routineDispatch(RTYPE routineType){
+		Gdx.app.log("TBF", "Rgith button presses :" + routineType);
 		switch (routineType){
 			case LIST: 		routineList(); 		break; 
 			case PARAM: 	routineParam(); 	break; 
