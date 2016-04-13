@@ -22,11 +22,12 @@ public class TextAreaX extends TextArea {
 		return new TextAreaXListener();
 	}
 
+	// TODO this is newline abd add delete char
 	public void paste(String to){
 		if (to.length() == 0) {return;}
 		String text = this.getText();
 		int iPos = this.getCursorPosition();
-		Gdx.app.log("TBF", "cursor posiriont " + iPos );
+		Gdx.app.log("TBF", "cursor posiriont " + iPos +"+"+ this.getCursorLine());
 
 		String res = text.substring(0, iPos );
 		res += to;
@@ -35,6 +36,23 @@ public class TextAreaX extends TextArea {
 		
 		Gdx.app.log("TBF", "cursor posiriont 2 " + this.getCursorPosition() );
 		this.setText(res); 
+		this.moveCursorLine(this.getCursorLine() +1);
+	}
+
+	public void backspace(){
+		String text = this.getText();
+		int iPos = this.getCursorPosition();
+		Gdx.app.log("TBF", "cursor posiriont " + iPos );
+		if (iPos > 0){
+			String res = text.substring(0, iPos - 1 );
+			res += text.substring(iPos, text.length());
+			this.setText(res);
+			this.setCursorPosition(iPos-1);
+		}
+		else{
+			this.moveCursorLine(this.getCursorLine() - 1);
+		}
+
 	}
 
 
@@ -53,10 +71,9 @@ public class TextAreaX extends TextArea {
 							//if (Global.platformOs.getOs() != OS.DESKTOP)
 							//{
 								paste("\n");
-								TextAreaX.this.moveCursorLine(TextAreaX.this.getCursorLine() +1);
 							//}
 						}
-						else{paste("\b");}
+						else{backspace();}
 						
 						TextAreaX.this.setPrefRows(TextAreaX.this.getLines() +1);
 						p.scrollPane.layout();
