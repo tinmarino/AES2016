@@ -127,7 +127,7 @@ public class MainRenderer extends AbstractScreen
 		ScrollPaneStyle spStyle = Global.getScrollPaneStyle(disposableList);
 		scrollPane = new ScrollPane(textArea, spStyle);
 		scrollPane.setScrollingDisabled(true, false);
-		leftTable.add(scrollPane).expand().fill().center();
+		leftTable.add(scrollPane).expand().fill();
 		
 		
 
@@ -336,8 +336,10 @@ public class MainRenderer extends AbstractScreen
 			rightTable.reset();
 			rightTable.add(rightTopTable).width(w2).height(ibWidth+4).fill().row(); 
 			rightTable.add(rightBottomTable).width(w2).height(h0-ibWidth-4).fill().row(); 
+			leftTable.reset();
+			leftTable.add(scrollPane).expand().fill();
 			table.add(leftTable).width(w1).expandY().fill(); 
-			table.add(rightTable).width(w2).height(h0- ibWidth-4).expandY().align(Align.top).top().fill(); 
+			table.add(rightTable).width(w2).expandY().fill(); 
 		}
 		bList.remove();
 		stage.addActor(bList);
