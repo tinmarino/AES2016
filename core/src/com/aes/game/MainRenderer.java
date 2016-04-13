@@ -18,7 +18,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea.TextAreaListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldClickListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -98,7 +100,11 @@ public class MainRenderer extends AbstractScreen
 
 		textArea 	= new TextArea("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
 		textArea.setPrefRows(textArea.getLines());
-		textArea.setTextFieldListener(new TextFieldListener()
+		textArea.setClipboard(Global.clipboard);
+
+
+		// TODO Auto-generated constructor stub
+		textArea.setTextFieldListener((TextFieldClickListener) new TextAreaListener()
 		{
 			@Override
 			public void keyTyped(TextField textArea, char c)
@@ -123,9 +129,13 @@ public class MainRenderer extends AbstractScreen
 						Gdx.app.log("TBF", "Enter pressed in textArea" + textArea.getHeight() + "+" + textArea.getY());
 					}
 			}
+
+			@Override 
+			public boolean keyDown(InputEvent event , int keycode){
+				Gdx.app.log("TBF", "keyDown " +keycode +"///" + event);
+			}
+
 		});
-
-
 		
 		// PACK LEFT TABLE
 		ScrollPaneStyle spStyle = Global.getScrollPaneStyle(disposableList);

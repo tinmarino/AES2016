@@ -88,6 +88,7 @@ set backupdir=~/.vim/backup//
 set balloonexpr=eclim#util#Balloon(eclim#util#GetLineError(line('.')))
 set completefunc=youcompleteme#Complete
 set completeopt=preview,menuone
+set cpoptions=aAceFsB
 set directory=~/.vim/backup//
 set fileencodings=ucs-bom,utf-8,default,latin1
 set foldlevelstart=30
@@ -111,7 +112,6 @@ set undolevels=100000
 set updatetime=2000
 set wildcharm=26
 set wildmenu
-set window=38
 set nowritebackup
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
@@ -122,31 +122,33 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +10 core/src/com/aes/game/AbstractScreen.java
-badd +70 core/src/com/aes/game/Global.java
-badd +436 core/src/com/aes/game/MainRenderer.java
-badd +22 core/src/com/aes/game/MyAesGame.java
-badd +35 core/src/com/aes/game/MyCipher.java
-badd +34 core/src/com/aes/game/ParamScreen.java
-badd +104 core/src/com/aes/game/PixmapFactory.java
+badd +81 core/src/com/aes/game/Global.java
+badd +322 core/src/com/aes/game/MainRenderer.java
+badd +17 core/src/com/aes/game/MyAesGame.java
+badd +92 core/src/com/aes/game/MyCipher.java
+badd +136 core/src/com/aes/game/ParamScreen.java
+badd +35 core/src/com/aes/game/PixmapFactory.java
 badd +1 core/src/com/aes/game/PlatformOs.java
 badd +133 core/src/com/aes/game/HtmlColor.java
 badd +11 html/src/com/aes/game/GdxDefinition.gwt.xml
-badd +19 html/src/com/aes/game/client/HtmlLauncher.java
+badd +18 html/src/com/aes/game/client/HtmlLauncher.java
 badd +11 android/AndroidManifest.xml
-badd +19 desktop/src/com/aes/game/desktop/DesktopLauncher.java
+badd +18 desktop/src/com/aes/game/desktop/DesktopLauncher.java
 badd +1 tmp
-badd +6 core/src/com/aes/game/KeyObject.java
-badd +12 core/src/com/aes/game/PreferenceSaved.java
+badd +24 core/src/com/aes/game/KeyObject.java
+badd +26 core/src/com/aes/game/PreferenceSaved.java
 badd +13 html/src/com/aes/game/GdxDefinitionSuperdev.gwt.xml
+badd +0 core/src/com/aes/game/base64/
+badd +16 ~/Software/Java/Libgdx/AES2016/desktop/src/com/aes/game/desktop/PlatformDesktop.java
 args core/src/com/aes/game/AbstractScreen.java core/src/com/aes/game/base64/ core/src/com/aes/game/Global.java core/src/com/aes/game/MainRenderer.java core/src/com/aes/game/MyAesGame.java core/src/com/aes/game/MyCipher.java core/src/com/aes/game/ParamScreen.java core/src/com/aes/game/PixmapFactory.java core/src/com/aes/game/PlatformOs.java
-edit core/src/com/aes/game/MyAesGame.java
+edit core/src/com/aes/game/MainRenderer.java
 set splitbelow splitright
 set nosplitbelow
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
 argglobal
-edit core/src/com/aes/game/MyAesGame.java
+edit core/src/com/aes/game/MainRenderer.java
 inoreabbr <buffer> logger logger=eclim#java#logging#LoggingInit("logger")
 inoreabbr <buffer> log log=eclim#java#logging#LoggingInit("log")
 setlocal keymap=
@@ -253,14 +255,42 @@ setlocal winfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-9
+35
 normal! zo
-let s:l = 12 - ((11 * winheight(0) + 18) / 37)
+57
+normal! zo
+103
+normal! zo
+106
+normal! zo
+108
+normal! zo
+111
+normal! zo
+115
+normal! zo
+237
+normal! zo
+242
+normal! zo
+259
+normal! zo
+293
+normal! zo
+293
+normal! zo
+294
+normal! zo
+312
+normal! zo
+328
+normal! zo
+let s:l = 327 - ((18 * winheight(0) + 18) / 37)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-12
-normal! 0
+327
+normal! 030|
 tabnext 1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
