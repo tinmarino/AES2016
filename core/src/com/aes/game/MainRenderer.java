@@ -97,7 +97,6 @@ public class MainRenderer extends AbstractScreen
 		textArea.setParent(this);
 		textArea.setPrefRows(textArea.getLines());
 		textArea.setClipboard(Global.clipboard);
-		textArea.addListener(new InputTextArea(this));
 
 
 
@@ -367,6 +366,9 @@ public class MainRenderer extends AbstractScreen
 		Gdx.app.log("TBF", "text height " +   textArea.getHeight() );
 		Gdx.app.log("TBF", "line number  " +   textArea.getLines() );
 		Gdx.app.log("TBF", "Pixel DEnsity  " +   Gdx.graphics.getDensity());
+		Gdx.app.log("TBF", "Curosr " +   textArea.getCursorPosition() + textArea.getCursorLine());
+		textArea.setCursorPosition(textArea.getCursorPosition()+3);
+		textArea.moveCursorLine(1);
 		////textArea.setHeight(1000);
 		////scrollPane.layout();
 		//scrollPane.setScrollPercentX( scrollPane.getScrollPercentX() + 10 );

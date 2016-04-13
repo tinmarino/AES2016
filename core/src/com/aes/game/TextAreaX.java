@@ -2,6 +2,7 @@ package com.aes.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 
 public class TextAreaX extends TextArea {
@@ -16,6 +17,11 @@ public class TextAreaX extends TextArea {
 	}
 
 
+	@Override
+	protected InputListener createInputListener () {
+		return new TextAreaXListener();
+	}
+
 	public void paste(String to){
 		if (to.length() == 0) {return;}
 		String text = this.getText();
@@ -25,8 +31,9 @@ public class TextAreaX extends TextArea {
 		String res = text.substring(0, iPos );
 		res += to;
 		res += text.substring(iPos, text.length());
-		this.setCursorPosition(iPos+2);
+	
 		
+		Gdx.app.log("TBF", "cursor posiriont 2 " + this.getCursorPosition() );
 		this.setText(res); 
 	}
 
@@ -40,19 +47,19 @@ public class TextAreaX extends TextArea {
 					Gdx.app.log("TBF", "Key pressed in TextAreaX.this :" + c +  "+ " +((int) c) +"+"+ ((int)'\n')  );
 					if (c == '\n' || c == '\r' || 8 == c || 127 == c)
 					{
-						int i = TextAreaX.this.getCursorPosition();
 						p.stage.setKeyboardFocus(TextAreaX.this);
 						TextAreaX.this.getOnscreenKeyboard().show(true);
 						if (c == '\n' || c == '\r'){
 							//if (Global.platformOs.getOs() != OS.DESKTOP)
 							//{
 								paste("\n");
+								TextAreaX.this.moveCursorLine(TextAreaX.this.getCursorLine() +1);
 							//}
 						}
 						else{paste("\b");}
+						
 						TextAreaX.this.setPrefRows(TextAreaX.this.getLines() +1);
 						p.scrollPane.layout();
-						TextAreaX.this.setCursorPosition(i);
 						Gdx.app.log("TBF", "Enter pressed in TextAreaX.this" + TextAreaX.this.getHeight() + "+" + TextAreaX.this.getY());
 						return true;
 					}
