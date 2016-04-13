@@ -119,9 +119,12 @@ public class MainRenderer extends AbstractScreen
     	tButton.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
     	tButton.add(bExit		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
     	tButton.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 8*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
-		scrollPaneRight = new ScrollPane(tButton)	;
+		ScrollPaneStyle spStyleButton = new ScrollPaneStyle();
+		spStyleButton.background = PixmapFactory.getDrawableMonocromatic(1,1, GuiParameter.colSpButtonBck, disposableList);
+		scrollPaneRight = new ScrollPane(tButton, spStyleButton)	;
 	    scrollPaneRight.setScrollingDisabled(true, false);
     	rightTopTable.add(bNull		).fill().expand().row();
+		rightTopTable.setBackground(PixmapFactory.getDrawableMonocromatic(1, 1, GuiParameter.colSpButtonBck, disposableList));
 		rightBottomTable.add(scrollPaneRight).fill().expand();
 
 
@@ -148,7 +151,7 @@ public class MainRenderer extends AbstractScreen
 	@Override
 	public void render(float delta) {
 		// CLEAR 
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(GuiParameter.colClear.r, GuiParameter.colClear.g, GuiParameter.colClear.b, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		// DRAW
@@ -210,15 +213,16 @@ public class MainRenderer extends AbstractScreen
 
 		// 1/ STYLE 
 		ImageTextButtonStyle itbStyle = new ImageTextButtonStyle(); 
-		itbStyle.font = fontButton; 
-		itbStyle.fontColor = GuiParameter.colFontButton;
+		itbStyle.font 		= fontButton; 
+		itbStyle.fontColor 	= GuiParameter.colFontButton;
 		switch(routineType){
 			case LIST:
-				new Color();
-				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1f,0.01f), disposableList);
+				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1, 0.01f), disposableList);
 				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,new Color(1,1,1,0.5f), disposableList);
 				break;
+			
 			case NULL:
+				itbStyle.up = PixmapFactory.getDrawableMonocromatic(1,1,GuiParameter.colSpButtonBck, disposableList);
 				break;
 			default:
 			 	Texture t = new Texture(PixmapFactory.circle(16, GuiParameter.colButton));

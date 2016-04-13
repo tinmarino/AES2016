@@ -15,7 +15,7 @@ public class HtmlColor {
 	// COSMOPOLITA 
 	public static Color	  BlueGray				= c(133, 147, 174);
 	public static Color	  Steel					= c(90, 78, 77);
-	public static Color	  Pexter				= c(126, 103, 94);
+	public static Color	  Pewter				= c(126, 103, 94);
 	public static Color	  Blush					= c(221, 162, 136);
 	
 	
