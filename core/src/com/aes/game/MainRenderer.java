@@ -18,10 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea.TextAreaListener;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldClickListener;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -101,41 +97,10 @@ public class MainRenderer extends AbstractScreen
 		textArea 	= new TextArea("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
 		textArea.setPrefRows(textArea.getLines());
 		textArea.setClipboard(Global.clipboard);
+		textArea.addListener(new InputTextArea(this));
 
 
-		// TODO Auto-generated constructor stub
-		textArea.setTextFieldListener((TextFieldClickListener) new TextAreaListener()
-		{
-			@Override
-			public void keyTyped(TextField textArea, char c)
-			{
-				// Handle a newline properly. If not handled here, the TextField
-				// will advance to the next field.
-					Gdx.app.log("TBF", "Key pressed in textArea :" + c +  "+ " +((int) c) +"+"+ ((int)'\n')  );
-					if (c == '\n' || c == '\r' || 8 == c || 127 == c)
-					{
-						int i = textArea.getCursorPosition();
-						stage.setKeyboardFocus(textArea);;
-						textArea.getOnscreenKeyboard().show(true);
-						if (c == '\n' || c == '\r'){
-							if (Global.platformOs.getOs() != OS.DESKTOP){
-								textArea.appendText("\n");
-							} // otherwise, adding 2 lines
-						}
-						else{textArea.appendText("\b");}
-						((TextArea)textArea).setPrefRows(((TextArea)textArea).getLines() +1);
-						scrollPane.layout();
-						textArea.setCursorPosition(i);
-						Gdx.app.log("TBF", "Enter pressed in textArea" + textArea.getHeight() + "+" + textArea.getY());
-					}
-			}
 
-			@Override 
-			public boolean keyDown(InputEvent event , int keycode){
-				Gdx.app.log("TBF", "keyDown " +keycode +"///" + event);
-			}
-
-		});
 		
 		// PACK LEFT TABLE
 		ScrollPaneStyle spStyle = Global.getScrollPaneStyle(disposableList);
