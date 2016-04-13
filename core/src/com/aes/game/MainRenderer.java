@@ -132,18 +132,20 @@ public class MainRenderer extends AbstractScreen
 		
 
 		// PACK RIGHT TABLE
-    	rightBottomTable.add(bParam		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
-    	rightBottomTable.add(bCipher	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
-    	rightBottomTable.add(bCopy		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightBottomTable.add(bPaste		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightBottomTable.add(bClear		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightBottomTable.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightBottomTable.add(bExit		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	rightBottomTable.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 8*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
-		scrollPaneRight = new ScrollPane(rightBottomTable)	;
+		// T
+		Table tButton = new Table();
+    	tButton.add(bParam		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
+    	tButton.add(bCipher	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
+    	tButton.add(bCopy		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	tButton.add(bPaste		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	tButton.add(bClear		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	tButton.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	tButton.add(bExit		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	tButton.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 8*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
+		scrollPaneRight = new ScrollPane(tButton)	;
 	    scrollPaneRight.setScrollingDisabled(true, false);
-    	rightTable.add(bNull		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
-		rightTable.add(scrollPaneRight);
+    	rightTopTable.add(bNull		).fill().expand().row();
+		rightBottomTable.add(scrollPaneRight).fill().expand();
 
 
 		
@@ -326,18 +328,25 @@ public class MainRenderer extends AbstractScreen
 		
 		// DELETE TOOL scrollpane
 		if (bAreToolsVisible){
+			// LEFT 
+			leftTable.reset();
+			leftTable.add(scrollPane).expand().fill();
+			// MAIN
 			table.reset();
-			table.add(leftTable).width(w0).expandY().fill(); 
+			table.add(leftTable).width(w0).expand().fill(); 
 		}
 
 		// ADD TOOL ScrollPane
 		else{
-			table.reset();
+			// RIGHT
 			rightTable.reset();
 			rightTable.add(rightTopTable).width(w2).height(ibWidth+4).fill().row(); 
 			rightTable.add(rightBottomTable).width(w2).height(h0-ibWidth-4).fill().row(); 
+			// LEFT 
 			leftTable.reset();
 			leftTable.add(scrollPane).expand().fill();
+			// MAIN 
+			table.reset();
 			table.add(leftTable).width(w1).expandY().fill(); 
 			table.add(rightTable).width(w2).expandY().fill(); 
 		}
