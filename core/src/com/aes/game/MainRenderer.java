@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton.ImageTextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -31,7 +30,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 public class MainRenderer extends AbstractScreen
  {
 	Stage 			stage; 
-	TextArea  		textArea;
+	TextAreaX  		textArea;
 	ScrollPane 		scrollPane, scrollPaneRight;
 	Table 			table, leftTable, rightTable, rightTopTable, rightBottomTable; 
 	BitmapFont 		font, fontButton; 
@@ -94,7 +93,8 @@ public class MainRenderer extends AbstractScreen
 		// TEXT AREA
 		TextFieldStyle tfStyle = Global.getTextFieldStyle(disposableList);
 
-		textArea 	= new TextArea("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
+		textArea 	= new TextAreaX("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
+		textArea.setParent(this);
 		textArea.setPrefRows(textArea.getLines());
 		textArea.setClipboard(Global.clipboard);
 		textArea.addListener(new InputTextArea(this));

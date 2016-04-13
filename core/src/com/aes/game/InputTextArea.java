@@ -4,7 +4,6 @@ import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
 
 class InputTextArea extends InputListener{
 	MainRenderer p; 
@@ -70,6 +69,23 @@ class InputTextArea extends InputListener{
         return l.keyUp(event, keycode);
     }
 	*/
+
+
+	public void paste(String to){
+		if (to.length() == 0) {return;}
+		String text = p.textArea.getText();
+		int iPos = p.textArea.getCursorPosition();
+		Gdx.app.log("TBF", "cursor posiriont " + iPos );
+
+		String res = text.substring(0, iPos );
+		res += to;
+		res += text.substring(iPos, text.length());
+		p.textArea.setCursorPosition(iPos+2);
+		
+		p.textArea.setText(res); 
+	}
+
+
     @Override
     public boolean keyTyped(InputEvent event, char c) {
 			{
@@ -82,12 +98,13 @@ class InputTextArea extends InputListener{
 						p.stage.setKeyboardFocus(p.textArea);
 						p.textArea.getOnscreenKeyboard().show(true);
 						if (c == '\n' || c == '\r'){
-							if (Global.platformOs.getOs() != OS.DESKTOP){
-								p.textArea.appendText("\n");
-							} // otherwise, adding 2 lines
+							//if (Global.platformOs.getOs() != OS.DESKTOP)
+							//{
+								paste("\n");
+							//}
 						}
-						else{p.textArea.appendText("\b");}
-						((TextArea)p.textArea).setPrefRows(((TextArea)p.textArea).getLines() +1);
+						else{paste("\b");}
+						p.textArea.setPrefRows(p.textArea.getLines() +1);
 						p.scrollPane.layout();
 						p.textArea.setCursorPosition(i);
 						Gdx.app.log("TBF", "Enter pressed in p.textArea" + p.textArea.getHeight() + "+" + p.textArea.getY());
