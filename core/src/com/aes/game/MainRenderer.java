@@ -211,7 +211,7 @@ public class MainRenderer extends AbstractScreen
 		// 1/ STYLE 
 		ImageTextButtonStyle itbStyle = new ImageTextButtonStyle(); 
 		itbStyle.font = fontButton; 
-		itbStyle.fontColor = Color.BLACK;
+		itbStyle.fontColor = GuiParameter.colFontButton;
 		switch(routineType){
 			case LIST:
 				new Color();
@@ -221,10 +221,10 @@ public class MainRenderer extends AbstractScreen
 			case NULL:
 				break;
 			default:
-			 	Texture t = new Texture(PixmapFactory.circle(16, HtmlColor.SkyBlue));
+			 	Texture t = new Texture(PixmapFactory.circle(16, GuiParameter.colButton));
 				disposableList.add(t);
 				itbStyle.up   = PixmapFactory.ninePatchFromTexture(t);
-				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,HtmlColor.MidnightBlue, disposableList);
+				itbStyle.down = PixmapFactory.getDrawableMonocromatic(1,1,GuiParameter.colButtonDown, disposableList);
 				break;
 		}
 		String suffix = "128.png";

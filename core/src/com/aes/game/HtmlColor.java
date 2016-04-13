@@ -5,6 +5,22 @@ import com.badlogic.gdx.graphics.Color;
 
 
 public class HtmlColor {
+	// MINE from https://designschool.canva.com/blog/100-color-combinations/
+	// GRECIAN HolliDAY 
+	public static Color   GrecianBlue          =  new Color(41f/256, 136f/256, 188f/256, 1);
+	public static Color   Sea           		=  new Color(47f/256, 73f/256, 110f/256, 1);
+	public static Color   Plaster         		=  c(244, 234, 222);
+	public static Color	  CoralMy				= c(237, 140, 114);
+	
+	// COSMOPOLITA 
+	public static Color	  BlueGray				= c(133, 147, 174);
+	public static Color	  Steel					= c(90, 78, 77);
+	public static Color	  Pexter				= c(126, 103, 94);
+	public static Color	  Blush					= c(221, 162, 136);
+	
+	
+
+
 	public  static Color   AliceBlue             =  new Color(0.9375f,      0.96875f,     0.99609375f,1);
 	public  static Color   AntiqueWhite          =  new Color(0.9765625f,   0.91796875f,  0.83984375f,1);
 	public  static Color   Aqua                  =  new Color(0,           0.99609375f,  0.99609375f,1);
@@ -146,6 +162,17 @@ public class HtmlColor {
 	public  static Color   Yellow                =  new Color(0.99609375f,  0.99609375f,  0         ,1);
 	public  static Color   YellowGreen           =  new Color(0.6015625f,   0.80078125f,  0.1953125f ,1);
 
+
+
+	public static Color c(int r, int g, int b){
+		return new Color(
+				((float)(r))/256,
+				((float)(g))/256,
+				((float)(b))/256,
+				1
+				);
+
+	}
 }
 
 
