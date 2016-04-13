@@ -45,9 +45,10 @@ public class Global{
 	*/
 	public static TextFieldStyle 	tfStyle;
 
-	/* My keyList, thiese are saved in the game preferences
+	/* The key I will use to cipher. 
+	 * Warning this must be a hava a cleared clearKey to avoid leaks
 	*/
-	//public static List<KeyObject>	keyList; 
+	public static KeyObject			keyObject	= null; 
 
 	/* The ciphering type, AES? RSA TRIPLEDES or TBF, my own type laying on AES256
 	*/
@@ -131,3 +132,6 @@ public class Global{
 
 	public enum CTYPE{AES, TBF, RSA, TRIPLEDES}
 }
+	/* My keyList, thiese are saved in the game preferences
+	*/
+	//public static List<KeyObject>	keyList; 

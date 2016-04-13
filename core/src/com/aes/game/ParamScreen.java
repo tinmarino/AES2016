@@ -94,7 +94,7 @@ public class ParamScreen extends AbstractScreen {
 
 
 
-		// KEY 
+		// KEY  : Saved keys 
 		Table tKey = new Table(); 
 		for (KeyObject keyObject : Global.preferenceSaved.keyList){
 			final KeyObject keyObjectSaved = keyObject;
@@ -111,7 +111,7 @@ public class ParamScreen extends AbstractScreen {
 			tKey.add(lKey).expandX().fill().row();
 		}
 	
-		// NEW KEY 
+		// NEW KEY : tNewKey 
 		// New Key : key field 
 		Table 		tNewKey 	= new Table();
 		Label 		lNewKey 	= new Label("Key:",lStyle);
@@ -138,7 +138,24 @@ public class ParamScreen extends AbstractScreen {
 						} 
 					}
 		);
-		tNewKey.add(tbSaveNewKey).colspan(2);
+		// New Key : TExtbuttn Use new Key 
+		TextButton tbUseNewKey = new TextButton("UseKey", tbStyle);
+		tbUseNewKey.addListener(
+					new ClickListener(){
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							super.clicked(event,x,y); 
+							final KeyObject keyObject = new KeyObject();
+							keyObject.clearKey 	= tfNewKey.getText();
+							keyObject.label 	= tfNewLabel.getText();
+							routineUseNewKey(keyObject); 
+						} 
+					}
+		);
+		Table tUseSave = new Table();
+		tUseSave.add(tbUseNewKey);
+		tUseSave.add(tbSaveNewKey);
+		tNewKey.add(tUseSave).colspan(2).expandX().row();
 		tKey.add(tNewKey).expandX().fill().row();
 		
 
@@ -263,12 +280,18 @@ public class ParamScreen extends AbstractScreen {
 
 	public void routineLabelKey(KeyObject keyObject){
 		Gdx.app.log("TBF", "You choosed key:" + keyObject.label);
+		Global.keyObject = keyObject;
 	}
 
 	public void routineSaveNewKey(KeyObject keyObject){
 		keyObject.cipherKey();		
 		Global.preferenceSaved.keyList.add(keyObject);
 		Global.writePref();
+	}
+
+	public void routineUseNewKey(KeyObject keyObject){
+		keyObject.cipherKey();
+		Global.keyObject = keyObject;
 	}
 
 }

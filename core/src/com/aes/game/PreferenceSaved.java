@@ -15,30 +15,14 @@ public class PreferenceSaved{
 
 	public void initDebug(){
 		KeyObject keyObject = new KeyObject();
-		keyObject.label = "Label1 on Android";
-		keyObject.cipheredKey = "Any String you want".getBytes();
+		keyObject.label = "Dbg1 on Android";
+		keyObject.cipheredKey = "Dbg1android Key ".getBytes();
 		keyList.add(keyObject);
 
 
 		keyObject = new KeyObject();
-		keyObject.label = "Label2 on Android";
-		keyObject.cipheredKey = "Any String 2 you want".getBytes();
-		keyList.add(keyObject);
-
-		keyObject = new KeyObject();
-		keyObject.label = "Label3 on Android";
-		keyObject.cipheredKey = "Any String 3 you want".getBytes();
-		keyList.add(keyObject);
-
-
-		keyObject = new KeyObject();
-		keyObject.label = "Label4 on Android";
-		keyObject.cipheredKey = "Any String 3 you want".getBytes();
-		keyList.add(keyObject);
-
-		keyObject = new KeyObject();
-		keyObject.label = "Label5 on Android";
-		keyObject.cipheredKey = "Any String 3 you want".getBytes();
+		keyObject.label = "Dbg2 2 on Desktop";
+		keyObject.cipheredKey = "Dbg2Desktop Key ".getBytes();
 		keyList.add(keyObject);
 	}
 }

@@ -36,9 +36,8 @@ public class MyCipher{
 
 	static int 		iBlockSize 			= 16;
 	static int 		iShowedIvSize		= 6;    // 6 bytes so 8 chars in base64
-	static byte[] 	IV					= new byte[iBlockSize];  				
-	static byte[]   key 				= new byte[iBlockSize];
-   	static Random 	rn 					= new Random();
+	static byte[] 	IV					= null;  				
+	static byte[]   key 				= null;
 
 
 	public static String CipherMain(String sIn){
@@ -46,6 +45,16 @@ public class MyCipher{
 		Boolean bol = false; 
 
 		
+
+		// TEST if I have a key  
+		bol  = (null != Global.keyObject);
+		if (bol){bol &= (null != Global.keyObject.cipheredKey);}
+		if (!bol){
+			Gdx.app.log("TBF","ERROR I don't have any walid key to cipher");
+			return "Error no valid key to cipher";
+		}
+		key = Global.keyObject.cipheredKey;
+
 		// TEST if starting by IV
 		bol  = 2 < sIn.length() ;
 		if (bol){bol &= "IV".equals(sIn.substring(0,2)) ;}
@@ -82,6 +91,7 @@ public class MyCipher{
 		// GET IV 
 		String ivString = text.split("=")[1].split("\n")[0].split("\r")[0]; 
 		byte[] IVshowed  = Base64.decode(ivString);
+		IV = new byte[iBlockSize];
 		for (int i=0; IVshowed.length > i; i++){
 			IV[i] = IVshowed[i];
 		}
@@ -111,6 +121,7 @@ public class MyCipher{
 
 	public static String CipherText(String text){
 		String res = ""; 
+		Random rn  = new Random();
 
 		// Generate IV 
 		IV = new byte[iBlockSize];

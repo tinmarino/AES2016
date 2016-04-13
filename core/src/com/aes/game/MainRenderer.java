@@ -327,7 +327,7 @@ public class MainRenderer extends AbstractScreen
 		// DELETE TOOL scrollpane
 		if (bAreToolsVisible){
 			table.reset();
-			table.add(scrollPane).width(w0).expandY().fill(); 
+			table.add(leftTable).width(w0).expandY().fill(); 
 		}
 
 		// ADD TOOL ScrollPane
