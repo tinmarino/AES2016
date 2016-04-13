@@ -2,6 +2,9 @@ TODO
 
 	button list to hide, repack well
   	Resize also the rightTabel 
+	get invalid cipher text exception in case of wrong key
+			Exception in thread "LWJGL Application" java.lang.RuntimeException: com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException: pad block corrupted
+	at com.aes.game.MyCipher.MyAesCipher(MyCipher.java:202)
 	BUG : textArea, never go to and hide the text outside of that textArea 
   	HTML :	log with buttons to see if the preferences works with html
   			Warning cannot add new line  in html
@@ -10,6 +13,8 @@ TODO
 
 
 TOREAD  (and todo less important)
+  sudo apt-get install parcellite  for clipboard persistence un Ubuntu 
+  What is your verison of libgdx, should you update ? 
   Vim, make a nice buffer go backward and foward., make a list of buffer 
   REad json and serailisation 
   REad all your bookmarks
