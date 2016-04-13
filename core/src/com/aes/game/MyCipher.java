@@ -199,10 +199,13 @@ public class MyCipher{
 				Gdx.app.log("TBF", "out len " + res.length());
         } 
 		catch (InvalidCipherTextException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+			Gdx.app.log("TBF", "Pad, cipher exception 1: " + e);
+			res = "Apparently not the good key :Error java " +e;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			Gdx.app.log("TBF", "Pad, cipher exception 2: " + e);
 			e.printStackTrace();
+			res = "Apparently not the good key :Error java " +e;
 		}
 
 		return res;

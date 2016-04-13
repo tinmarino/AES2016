@@ -62,12 +62,13 @@ public class TextAreaX extends TextArea {
     		public boolean keyTyped(InputEvent event, char c) {
 				// Handle a newline properly. If not handled here, the TextField
 				// will advance to the next field.
-					Gdx.app.log("TBF", "Key pressed in TextAreaX.this :" + c +  "+ " +((int) c) +"+"+ ((int)'\n')  );
-					if (c == '\n' || c == '\r' || 8 == c || 127 == c)
+				// 0 if for enter in html
+					Gdx.app.log("TBF", "Key pressed in TextAreaX.this :" + c +  "+ " +((int) c)  );
+					if (c == '\n' || c == '\r' || 8 == c || 127 == c || 0 == c)
 					{
 						p.stage.setKeyboardFocus(TextAreaX.this);
 						TextAreaX.this.getOnscreenKeyboard().show(true);
-						if (c == '\n' || c == '\r'){
+						if (c == '\n' || c == '\r' || c == 0){
 							//if (Global.platformOs.getOs() != OS.DESKTOP)
 							//{
 								paste("\n");

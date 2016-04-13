@@ -1,20 +1,16 @@
 TODO 
 
-  	Resize also the rightTabel 
-	get invalid cipher text exception in case of wrong key
+	save key
+			get invalid cipher text exception in case of wrong key during uncipher
 			Exception in thread "LWJGL Application" java.lang.RuntimeException: com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException: pad block corrupted
 	at com.aes.game.MyCipher.MyAesCipher(MyCipher.java:202)
-  	HTML :	log with buttons to see if the preferences works with html
   			Warning cannot add new line  in html
-  			grep the entre also in html, because a cannot make a newLine
 
-	GLOBAL : pretty print 
 
 
 TOREAD  (and todo less important)
-  sudo apt-get install parcellite  for clipboard persistence un Ubuntu 
+  	Resize also the rightTabel 
   What is your verison of libgdx, should you update ? 
-  Vim, make a nice buffer go backward and foward., make a list of buffer 
   REad json and serailisation 
   REad all your bookmarks
 	Make cipher, uncipher with different images
@@ -31,11 +27,12 @@ SOLVED
      	-> Normal, that was my default screen, now my default screen is with buttons 
   cannot exit ith html 
 		-> nevermind
-
+  sudo apt-get install parcellite  for clipboard persistence un Ubuntu 
 
 
 ECLIM 
   NEXT ERROR :lnext, :lprev, :lopen, etc.(see :h location-list for more info).
+  Vim, make a nice buffer go backward and foward., make a list of buffer 
 
 
 HTML 
