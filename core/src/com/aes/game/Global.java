@@ -108,7 +108,7 @@ public class Global{
 	public static void writePref(){
 		Json json = new Json();
 		String sTosave = json.toJson(preferenceSaved);
-		Gdx.app.log("TBF", "Global.writePref : " + sTosave);
+		Gdx.app.log("TBF", "Global.writePref : " + json.prettyPrint(preferenceSaved));
      	Preferences preferences = Gdx.app.getPreferences("v1"); // v1 for version 1 
 		preferences.putString("jsonKey1", sTosave);
 		preferences.flush();
@@ -120,7 +120,7 @@ public class Global{
 		if (preferences.get().containsKey("jsonKey1")) {
 			String sToLoad = preferences.getString("jsonKey1");
 			preferenceSaved = json.fromJson(PreferenceSaved.class, sToLoad );
-			Gdx.app.log("TBF", "Global.readPref : " + sToLoad);
+			Gdx.app.log("TBF", "Global.readPref : " + json.prettyPrint(preferenceSaved));
 		}
 		else{
 			Gdx.app.log("TBF", "Global.readPref : NULL !!! ");
