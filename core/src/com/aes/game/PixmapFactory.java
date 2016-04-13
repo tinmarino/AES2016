@@ -22,8 +22,9 @@ import com.badlogic.gdx.utils.Disposable;
 public class PixmapFactory{
 	
 
-	public static NinePatchDrawable ninePatchDrawableMonochromatci(int width, int height, Color color){
+	public static NinePatchDrawable ninePatchDrawableMonochromatic(int width, int height, Color color, List<Disposable> disposableList){
 		final Texture t = new Texture(monocromaticPixmap(width, height, color));
+		if (disposableList != null){disposableList.add(t);}
 		return ninePatchFromTexture(t);
 	}
 
@@ -101,7 +102,7 @@ public class PixmapFactory{
 
 	public static Drawable getDrawableMonocromatic(int x, int y, Color color, List<Disposable> disposableList){
 		Pixmap pixmap = monocromaticPixmap(x, y, color);
-		disposableList.add(pixmap);
+		if (disposableList!= null){disposableList.add(pixmap);}
 		return new SpriteDrawable(new Sprite(new Texture(pixmap)));
 	}
 

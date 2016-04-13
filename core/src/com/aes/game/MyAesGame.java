@@ -13,7 +13,7 @@ public class MyAesGame extends Game {
 	@Override
 	public void create () {
 
-		Global.inputMultiplexer = new InputMultiplexer();
+		Global.init();
 		// To prevent backKey from returning
 		Gdx.input.setCatchBackKey(true);
 		Gdx.input.setInputProcessor(Global.inputMultiplexer);

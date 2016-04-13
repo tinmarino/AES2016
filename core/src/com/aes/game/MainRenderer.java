@@ -8,6 +8,7 @@ import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -151,9 +152,15 @@ public class MainRenderer extends AbstractScreen
 		// LEFT 
 		leftTable.add(textArea).expand().fill().center();
 		ScrollPaneStyle spStyle = new ScrollPaneStyle();
-		spStyle.vScroll = PixmapFactory.getDrawableMonocromatic(5, 25, Color.GRAY, disposableList) ;
-		spStyle.vScrollKnob	= PixmapFactory.getDrawableMonocromatic(10, 10, Color.BLUE, disposableList) ;
-		scrollPane = new ScrollPane(textArea);
+		//spStyle.vScroll 	= PixmapFactory.ninePatchDrawableMonochromatic(5 , 25, Color.GRAY, disposableList) ;
+		//spStyle.vScrollKnob	= PixmapFactory.ninePatchDrawableMonochromatic(10, 10, Color.BLUE, disposableList) ;
+		//spStyle.vScroll 	= PixmapFactory.getDrawableMonocromatic(10,1,Color.RED, disposableList);
+		//spStyle.vScrollKnob = PixmapFactory.getDrawableMonocromatic(20,1,Color.BLUE, disposableList);
+		Texture t1  = new Texture(PixmapFactory.circle(32,Color.BLUE));
+		Texture t2  = new Texture(PixmapFactory.circle(32,Color.RED));
+		spStyle.vScroll 	= PixmapFactory.ninePatchFromTexture(t1) ;
+		spStyle.vScrollKnob 	= PixmapFactory.ninePatchFromTexture(t2) ;
+		scrollPane = new ScrollPane(textArea, spStyle);
 		scrollPane.setScrollingDisabled(true, false);
 	    scrollPane.setForceScroll(true, false);
 		scrollPane.setOverscroll(false, false);

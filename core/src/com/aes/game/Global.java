@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.Json;
@@ -23,9 +23,9 @@ public class Global{
 	*/
 	public static PlatformOs 		platformOs;
 
-	/* System clipboard, not implemented yet, not working on html 
+	/* System clipboard not implemented on html
 	*/
-	public static Clipboard 		clipboard;
+	public static Clipboard			clipboard;
 
 	/* Is debbuging boolean, to check or uncheck the debug view
 	*/
@@ -41,7 +41,7 @@ public class Global{
 
 	/* My keyList, thiese are saved in the game preferences
 	*/
-	public static List<KeyObject>			keyList; 
+	//public static List<KeyObject>	keyList; 
 
 	/* The ciphering type, AES? RSA TRIPLEDES or TBF, my own type laying on AES256
 	*/
@@ -55,6 +55,13 @@ public class Global{
 
 	public static PreferenceSaved  	preferenceSaved; 
 
+
+	public static void init(){
+		Global.inputMultiplexer 	= new InputMultiplexer();
+		Global.preferenceSaved  	= new PreferenceSaved();
+		Global.preferenceSaved.initDebug();
+
+	}
 
 	public static void writePref(){
 		Json json = new Json();

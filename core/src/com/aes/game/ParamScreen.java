@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.CheckBox.CheckBoxStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
@@ -83,13 +84,32 @@ public class ParamScreen extends AbstractScreen {
 
 		// KEY 
 		Table tKey = new Table(); 
-		tKey.add(new Label("Key:",lStyle)).align(Align.left);
-		tKey.add(new TextField("", tfStyle)).align(Align.left).expandX().fill();
+		for (KeyObject keyObject : Global.preferenceSaved.keyList){
+			final KeyObject keyObjectSaved = keyObject;
+			Label lKey = new Label(keyObject.label, lStyle);
+			lKey.addListener(
+					new ClickListener(){
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							super.clicked(event,x,y); 
+							Gdx.app.log("MARTIN Stage", "button click"); 
+							routineLabelKey(keyObjectSaved); 
+						} 
+					}
+			);
+			tKey.add(lKey).expandX().fill().row();
+		}
+		Label lNewKey = new Label("Key:",lStyle);
+		Table tNewKey = new Table();
+		tNewKey.add(lNewKey).align(Align.left);
+		tNewKey.add(new TextField("", tfStyle)).align(Align.left).expandX().fill().row();
+		tKey.add(tNewKey).expandX().fill().row();
 
-		table.add(tKey).expandX().fill().row();
-
-		// IV 
-		
+		ScrollPaneStyle spStyle = new ScrollPaneStyle();
+		//spStyle.vScroll 	=
+		//spStyle.vScrollKnob =
+		keyScrollPane = new ScrollPane(tKey, spStyle);
+		keyScrollPane.setHeight(lNewKey.getHeight()*3);
 
 
 		// CIPHER type 
@@ -122,10 +142,12 @@ public class ParamScreen extends AbstractScreen {
 
 		
 		// PACK 
+
 		Table tCipherType = new Table();
 		tCipherType.add(cb1).expandX().fill().row();
 		tCipherType.add(cb2).expandX().fill().row();
 
+		table.add(keyScrollPane).height(lNewKey.getHeight()*3).expandX().fill().row();
 		table.add(tCipherType).expandX().fill().row();
 		table.add(isDebuggingCheckBox).expandX().fill().row();
 		for(int  i= 0; i<30; i++){
@@ -172,6 +194,10 @@ public class ParamScreen extends AbstractScreen {
 
 	public void routineCipherType(Global.CTYPE cType){
 		Gdx.app.log("TBF", "routine cihper type");
+	}
+
+	public void routineLabelKey(KeyObject keyObject){
+		Gdx.app.log("TBF", "You choosed key:" + keyObject.label);
 	}
 
 }
