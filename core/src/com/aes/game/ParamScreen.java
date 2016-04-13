@@ -287,6 +287,7 @@ public class ParamScreen extends AbstractScreen {
 		keyObject.cipherKey();		
 		Global.preferenceSaved.keyList.add(keyObject);
 		Global.writePref();
+		Global.keyObject = keyObject;
 	}
 
 	public void routineUseNewKey(KeyObject keyObject){

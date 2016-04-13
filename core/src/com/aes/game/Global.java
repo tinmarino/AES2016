@@ -66,6 +66,7 @@ public class Global{
 	public static void init(){
 		Global.inputMultiplexer 	= new InputMultiplexer();
 		Global.preferenceSaved  	= new PreferenceSaved();
+		Global.readPref();
 		Global.preferenceSaved.initDebug();
 
 		switch (Global.platformOs.getOs()){
