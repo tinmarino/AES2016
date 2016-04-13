@@ -8,7 +8,6 @@ import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -19,8 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -115,27 +112,30 @@ public class MainRenderer extends AbstractScreen
 
 		textArea 	= new TextArea("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
 		textArea.setPrefRows(textArea.getLines());
-		textArea.setTextFieldListener(new TextFieldListener()
-		{
-			@Override
-			public void keyTyped(TextField textArea, char c)
-			{
-				// Handle a newline properly. If not handled here, the TextField
-				// will advance to the next field.
-					Gdx.app.log("TBF", "Key pressed in textArea :" + c +  "+ " +((int) c) +"+"+ ((int)'\n')  );
-					if (c == '\n' || c == '\r' || 8 == c || 127 == c)
-					{
-						int i = textArea.getCursorPosition();
-						stage.setKeyboardFocus(textArea);
-						textArea.getOnscreenKeyboard().show(true);
-						textArea.appendText("\n");
-						((TextArea)textArea).setPrefRows(((TextArea)textArea).getLines()+4);
-						scrollPane.layout();
-						textArea.setCursorPosition(i);
-						Gdx.app.log("TBF", "Enter pressed in textArea" + textArea.getHeight() + "+" + textArea.getY());
-					}
-			}
-		});
+		textArea.setPrefRows(50);
+
+
+		//textArea.setTextFieldListener(new TextFieldListener()
+		//{
+		//	@Override
+		//	public void keyTyped(TextField textArea, char c)
+		//	{
+		//		// Handle a newline properly. If not handled here, the TextField
+		//		// will advance to the next field.
+		//			Gdx.app.log("TBF", "Key pressed in textArea :" + c +  "+ " +((int) c) +"+"+ ((int)'\n')  );
+		//			if (c == '\n' || c == '\r' || 8 == c || 127 == c)
+		//			{
+		//				int i = textArea.getCursorPosition();
+		//				//stage.setKeyboardFocus(textArea);
+		//				//textArea.getOnscreenKeyboard().show(true);
+		//				textArea.appendText("\n");
+		//				((TextArea)textArea).setPrefRows(((TextArea)textArea).getLines()+4);
+		//				scrollPane.layout();
+		//				textArea.setCursorPosition(i);
+		//				Gdx.app.log("TBF", "Enter pressed in textArea" + textArea.getHeight() + "+" + textArea.getY());
+		//			}
+		//	}
+		//});
 
 		
 
@@ -151,19 +151,6 @@ public class MainRenderer extends AbstractScreen
 		
 		// LEFT 
 		leftTable.add(textArea).expand().fill().center();
-		ScrollPaneStyle spStyle = new ScrollPaneStyle();
-		//spStyle.vScroll 	= PixmapFactory.ninePatchDrawableMonochromatic(5 , 25, Color.GRAY, disposableList) ;
-		//spStyle.vScrollKnob	= PixmapFactory.ninePatchDrawableMonochromatic(10, 10, Color.BLUE, disposableList) ;
-		//spStyle.vScroll 	= PixmapFactory.getDrawableMonocromatic(10,1,Color.RED, disposableList);
-		//spStyle.vScrollKnob = PixmapFactory.getDrawableMonocromatic(20,1,Color.BLUE, disposableList);
-		Texture t1  = new Texture(PixmapFactory.circle(32,Color.BLUE));
-		Texture t2  = new Texture(PixmapFactory.circle(32,Color.RED));
-		spStyle.vScroll 	= PixmapFactory.ninePatchFromTexture(t1) ;
-		spStyle.vScrollKnob 	= PixmapFactory.ninePatchFromTexture(t2) ;
-		scrollPane = new ScrollPane(textArea, spStyle);
-		scrollPane.setScrollingDisabled(true, false);
-	    scrollPane.setForceScroll(true, false);
-		scrollPane.setOverscroll(false, false);
 		
 		
 
@@ -183,6 +170,16 @@ public class MainRenderer extends AbstractScreen
 
 
 		// PACK 
+		ScrollPaneStyle spStyle = new ScrollPaneStyle();
+		Texture t1  = new Texture(PixmapFactory.circle(32,Color.BLUE));
+		Texture t2  = new Texture(PixmapFactory.circle(32,Color.RED));
+		spStyle.vScroll 	= PixmapFactory.ninePatchFromTexture(t1) ;
+		spStyle.vScrollKnob 	= PixmapFactory.ninePatchFromTexture(t2) ;
+		scrollPane = new ScrollPane(textArea, spStyle);
+		scrollPane.setScrollingDisabled(true, false);
+	    //scrollPane.setForceScroll(true, false);
+		//scrollPane.setOverscroll(false, false);
+		//scrollPane.setScrollbarsOnTop(true);
 		
 
 		table.add(scrollPane).width(w0).expand().fill(); 
