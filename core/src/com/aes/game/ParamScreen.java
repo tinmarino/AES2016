@@ -17,6 +17,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -30,8 +32,9 @@ public class ParamScreen extends AbstractScreen {
 	List<Disposable> disposableList = new ArrayList<Disposable>();
 
 	ScrollPane 	scrollPane, keyScrollPane;  
-	Table      	table, keyTable;
+	Table      	table;
 	CheckBox 	cb1, cb2, cb3, cb4;
+	TextField 	tfNewKey, tfNewLabel;
 	
 
     float sWidth ;  // slider width 
@@ -78,6 +81,11 @@ public class ParamScreen extends AbstractScreen {
 		cbStyle.checkboxOff = PixmapFactory.drawableCheckBoxOff(disposableList);
 		cbStyle.checkboxOn =  PixmapFactory.drawableCheckBoxOn(disposableList);
 
+		TextButtonStyle tbStyle = new TextButtonStyle();
+		tbStyle.font 			= Global.font; 
+		tbStyle.fontColor 		= Color.BLACK;
+		Texture t1 				= new Texture(PixmapFactory.circle(32, Color.GRAY));
+		tbStyle.up 				= PixmapFactory.ninePatchFromTexture(t1); 
 
 
 
@@ -86,28 +94,51 @@ public class ParamScreen extends AbstractScreen {
 		Table tKey = new Table(); 
 		for (KeyObject keyObject : Global.preferenceSaved.keyList){
 			final KeyObject keyObjectSaved = keyObject;
-			Label lKey = new Label(keyObject.label, lStyle);
+			TextButton  lKey = new TextButton(keyObject.label, tbStyle);
 			lKey.addListener(
 					new ClickListener(){
 						@Override
 						public void clicked(InputEvent event, float x, float y) {
 							super.clicked(event,x,y); 
-							Gdx.app.log("MARTIN Stage", "button click"); 
 							routineLabelKey(keyObjectSaved); 
 						} 
 					}
 			);
 			tKey.add(lKey).expandX().fill().row();
 		}
-		Label lNewKey = new Label("Key:",lStyle);
-		Table tNewKey = new Table();
+	
+		// NEW KEY 
+		// New Key : key field 
+		Table 		tNewKey 	= new Table();
+		Label 		lNewKey 	= new Label("Key:",lStyle);
+					tfNewKey 	= new TextField("", tfStyle);
 		tNewKey.add(lNewKey).align(Align.left);
-		tNewKey.add(new TextField("", tfStyle)).align(Align.left).expandX().fill().row();
+		tNewKey.add(tfNewKey).align(Align.left).expandX().fill().row();
+		
+		// New Key : Label field 
+		Label 		lNewLabel 	= new Label("Label:",lStyle);
+					tfNewLabel 	= new TextField("", tfStyle);
+		tNewKey.add(lNewLabel).align(Align.left);
+		tNewKey.add(tfNewLabel).align(Align.left).expandX().fill().row();
+		// New Key : TExtbuttn Saved new Key 
+		TextButton tbSaveNewKey = new TextButton("SaveKey", tbStyle);
+		tbSaveNewKey.addListener(
+					new ClickListener(){
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							super.clicked(event,x,y); 
+							final KeyObject keyObject = new KeyObject();
+							keyObject.clearKey 	= tfNewKey.getText();
+							keyObject.label 	= tfNewLabel.getText();
+							routineSaveNewKey(keyObject); 
+						} 
+					}
+		);
+		tNewKey.add(tbSaveNewKey).colspan(2);
 		tKey.add(tNewKey).expandX().fill().row();
+		
 
-		ScrollPaneStyle spStyle = new ScrollPaneStyle();
-		//spStyle.vScroll 	=
-		//spStyle.vScrollKnob =
+		ScrollPaneStyle spStyle = Global.getScrollPaneStyle(disposableList);
 		keyScrollPane = new ScrollPane(tKey, spStyle);
 		keyScrollPane.setHeight(lNewKey.getHeight()*3);
 
@@ -138,11 +169,35 @@ public class ParamScreen extends AbstractScreen {
 		});
 
 
+		// BACK and EXIT Button 
+		TextButton tbBack = new TextButton("Back", tbStyle);
+		tbBack.addListener(
+					new ClickListener(){
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							(ParamScreen.this).goBack = true; 	
+						} 
+					}
+		);
+		TextButton tbExit = new TextButton("Exit", tbStyle);
+		tbExit.addListener(
+					new ClickListener(){
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							Gdx.app.exit();
+						} 
+					}
+		);
+		Table tBackExit = new Table(); 
+		tBackExit.add(tbBack).pad(4);
+		tBackExit.add(tbExit).pad(4);
+
+
+
 		// SAVE PARAMS 
 
 		
 		// PACK 
-
 		Table tCipherType = new Table();
 		tCipherType.add(cb1).expandX().fill().row();
 		tCipherType.add(cb2).expandX().fill().row();
@@ -150,6 +205,7 @@ public class ParamScreen extends AbstractScreen {
 		table.add(keyScrollPane).height(lNewKey.getHeight()*3).expandX().fill().row();
 		table.add(tCipherType).expandX().fill().row();
 		table.add(isDebuggingCheckBox).expandX().fill().row();
+		table.add(tBackExit).row();
 		for(int  i= 0; i<30; i++){
 			table.add(new Label("Alea jacta est",lStyle)).row();
 		}
@@ -200,215 +256,10 @@ public class ParamScreen extends AbstractScreen {
 		Gdx.app.log("TBF", "You choosed key:" + keyObject.label);
 	}
 
-}
-
-/*	
-	public void show(){
-            stage = new Stage() ;
-	    stage.addListener(new InputListener(){
-               @Override
-	       public boolean keyDown(InputEvent event, int keycode) {
-	           switch (keycode){
-	             case Keys.BACK   : 
-	             case Keys.ESCAPE : 
-	             case Keys.B      : 
-	             case Keys.MENU   :
-		        goOut = true; 
-	                return true;  
-	             default : 
-	                 return false; 
-	           }  
-               } 
-	    });
-	    Gdx.input.setInputProcessor(stage); 
-
-		
-	    skin = new Skin( Gdx.files.internal("img/game/setting/Setting.json") ,  
-		new TextureAtlas(Gdx.files.internal("img/game/setting/Setting.atlas"))  );
-		
-	    Table table = new Table(); 
-	    
-	//GEOMETRY 
-	    float sWidth = wwidth / 1.1f;  // slider width 
-	    float sHeight = wwidth/5; 
-	    Drawable drawable =  skin.newDrawable("Slider",HtmlColor.Red); 
-	    drawable.setMinHeight(sHeight) ; 
-
-
-
-	   InputListener stopTouchDown = new InputListener() {
-	        public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-		        event.stop();
-			return false;
-	        }
-	   };
-	    
-	//CONTENT 
-	  //Speed 
-	    Table speedTable = new Table(); 
-	    final Label speedLabel = new Label("Speed :", skin); 
-	    
-	    final TextField speedField = new TextField("", skin);
-	    speedField.setMessageText("enterText");
-	    
-	    final Slider speedSlider = new Slider(0,10,1,false,skin);
-	    speedSlider.getStyle().knob = skin.getDrawable("Slider"); 
-	    speedSlider.getStyle().background.setMinHeight(sHeight/2);
-	    speedSlider.setValue( GamePrefs.preferences.getInteger(GamePrefs.TIMESTEP)  ); 
-	    
-	    speedSlider.addListener(stopTouchDown); 
-	    speedSlider.addListener(new DragListener() {	
-	    	@Override
-	    	public void drag(InputEvent event, float x, float y, int pointer) {
-	    	    super.drag(event, x, y, pointer);
-		    int value = (int)  speedSlider.getValue(); 
-		    switch ( value ){
-		    case 0 : 
-		      speedField.setText("Slow"); 
-		      break; 
-		    case 5 : 
-		      speedField.setText("Normal"); 
-		      break; 
-		    case 10: 
-		      speedField.setText("Fast"); 
-		      break; 
-		    default : 
-		      speedField.setText(   Integer.toString(value )  );
-		      break;  
-		    }
-	    	}
-	    	@Override
-	    	public void dragStop(InputEvent event, float x, float y, int pointer) {
-		    super.dragStop(event,x,y,pointer);  
-                    GamePrefs.calculateTimeStep(speedSlider.getValue()); 		    
-	    	}
-	    });
-	    speedTable.add(speedLabel).expand();
-	    speedTable.add(speedField).expand();
-	    speedTable.row();
-	    speedTable.add(speedSlider).expand().colspan(2).fill();
-	    speedTable.row();
-
-	    
-	    
-	//Music 
-	    Table musicTable = new Table(); 
-	    final Label musicLabel = new Label("Music Volume: ", skin); 
-	    musicLabel.setWrap(true);
-	    musicLabel.setAlignment(Align.left);
-	    
-	    final TextField musicField = new TextField("", skin);
-	    musicField.setMessageText(  Integer.toString(  (int)   (100*GamePrefs.preferences.getFloat(GamePrefs.VOLUME))   )   );
-	    musicField.setMaxLength(4);
-	    
-	    System.out.println(musicField.getWidth() + ",," + musicField.getMinWidth());
-	    
-	    final Slider musicSlider = new Slider(0,100,1,false,skin);
-	    musicSlider.getStyle().knob = drawable; 
-	    musicSlider.getStyle().background.setMinHeight(sHeight/2);
-	    musicSlider.setValue( (int)   (100*GamePrefs.preferences.getFloat(GamePrefs.VOLUME))  ); 
-	    
-	    musicSlider.addListener(stopTouchDown); 
-	    musicSlider.addListener(new DragListener() {
-	    	@Override
-	    	public void drag(InputEvent event, float x, float y, int pointer) {
-	    		super.drag(event, x, y, pointer);
-	    		musicField.setText(   Integer.toString( (int)  musicSlider.getValue()  )  );
-	    	}
-	    	@Override
-	    	public void dragStop(InputEvent event, float x, float y, int pointer) {
-		        super.dragStop(event, x, y, pointer); 
-	    		System.out.println("VOLUME :" + musicSlider.getValue()); 
-	    		//Global.midiPlayer.setVolume(   musicSlider.getValue() /100 );
-	    		GamePrefs.preferences.putFloat(GamePrefs.VOLUME, musicSlider.getValue() /100);
-	    		GamePrefs.preferences.flush();
-	    	}
-		});
-	    
-	    musicTable.add(musicLabel).expand().left();
-	    musicTable.add(musicField).right().width(sWidth-musicLabel.getWidth());
-	    musicTable.row();
-	    musicTable.add(musicSlider).expand().colspan(2).fill(); //.fill();
-	    musicTable.row();
-	    //musicTable.setWidth(100);
-	    musicTable.debug(); 
-	
-	//isMute, 
-	    final CheckBox isMuteCheckBox = new CheckBox("Mute ", skin); 
-	    isMuteCheckBox.getStyle().fontColor = HtmlColor.Black; 
-	    //if (Global.midiPlayer.isMute()) {isMuteCheckBox.setChecked(true);} 
-		isMuteCheckBox.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				GamePrefs.preferences.putBoolean(GamePrefs.IS_MUTE, isMuteCheckBox.isChecked());
-				GamePrefs.preferences.flush();
-				//Global.midiPlayer.setMute(isMuteCheckBox.isChecked());
-			}
-		});
-		musicTable.add(isMuteCheckBox); 
-	    
-	    
-	    
-	// DEBUG 
-	    final CheckBox debugCheckBox = new CheckBox("Debug ", skin); 
-	    debugCheckBox.getStyle().fontColor = HtmlColor.Black; 
-	    if (Global.debug) {debugCheckBox.setChecked(true);} 
-	    debugCheckBox.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				if (debugCheckBox.isChecked()) {Global.debug = true; }
-				else {Global.debug = false;}
-			}
-	     });
-	    
-	// OK
-	    final TextButton okButton = new TextButton("OK", skin); 
-	    okButton.getStyle().fontColor = HtmlColor.Black; 
-	    okButton.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-			   goOut= true; 
-			}
-	    });
-
-	    
-	//PACK 
-
-	    
-	    scrollPane = new ScrollPane(table);
-	    scrollPane.setFillParent(true); 
-	    scrollPane.setScrollingDisabled(true,false); 
-	 // Music 
-	    table.add(musicTable).width(sWidth); 
-	    table.row();
-	 //Speed
-	    table.add(speedTable).width(sWidth); 
-	    table.row(); 
-	  // Debug 
-	    table.add(debugCheckBox); 
-	    table.row(); 
-
-          // ok 
-	    table.add(okButton); 
-	    table.row(); 
-
-	    table.setWidth(sWidth);
-	    table.debug();
-	    stage.addActor(scrollPane);
-	 
-		
-		
+	public void routineSaveNewKey(KeyObject keyObject){
+		keyObject.cipherKey();		
+		Global.preferenceSaved.keyList.add(keyObject);
+		Global.writePref();
 	}
-	
-
-
-
-	public void dispose(){
-		stage.dispose();
-		skin.dispose();
-	}
-	
-
 
 }
-*/

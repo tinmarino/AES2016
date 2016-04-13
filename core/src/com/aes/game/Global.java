@@ -39,6 +39,7 @@ public class Global{
 	/* My main font, I don't want to pass it in all classes 
 	*/
 	public static BitmapFont 		font; 
+	public static BitmapFont 		fontButton; 
 
 	/* To be removed maybe 
 	*/
@@ -66,17 +67,28 @@ public class Global{
 		Global.preferenceSaved  	= new PreferenceSaved();
 		Global.preferenceSaved.initDebug();
 
+		switch (Global.platformOs.getOs()){
+		case ANDROID : 
+			font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
+			fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu8White.fnt"));
+			break;
+		default: 
+			font = new BitmapFont(Gdx.files.internal("font/Ubuntu32Black.fnt"));
+			fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
+			break;
+		}
 	}
 
 	//
 	// STYLES 
 	//
 	public static TextFieldStyle getTextFieldStyle(List<Disposable> disposableList){
-		TextFieldStyle tfStyle = new TextFieldStyle(); 
-		tfStyle.font = font;
-		tfStyle.fontColor = Color.BLACK;
-		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK, disposableList);
-		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE, disposableList);
+		TextFieldStyle tfStyle 	= new TextFieldStyle(); 
+		tfStyle.font 			= font;
+		tfStyle.fontColor 		= Color.BLACK;
+		tfStyle.background 		= PixmapFactory.getDrawableMonocromatic(1, 1, Color.GRAY, disposableList);
+		tfStyle.cursor			= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK, disposableList);
+		tfStyle.selection		= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE, disposableList);
 		tfStyle.cursor.setMinWidth(2f);
 		return tfStyle;
 	}

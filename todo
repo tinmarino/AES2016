@@ -1,12 +1,14 @@
 TODO 
 
   	Resize also the rightTabel 
+	BUG : textArea, never go to and hide the text outside of that textArea 
 	PARAM : add button back. EXIt, 
 			AddNewKey expanding dialog
 			and a scrollpane of size two field with the labels of existing keys
   	HTML :	log with buttons to see if the preferences works with html
   			Warning cannot add new line  in html
   			grep the entre also in html, because a cannot make a newLine
+	GLOBAL : pretty print 
 
 
 TOREAD  (and todo less important)
