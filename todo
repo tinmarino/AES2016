@@ -1,5 +1,6 @@
 TODO 
 
+	get a readme readable by the user 
 	save key | delete key, get a nice keyList screen
   			Warning in html chekc key if keycode = 0 in html for arrow moving
 

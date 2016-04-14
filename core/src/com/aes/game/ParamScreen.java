@@ -331,6 +331,9 @@ public class ParamScreen extends AbstractScreen {
 		keyObject.cipherKey();		
 		Global.preferenceSaved.keyList.add(keyObject);
 		Global.writePref();
+		tKey.remove();
+		tKey = tableSavedKey();
+		keyScrollPane.setWidget(tKey);
 		Global.keyObject = keyObject;
 	}
 
@@ -341,12 +344,18 @@ public class ParamScreen extends AbstractScreen {
 
 	public void routineRmKey(){
 		for (KeyObject key : listKeyToDelete){
-			Global.preferenceSaved.keyList.remove(key);
+			if (Global.preferenceSaved.keyList.contains(key)){
+				Global.preferenceSaved.keyList.remove(key);
+			}
+			else{
+				Gdx.app.log("TBF", "Warning cannot remove key :" + key.label);
+			}
 		}
+		listKeyToDelete.clear();
+		Global.writePref();
 		tKey.remove();
 		tKey = tableSavedKey();
 		keyScrollPane.setWidget(tKey);
-		Global.writePref();
 	}
 
 }
