@@ -69,28 +69,28 @@ public class Global{
 		Global.readPref();
 		Global.preferenceSaved.initDebug();
 
-		//switch (Global.platformOs.getOs()){
-		//case ANDROID : 
-		//	if (Gdx.graphics.getHeight() <500){
-		//		font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
-		//		fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu8White.fnt"));
-		//		break;
-		//	}
-		//default: 
-		//	font = new BitmapFont(Gdx.files.internal("font/Ubuntu32White.fnt"), false);
-		//	fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"), false);
-		//	break;
-		//}
-		// font/UbuntuMono-R.ttf
-		//
+		
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/UbuntuMono-R.ttf"));
-		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-		parameter.size = 12;
-		font  		= generator.generateFont(parameter); // font size 12 pixels
-		fontButton  = generator.generateFont(parameter); // font size 12 pixels
-		generator.dispose(); // don't forget to dispose to avoid memory leaks!
-		//font.getData().markupEnabled = false;
-		//fontButton.setMarkupEnabled(false);
+		FreeTypeFontParameter parameter1 = new FreeTypeFontParameter();
+		FreeTypeFontParameter parameter2 = new FreeTypeFontParameter();
+	 		
+		switch (Global.platformOs.getOs()){
+		case ANDROID : 
+			if (Gdx.graphics.getHeight() <500){
+				parameter1.size = 16;
+				font  			= generator.generateFont(parameter1);
+				parameter2.size = 8;
+				fontButton  = generator.generateFont(parameter2);
+				break;
+			}
+		default: 
+				parameter1.size = 32;
+				font  			= generator.generateFont(parameter1);
+				parameter2.size = 16;
+				fontButton  = generator.generateFont(parameter2);
+				break;
+		}
+		generator.dispose();
 	}
 
 	//
