@@ -90,7 +90,9 @@ public class TextAreaX extends TextArea {
 
 			@Override
 			public void clicked (InputEvent event, float x, float y) {
-				if (  TextAreaX.this.getText().length()  < TextAreaX.this.letterUnderCursor(x)){
+				int len = TextAreaX.this.getText().length();
+				if ( len   < TextAreaX.this.letterUnderCursor(x)){
+					TextAreaX.this.setCursorPosition(len);
 					Gdx.app.log("TBF", "click dans les choux:"+ x + "+" + y +"+"+event);
 					return ;
 				}
