@@ -1,6 +1,7 @@
 package com.aes.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
@@ -69,10 +70,12 @@ public class TextAreaX extends TextArea {
 						p.stage.setKeyboardFocus(TextAreaX.this);
 						TextAreaX.this.getOnscreenKeyboard().show(true);
 						if (c == '\n' || c == '\r' || c == 0){
-							//if (Global.platformOs.getOs() != OS.DESKTOP)
-							//{
+							 	if (c==0){
+									if(!Gdx.input.isKeyPressed(Keys.ENTER)){
+										return super.keyTyped(event, c);
+									}
+								}
 								paste("\n");
-							//}
 						}
 						else{backspace();}
 						

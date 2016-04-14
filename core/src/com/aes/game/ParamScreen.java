@@ -234,9 +234,9 @@ public class ParamScreen extends AbstractScreen {
 		table.add(keyScrollPane).height(iKeyScrollPaneHeight).expandX().fill().row();
 		table.add(new Label("New Key---------------------------------", lStyleChapter) ).expandX().fill().row();
 		table.add(tNewKey).expandX().fill().row();
-		table.add(new Label("Misc--------------------------------", lStyleChapter) ).expandX().fill().row();
-		table.add(tCipherType).expandX().fill().row();
-		table.add(isDebuggingCheckBox).expandX().fill().row();
+		//table.add(new Label("Misc--------------------------------", lStyleChapter) ).expandX().fill().row();
+		//table.add(tCipherType).expandX().fill().row();
+		//table.add(isDebuggingCheckBox).expandX().fill().row();
 		table.add(new Label("Return------------------------------", lStyleChapter) ).expandX().fill().row();
 		table.add(tBackExit).row();
 		table.add(new Label("------", lStyleChapter) ).expandX().fill().row();
