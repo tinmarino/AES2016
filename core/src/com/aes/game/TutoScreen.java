@@ -40,9 +40,10 @@ public class TutoScreen extends AbstractScreen{
 					Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
 		Global.inputMultiplexer.addProcessor(stage);
 		disposableList.add(stage);
-		label 	= new Label(sText, Global.getLabelStyle());
+		label 	= new Label(sText, Global.getTLabelStyle());
 		label.setWrap(true);
 		tbBack 	= new TextButton("OK", Global.getTextButtonStyle(disposableList));
+		tbBack.setColor(GuiParameter.colTButton);
 		tbBack.addListener(
 				new ClickListener(){
 					@Override
@@ -65,7 +66,7 @@ public class TutoScreen extends AbstractScreen{
 	@Override 
 	public void render(float delta){
 		// CLEAR 
-		Gdx.gl.glClearColor(GuiParameter.colClear.r, GuiParameter.colClear.g, GuiParameter.colClear.b, 1);
+		Gdx.gl.glClearColor(GuiParameter.colTClear.r, GuiParameter.colTClear.g, GuiParameter.colTClear.b, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		// DRAW
 		stage.act(delta); 

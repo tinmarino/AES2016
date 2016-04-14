@@ -106,10 +106,10 @@ public class Global{
 		return spStyle;
 	}
 
-	public static LabelStyle getLabelStyle(){
+	public static LabelStyle getTLabelStyle(){
 		LabelStyle lStyle 	= new LabelStyle();
 		lStyle.font 		= Global.font; 
-		lStyle.fontColor 	= GuiParameter.colLabelFont;
+		lStyle.fontColor 	= GuiParameter.colTLabelFont;
 		return lStyle;
 	}
 

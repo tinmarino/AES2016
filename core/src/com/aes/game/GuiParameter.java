@@ -34,7 +34,9 @@ public class GuiParameter{
 	public static Color colPButtonDown		= HtmlColor.Black;
 
 	// TUTO 
-	public static Color colLabelFont		= HtmlColor.DarkBlue;
+	public static Color colTLabelFont		= HtmlColor.Black;
+	public static Color colTClear			= HtmlColor.Blush;
+	public static Color colTButton			= HtmlColor.BlueGray;
 
 
 	public static int   iScroll			= 8; 
