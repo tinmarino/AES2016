@@ -67,13 +67,10 @@ public class Global{
 		Global.preferenceSaved  	= new PreferenceSaved();
 		Global.readPref();
 		Global.preferenceSaved.initDebug();
-		int fontsize = 32, buttonfontsize =16;
-		if (OS.ANDROID == platformOs.getOs() && 500 > Gdx.graphics.getHeight() ){
-			fontsize/=2;
-			buttonfontsize/=2;
-		}
+		int fontsize = 32;
+		if (OS.ANDROID == platformOs.getOs() && 500 > Gdx.graphics.getHeight() ){fontsize/=2;}
 		Global.font 		= platformOs.getFont(fontsize);
-		Global.fontButton 	= platformOs.getFont(buttonfontsize); 
+		Global.fontButton 	= platformOs.getFont(8); 
 
 		
 	}

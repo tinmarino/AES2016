@@ -88,6 +88,16 @@ public class TextAreaX extends TextArea {
 						return super.keyTyped(event, c);
 					}
 			}
+
+			@Override
+			public void clicked (InputEvent event, float x, float y) {
+				if (  TextAreaX.this.getText().length()  < TextAreaX.this.letterUnderCursor(x)){
+					Gdx.app.log("TBF", "click dans les choux:"+ x + "+" + y +"+"+event);
+					return ;
+				}
+				super.clicked(event, x, y);
+				return;
+			}
 	}
 }
 

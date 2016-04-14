@@ -37,7 +37,7 @@ public class PlatformDesktop implements PlatformOs {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/UbuntuMono-R.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 	 		
-		parameter.size 	= 32;
+		parameter.size 	= fontsize;
 		BitmapFont font  			= generator.generateFont(parameter);
 		generator.dispose();
 		return font; 
