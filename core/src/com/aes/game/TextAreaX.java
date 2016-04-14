@@ -36,8 +36,7 @@ public class TextAreaX extends TextArea {
 		Gdx.app.log("TBF", "cursor posiriont bis " + this.getCursorPosition() );
 		this.setText(res); 
 		this.setCursorPosition(0);
-		this.moveCursorLine(0);
-		//this.moveCursorLine(this.getCursorLine() +1);
+		this.moveCursorLine(this.getCursorLine() +1);
 	}
 
 	public void backspace(){
