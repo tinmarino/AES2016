@@ -70,9 +70,11 @@ public class Global{
 
 		switch (Global.platformOs.getOs()){
 		case ANDROID : 
-			font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
-			fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu8White.fnt"));
-			break;
+			if (Gdx.graphics.getHeight() <500){
+				font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
+				fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu8White.fnt"));
+				break;
+			}
 		default: 
 			font = new BitmapFont(Gdx.files.internal("font/Ubuntu32White.fnt"));
 			fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
