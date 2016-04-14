@@ -14,6 +14,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 /*	Here I declare some global variables. They are accesible from anywhere. 
     They correspond to settings, parameters... 
@@ -67,18 +69,28 @@ public class Global{
 		Global.readPref();
 		Global.preferenceSaved.initDebug();
 
-		switch (Global.platformOs.getOs()){
-		case ANDROID : 
-			if (Gdx.graphics.getHeight() <500){
-				font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
-				fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu8White.fnt"));
-				break;
-			}
-		default: 
-			font = new BitmapFont(Gdx.files.internal("font/Ubuntu32White.fnt"));
-			fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
-			break;
-		}
+		//switch (Global.platformOs.getOs()){
+		//case ANDROID : 
+		//	if (Gdx.graphics.getHeight() <500){
+		//		font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"));
+		//		fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu8White.fnt"));
+		//		break;
+		//	}
+		//default: 
+		//	font = new BitmapFont(Gdx.files.internal("font/Ubuntu32White.fnt"), false);
+		//	fontButton = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"), false);
+		//	break;
+		//}
+		// font/UbuntuMono-R.ttf
+		//
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/UbuntuMono-R.ttf"));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+		parameter.size = 12;
+		font  		= generator.generateFont(parameter); // font size 12 pixels
+		fontButton  = generator.generateFont(parameter); // font size 12 pixels
+		generator.dispose(); // don't forget to dispose to avoid memory leaks!
+		//font.getData().markupEnabled = false;
+		//fontButton.setMarkupEnabled(false);
 	}
 
 	//

@@ -17,14 +17,14 @@ public class PlatformDesktop implements PlatformOs {
 
 	@Override
 	public void setOrientation(Orientation orientation) {
-	        this.orientation = orientation; 
+	    this.orientation = orientation; 
 		if (orientation == Orientation.PAYSAGE){
 			Gdx.app.log("PlatformDesktop","I change to desktop paysage");
-			Gdx.graphics.setWindowedMode(480,320); 
+			//Gdx.graphics.setWindowedMode(480,320); 
 		}
 		if (orientation == Orientation.PORTRAIT){
 			Gdx.app.log("PlatformDesktop","I change to desktop portrait");
-			Gdx.graphics.setWindowedMode(320,480); 
+			//Gdx.graphics.setWindowedMode(320,480); 
 		}	
 
 	}

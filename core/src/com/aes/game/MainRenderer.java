@@ -93,9 +93,11 @@ public class MainRenderer extends AbstractScreen
 		// TEXT AREA
 		TextFieldStyle tfStyle = Global.getTextFieldStyle(disposableList);
 
-		textArea 	= new TextAreaX("TextAreza this ssssis \n zaeazeazeaz very long \n\n\n\n\n\n\n\nn\n\nsetring\n\n\n\n\nn\n\n\n\nnEND", tfStyle); 
+		textArea 	= new TextAreaX("TextAreza this sss", tfStyle); 
 		textArea.setParent(this);
+		//textArea.setWrap(true);
 		textArea.setPrefRows(textArea.getLines());
+		textArea.setMaxLength(1000);
 		textArea.setClipboard(Global.clipboard);
 
 
@@ -156,8 +158,13 @@ public class MainRenderer extends AbstractScreen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		// DRAW
-		stage.act(delta); 
-		stage.draw(); 
+		//try{
+			stage.act(delta); 
+			stage.draw(); 
+		//}
+		//catch (ArrayIndexOutOfBoundsException e) {
+		//	Gdx.app.log("TBF", "Stage array out of bound error" + e);
+		//}
 	}
 
 	@Override

@@ -23,21 +23,21 @@ public class TextAreaX extends TextArea {
 		return new TextAreaXListener();
 	}
 
-	// TODO this is newline abd add delete char
-	public void paste(String to){
-		if (to.length() == 0) {return;}
+	public void newline(){
 		String text = this.getText();
 		int iPos = this.getCursorPosition();
 		Gdx.app.log("TBF", "cursor posiriont " + iPos +"+"+ this.getCursorLine());
 
 		String res = text.substring(0, iPos );
-		res += to;
+		res += "\n\r";
 		res += text.substring(iPos, text.length());
 	
 		
-		Gdx.app.log("TBF", "cursor posiriont 2 " + this.getCursorPosition() );
+		Gdx.app.log("TBF", "cursor posiriont bis " + this.getCursorPosition() );
 		this.setText(res); 
-		this.moveCursorLine(this.getCursorLine() +1);
+		this.setCursorPosition(0);
+		this.moveCursorLine(0);
+		//this.moveCursorLine(this.getCursorLine() +1);
 	}
 
 	public void backspace(){
@@ -75,7 +75,7 @@ public class TextAreaX extends TextArea {
 										return super.keyTyped(event, c);
 									}
 								}
-								paste("\n");
+								newline();
 						}
 						else{backspace();}
 						
