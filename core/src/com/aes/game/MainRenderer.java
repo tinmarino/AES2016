@@ -157,7 +157,7 @@ public class MainRenderer extends AbstractScreen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		// DRAW
-		stage.act(); 
+		stage.act(delta); 
 		stage.draw(); 
 	}
 
@@ -342,6 +342,8 @@ public class MainRenderer extends AbstractScreen
 	}
 
 	public void routineTuto(){
+		this.setNextScreen(new TutoScreen()); 
+		this.goFoward = true; 
 		
 	}
 

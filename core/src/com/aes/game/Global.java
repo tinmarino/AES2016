@@ -7,7 +7,9 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.Disposable;
@@ -40,9 +42,6 @@ public class Global{
 	public static BitmapFont 		font; 
 	public static BitmapFont 		fontButton; 
 
-	/* To be removed maybe 
-	*/
-	public static TextFieldStyle 	tfStyle;
 
 	/* The key I will use to cipher. 
 	 * Warning this must be a hava a cleared clearKey to avoid leaks
@@ -106,6 +105,28 @@ public class Global{
 		spStyle.vScrollKnob 	= PixmapFactory.ninePatchFromTexture(tKnob) ;
 		return spStyle;
 	}
+
+	public static LabelStyle getLabelStyle(){
+		LabelStyle lStyle 	= new LabelStyle();
+		lStyle.font 		= Global.font; 
+		lStyle.fontColor 	= GuiParameter.colLabelFont;
+		return lStyle;
+	}
+
+	public static TextButtonStyle getTextButtonStyle(List<Disposable> disposableList){
+
+		TextButtonStyle tbStyle = new TextButtonStyle();
+		tbStyle.font 			= Global.font; 
+		tbStyle.fontColor 		= GuiParameter.colPButtonFont;
+		Texture t1 				= new Texture(PixmapFactory.circle(32, GuiParameter.colPButton));
+		Texture t2 				= new Texture(PixmapFactory.circle(32, GuiParameter.colPButtonDown));
+		tbStyle.up 				= PixmapFactory.ninePatchFromTexture(t1); 
+		tbStyle.down			= PixmapFactory.ninePatchFromTexture(t2); 
+		disposableList.add(t1);
+		disposableList.add(t2);
+		return tbStyle;
+	}
+
 
 	public static void writePref(){
 		Json json = new Json();

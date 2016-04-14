@@ -66,7 +66,6 @@ public class AbstractScreen implements Screen, InputProcessor
 	@Override
 	public void resume() {
 		state = STATE.RUN;
-
 	}
 
 	@Override

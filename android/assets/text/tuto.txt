@@ -8,35 +8,35 @@ Welome to the AES encryptor tutorial by Tinmarino:
 
 ---------------------------------------------
 1/ Cipher:
-	a/ Write or paste the text you want to cipher in the Left textArea.
-	b/ The click on the button cipher (with a key as image).
+    a/ Write or paste the text you want to cipher in the Left textArea.
+    b/ The click on the button cipher (with a key as image).
 If you did not enter a key, you will get a warning message, just read key section below. 
-	c/ The text is cipher, it should start by IV1= you can now copy it and send it to a friend
+    c/ The text is cipher, it should start by IV1= you can now copy it and send it to a friend
 
 
 ---------------------------------------------
 2/ Unipher:
-	a/ Paste the text you want to uncipher in the main textArea, on the left of the screen
-	b/ Click on the button cipher (currently the second) on the right side of the screen. 
+    a/ Paste the text you want to uncipher in the main textArea, on the left of the screen
+    b/ Click on the button cipher (currently the second) on the right side of the screen. 
 If you did not enter a key, you will get a warning message, just read key section below. 
-	c/ Is your text readable ? Maybe you got a warning because you entered a bad key and the padding is incorect. 
+    c/ Is your text readable ? Maybe you got a warning because you entered a bad key and the padding is incorect. 
 I imagine this is the unciphered text padding that is incoreect as the unciphered text looks like random shit. 
 
 
 ---------------------------------------------
 3/ Keys for ciphering: how to set ?
-	a/ Go in param screen with the (currently first) param button on the right right side of the mainScreen
-	b/ Onces in Param you should see a (maybe null) list of saved key. You can just click on one of them to use it. 
-	c/ Otherwise you can create a temporary key. In the "new Key" Chapter. 
-		c1. You can use it and it will be destoyed when the app exits
-		c2. Tou can save it and it will be stored, you will see its label in the saved key :
+    a/ Go in param screen with the (currently first) param button on the right right side of the mainScreen
+    b/ Onces in Param you should see a (maybe null) list of saved key. You can just click on one of them to use it. 
+    c/ Otherwise you can create a temporary key. In the "new Key" Chapter. 
+        c1. You can use it and it will be destoyed when the app exits
+        c2. Tou can save it and it will be stored, you will see its label in the saved key :
 Of course I don't display the saved key as it is. Otherwise anyone could know its value.
 
 
 ---------------------------------------------
 4/ Keyboard
-	a/ Go Back   -> escape
-	b/ Go foward -> F
+    a/ Go Back   -> escape
+    b/ Go foward -> F
 
-		
+        
 

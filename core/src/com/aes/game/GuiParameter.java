@@ -20,7 +20,7 @@ public class GuiParameter{
 	public static Color colSpButtonBck		= HtmlColor.Pewter;
 	public static Color colClear			= HtmlColor.Red;
 
-	// PARAM
+	// PARAM 
 	public static Color colPClear			= HtmlColor.Blush;
 	public static Color colPTextFont		= HtmlColor.BlueGray;
 	public static Color colPTextCursor		= HtmlColor.Steel;
@@ -32,6 +32,9 @@ public class GuiParameter{
 	public static Color colPButtonFont		= HtmlColor.Black;
 	public static Color colPButton			= HtmlColor.BlueGray;
 	public static Color colPButtonDown		= HtmlColor.Black;
+
+	// TUTO 
+	public static Color colLabelFont		= HtmlColor.DarkBlue;
 
 
 	public static int   iScroll			= 8; 
