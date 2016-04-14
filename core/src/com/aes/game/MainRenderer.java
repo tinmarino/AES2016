@@ -81,13 +81,14 @@ public class MainRenderer extends AbstractScreen
 		// BUTTONS
 		bList					= CreateTextButton("", 			RTYPE.LIST);
 		ImageTextButton bNull 	= CreateTextButton("", 			RTYPE.NULL);
-		ImageTextButton bParam 	= CreateTextButton("param", 	RTYPE.PARAM);
+		ImageTextButton bParam 	= CreateTextButton("Param", 	RTYPE.PARAM);
 		ImageTextButton bCipher = CreateTextButton("Cipher", 	RTYPE.CIPHER); 
-		ImageTextButton bCopy  	= CreateTextButton("copy",		RTYPE.COPY); 
-		ImageTextButton bPaste 	= CreateTextButton("paste",		RTYPE.PASTE); 
-		ImageTextButton bClear 	= CreateTextButton("clear",		RTYPE.CLEAR); 
-		ImageTextButton bDbg	= CreateTextButton("dbg",		RTYPE.DBG); 
-		ImageTextButton bExit	= CreateTextButton("exit",		RTYPE.EXIT); 
+		ImageTextButton bCopy  	= CreateTextButton("Copy",		RTYPE.COPY); 
+		ImageTextButton bPaste 	= CreateTextButton("Paste",		RTYPE.PASTE); 
+		ImageTextButton bClear 	= CreateTextButton("Clear",		RTYPE.CLEAR); 
+		ImageTextButton bDbg	= CreateTextButton("Dbg",		RTYPE.DBG); 
+		ImageTextButton bTuto	= CreateTextButton("Tuto",		RTYPE.TUTO); 
+		ImageTextButton bExit	= CreateTextButton("Exit",		RTYPE.EXIT); 
 
 
 		// TEXT AREA
@@ -117,8 +118,9 @@ public class MainRenderer extends AbstractScreen
     	tButton.add(bPaste		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
     	tButton.add(bClear		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
     	tButton.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
+    	tButton.add(bTuto		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
     	tButton.add(bExit		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	tButton.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 8*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
+    	tButton.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 9*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
 		ScrollPaneStyle spStyleButton = new ScrollPaneStyle();
 		spStyleButton.background = PixmapFactory.getDrawableMonocromatic(1,1, GuiParameter.colSpButtonBck, disposableList);
 		scrollPaneRight = new ScrollPane(tButton, spStyleButton)	;
@@ -258,6 +260,9 @@ public class MainRenderer extends AbstractScreen
 			case EXIT:
 				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/exit" + suffix, disposableList);
 				break;
+			case TUTO:
+				itbStyle.imageUp = PixmapFactory.drawableFromFile("img/ui/book" + suffix, disposableList);
+				break;
 			case NULL:
 				break;
 		}
@@ -285,7 +290,7 @@ public class MainRenderer extends AbstractScreen
 		return bRes;
 	}
 
-	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG, LIST, NULL, EXIT}
+	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG, LIST, NULL, EXIT, TUTO}
 	public void routineDispatch(RTYPE routineType){
 		Gdx.app.log("TBF", "Rgith button presses :" + routineType);
 		switch (routineType){
@@ -298,6 +303,7 @@ public class MainRenderer extends AbstractScreen
 			case DBG:		routineDbg();		break;
 			case NULL:		routineDbg();		break;
 			case EXIT:		routineExit();		break;
+			case TUTO:		routineTuto();		break;
 		}
 
 	}
@@ -333,6 +339,10 @@ public class MainRenderer extends AbstractScreen
 		bList.remove();
 		stage.addActor(bList);
 		bAreToolsVisible = !bAreToolsVisible;
+	}
+
+	public void routineTuto(){
+		
 	}
 
 	public void routineExit(){

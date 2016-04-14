@@ -1,6 +1,5 @@
 TODO 
 
-	change font for big android screens
 	get a readme readable by the user 
 
 
@@ -16,6 +15,7 @@ TOREAD  (and todo less important)
   BUG : textArea, never go to and hide the text outside of that textArea 
   TExtArea issue, do ou really whant to extend this calls
   html : switch between delete and supp, both are using backspace method
+  key : make an cipheredKey AND a savedKey so you don't directly use the saved key
 
 
 
