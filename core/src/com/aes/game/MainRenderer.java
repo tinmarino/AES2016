@@ -93,10 +93,10 @@ public class MainRenderer extends AbstractScreen
 		// TEXT AREA
 		TextFieldStyle tfStyle = Global.getTextFieldStyle(disposableList);
 
-		textArea 	= new TextAreaX("TextAreza this sss", tfStyle); 
+		textArea 	= new TextAreaX("TextAreza  azeazethis sss", tfStyle); 
 		textArea.setParent(this);
-		//textArea.setWrap(true);
-		textArea.setPrefRows(textArea.getLines());
+		//textArea.setPrefRows(textArea.getLines());
+		textArea.setPrefRows(50);
 		textArea.setMaxLength(1000);
 		textArea.setClipboard(Global.clipboard);
 

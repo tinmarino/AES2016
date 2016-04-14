@@ -29,13 +29,18 @@ public class TextAreaX extends TextArea {
 		Gdx.app.log("TBF", "cursor posiriont " + iPos +"+"+ this.getCursorLine());
 
 		String res = text.substring(0, iPos );
-		res += "\n";
-		res += text.substring(iPos, text.length());
+		this.setText("");
+		this.appendText(res); 
+		res = "\n";
+		this.appendText(res); 
+		res = text.substring(iPos, text.length());
+		this.appendText(res); 
 	
 		
 		Gdx.app.log("TBF", "cursor posiriont bis " + this.getCursorPosition() );
-		this.setText(res); 
-		this.setCursorPosition(iPos+1);
+		//if(this.getText().length()>= iPos){this.setCursorPosition(iPos+1);}
+		//else{ this.setCursorPosition(this.getText().length()-3);}
+		//this.setCursorPosition(this.getText().length()-3);
 		//this.moveCursorLine(this.getCursorLine() +1);
 	}
 
@@ -64,6 +69,7 @@ public class TextAreaX extends TextArea {
 				// will advance to the next field.
 				// 0 if for enter in html
 					Gdx.app.log("TBF", "Key pressed in TextAreaX.this :" + c +  "+ " +((int) c)  );
+					Gdx.app.log("TBF", "Curor:" + TextAreaX.this.getCursorPosition() +  "+ cursorline " + TextAreaX.this.getCursorLine() +"Line number/" +TextAreaX.this.getLines() +"+"+ TextAreaX.this.getLinesShowing() + "+" + TextAreaX.this.getMaxLength() );
 					if (c == '\n' || c == '\r' || 8 == c || 127 == c || 0 == c)
 					{
 						p.stage.setKeyboardFocus(TextAreaX.this);

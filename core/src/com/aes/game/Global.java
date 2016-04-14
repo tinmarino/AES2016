@@ -85,7 +85,7 @@ public class Global{
 		tfStyle.background 		= PixmapFactory.getDrawableMonocromatic(1, 1, GuiParameter.colTextBck, disposableList);
 		tfStyle.cursor			= PixmapFactory.getDrawableMonocromatic(2, 16, GuiParameter.colTextCursor, disposableList);
 		tfStyle.selection		= PixmapFactory.getDrawableMonocromatic(2, 16, GuiParameter.colTextSelection, disposableList);
-		tfStyle.cursor.setMinWidth(2f);
+		//tfStyle.cursor.setMinWidth(2f);
 		return tfStyle;
 	}
 

@@ -14,11 +14,16 @@ public class PlatformHtml implements PlatformOs {
 	@Override
 	public BitmapFont getFont(int fontsize){
 		BitmapFont font;
-		if (16 == fontsize){
-			font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"), false);
-		}
-		else{
-			font = new BitmapFont(Gdx.files.internal("font/Ubuntu32White.fnt"), false);
+		switch(fontsize){
+			case 8:
+				font = new BitmapFont(Gdx.files.internal("font/Ubuntu8White.fnt"), false);
+				break;
+			case 16:
+				font = new BitmapFont(Gdx.files.internal("font/Ubuntu16White.fnt"), false);
+				break;
+			default:
+				font = new BitmapFont(Gdx.files.internal("font/Ubuntu32White.fnt"), false);
+				break;
 		}
 		return font; 
 	}
