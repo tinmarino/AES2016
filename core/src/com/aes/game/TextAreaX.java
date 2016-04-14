@@ -1,5 +1,6 @@
 package com.aes.game;
 
+import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,6 +19,13 @@ public class TextAreaX extends TextArea {
 	}
 
 
+
+
+
+
+
+
+
 	@Override
 	protected InputListener createInputListener () {
 		return new TextAreaXListener();
@@ -29,16 +37,14 @@ public class TextAreaX extends TextArea {
 		Gdx.app.log("TBF", "cursor posiriont " + iPos +"+"+ this.getCursorLine());
 
 		String res = text.substring(0, iPos );
-		this.setText("");
-		this.appendText(res); 
-		res = "\n";
-		this.appendText(res); 
-		res = text.substring(iPos, text.length());
-		this.appendText(res); 
+		if (OS.ANDROID == Global.platformOs.getOs()){res += ENTER_ANDROID;}
+		else{res+=ENTER_DESKTOP;}
+		res += text.substring(iPos, text.length());
+		this.setText(res);
 	
 		
 		Gdx.app.log("TBF", "cursor posiriont bis " + this.getCursorPosition() );
-		//if(this.getText().length()>= iPos){this.setCursorPosition(iPos+1);}
+		if(this.getText().length()>= iPos){this.setCursorPosition(iPos+1);}
 		//else{ this.setCursorPosition(this.getText().length()-3);}
 		//this.setCursorPosition(this.getText().length()-3);
 		//this.moveCursorLine(this.getCursorLine() +1);
@@ -68,6 +74,7 @@ public class TextAreaX extends TextArea {
 				// Handle a newline properly. If not handled here, the TextField
 				// will advance to the next field.
 				// 0 if for enter in html
+				// ENTER_DESKTOP is \r and android is \n
 					Gdx.app.log("TBF", "Key pressed in TextAreaX.this :" + c +  "+ " +((int) c)  );
 					Gdx.app.log("TBF", "Curor:" + TextAreaX.this.getCursorPosition() +  "+ cursorline " + TextAreaX.this.getCursorLine() +"Line number/" +TextAreaX.this.getLines() +"+"+ TextAreaX.this.getLinesShowing() + "+" + TextAreaX.this.getMaxLength() );
 					if (c == '\n' || c == '\r' || 8 == c || 127 == c || 0 == c)

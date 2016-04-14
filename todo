@@ -1,8 +1,5 @@
 TODO 
    android : the paramscreen is too wide 
-   get Html working not freezing cause of curosrPos
-   make 8 size font possible 
-   make stff stop bugging !!
  
 
 
@@ -29,6 +26,8 @@ SOLVED
   		-> Libgdx Dialog See dermetfan request 19
   TExtArea: what is the cursor position, what doeas taht mean ???!!
   		-> apparntly the offset in the string independanlty from cursorLine that is used for fast palcing the cursor
+   get Html working not freezing cause of curosrPos
+   		-> Because newline is \r in desktop and \n in android : you should have never hardcoded
 
 
 ECLIM 
