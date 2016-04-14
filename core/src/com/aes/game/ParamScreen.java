@@ -20,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
 
@@ -114,14 +113,14 @@ public class ParamScreen extends AbstractScreen {
 		Table 		tNewKey 	= new Table();
 		Label 		lNewKey 	= new Label("Key:",lStyle);
 					tfNewKey 	= new TextField("", tfStyle);
-		tNewKey.add(lNewKey).align(Align.left);
-		tNewKey.add(tfNewKey).align(Align.left).expandX().fill().row();
+		tNewKey.add(lNewKey).left();
+		tNewKey.add(tfNewKey).left().expandX().fill().row();
 		
 		// New Key : Label field 
 		Label 		lNewLabel 	= new Label("Label:",lStyle);
 					tfNewLabel 	= new TextField("", tfStyle);
-		tNewKey.add(lNewLabel).align(Align.left);
-		tNewKey.add(tfNewLabel).align(Align.left).expandX().fill().row();
+		tNewKey.add(lNewLabel).left();
+		tNewKey.add(tfNewLabel).left().expandX().fill().row();
 		// TextButton, remove selected key
 		TextButton tbRmKey = new TextButton("RmKey", tbStyle);
 		tbRmKey.addListener(

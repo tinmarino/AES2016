@@ -18,7 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane.ScrollPaneStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -112,15 +111,15 @@ public class MainRenderer extends AbstractScreen
 
 		// PACK RIGHT TABLE
 		Table tButton = new Table();
-    	tButton.add(bParam		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
-    	tButton.add(bCipher	).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row();
-    	tButton.add(bCopy		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	tButton.add(bPaste		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	tButton.add(bClear		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	tButton.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	tButton.add(bTuto		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	tButton.add(bExit		).width(ibWidth).height(ibWidth).pad(2).align(Align.top).fill().row(); 
-    	tButton.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 9*(ibWidth+4)).pad(2).align(Align.top).fill().row(); 
+    	tButton.add(bParam		).width(ibWidth).height(ibWidth).pad(2).fill().row();
+    	tButton.add(bCipher		).width(ibWidth).height(ibWidth).pad(2).fill().row();
+    	tButton.add(bCopy		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
+    	tButton.add(bPaste		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
+    	tButton.add(bClear		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
+    	tButton.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
+    	tButton.add(bTuto		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
+    	tButton.add(bExit		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
+    	tButton.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 9*(ibWidth+4)).pad(2).fill().row(); 
 		ScrollPaneStyle spStyleButton = new ScrollPaneStyle();
 		spStyleButton.background = PixmapFactory.getDrawableMonocromatic(1,1, GuiParameter.colSpButtonBck, disposableList);
 		scrollPaneRight = new ScrollPane(tButton, spStyleButton)	;
