@@ -20,11 +20,11 @@ public class PlatformDesktop implements PlatformOs {
 	        this.orientation = orientation; 
 		if (orientation == Orientation.PAYSAGE){
 			Gdx.app.log("PlatformDesktop","I change to desktop paysage");
-			Gdx.graphics.setDisplayMode(480,320,false); //boolean for fullscreen yes or no 
+			Gdx.graphics.setWindowedMode(480,320); 
 		}
 		if (orientation == Orientation.PORTRAIT){
 			Gdx.app.log("PlatformDesktop","I change to desktop portrait");
-			Gdx.graphics.setDisplayMode(320,480,false); //boolean for fullscreen yes or no 
+			Gdx.graphics.setWindowedMode(320,480); 
 		}	
 
 	}
