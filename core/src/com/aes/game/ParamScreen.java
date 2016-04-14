@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class ParamScreen extends AbstractScreen {
 
@@ -62,7 +63,7 @@ public class ParamScreen extends AbstractScreen {
 
 	@Override
 	public void show(){
-		stage = new Stage(); 
+		stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight())); 
 		Global.inputMultiplexer.addProcessor(stage);
 		table = new Table();
 

@@ -25,19 +25,15 @@ public class PlatformHtml implements PlatformOs {
 
 	@Override
 	public void setOrientation(Orientation orientation) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public Orientation getOrientation() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int[] getSize() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

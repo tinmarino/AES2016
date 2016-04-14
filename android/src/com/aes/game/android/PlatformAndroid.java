@@ -57,11 +57,11 @@ public class PlatformAndroid implements PlatformOs {
 	   this.orientation = orientation; 
 	   if (orientation == Orientation.PAYSAGE){
 		   activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-	       //Gdx.graphics.setDisplayMode(480,320,false); //boolean for fullscreen yes or no 
+			Gdx.graphics.setWindowedMode(480,320); 
 	   }
 	   if (orientation == Orientation.PORTRAIT){
 		   activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-	       //Gdx.graphics.setDisplayMode(320,480,false); //boolean for fullscreen yes or no 
+			Gdx.graphics.setWindowedMode(320, 480); 
 	   }
 	}
 

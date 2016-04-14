@@ -1,10 +1,11 @@
 TODO 
-   when dcursor dans les choux, make it points to the last char
-   Set<display mode, change screeen orientation to work again 
-   bad click should not make the app crash, 
+   android : the paramscreen is too wide 
+   get Html working not freezing cause of curosrPos
+ 
 
 
 TOREAD  (and todo less important)
+  android : be able to put in paysage 
   html : switch between delete and supp, both are using backspace method
   key : make an cipheredKey AND a savedKey so you don't directly use the saved key
 
@@ -24,6 +25,8 @@ SOLVED
 		-> 1.9 now 24 januray 2019, yes maybe I should change
   make a message routine, printing a message on screen 
   		-> Libgdx Dialog See dermetfan request 19
+  TExtArea: what is the cursor position, what doeas taht mean ???!!
+  		-> apparntly the offset in the string independanlty from cursorLine that is used for fast palcing the cursor
 
 
 ECLIM 
