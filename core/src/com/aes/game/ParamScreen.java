@@ -156,7 +156,7 @@ public class ParamScreen extends AbstractScreen {
 		tUseSave.add(tbUseNewKey);
 		tUseSave.add(tbSaveNewKey);
 		tNewKey.add(tUseSave).colspan(2).expandX().row();
-		tKey.add(tNewKey).expandX().fill().row();
+		//tKey.add(tNewKey).expandX().fill().row();
 		
 
 		ScrollPaneStyle spStyle = Global.getScrollPaneStyle(disposableList);
@@ -224,8 +224,10 @@ public class ParamScreen extends AbstractScreen {
 		tCipherType.add(cb2).expandX().fill().row();
 
 		int iKeyScrollPaneHeight = (int) Math.max(Gdx.graphics.getWidth()/4, lNewKey.getHeight()*5) ;
-		table.add(new Label("Key---------------------------------", lStyleChapter) ).expandX().fill().row();
+		table.add(new Label("Saved Key---------------------------------", lStyleChapter) ).expandX().fill().row();
 		table.add(keyScrollPane).height(iKeyScrollPaneHeight).expandX().fill().row();
+		table.add(new Label("New Key---------------------------------", lStyleChapter) ).expandX().fill().row();
+		table.add(tNewKey).expandX().fill().row();
 		table.add(new Label("Misc--------------------------------", lStyleChapter) ).expandX().fill().row();
 		table.add(tCipherType).expandX().fill().row();
 		table.add(isDebuggingCheckBox).expandX().fill().row();
