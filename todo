@@ -1,19 +1,7 @@
 TODO 
 
-	get a readme readable by the user 
-
-
 
 TOREAD  (and todo less important)
-  	Resize also the rightTabel 
-  What is your verison of libgdx, should you update ? 
-  REad json and serailisation 
-  REad all your bookmarks
-	Make cipher, uncipher with different images
-  make a message routine, printing a message on screen 
-  REISZE  pretty for desktop, like a pretty hmtl page or so on. 
-  BUG : textArea, never go to and hide the text outside of that textArea 
-  TExtArea issue, do ou really whant to extend this calls
   html : switch between delete and supp, both are using backspace method
   key : make an cipheredKey AND a savedKey so you don't directly use the saved key
 
@@ -26,6 +14,13 @@ SOLVED
   cannot exit ith html 
 		-> nevermind
   sudo apt-get install parcellite  for clipboard persistence un Ubuntu 
+  resize also the rightTabel 
+   		-> Useless with a StretchViewport, Maybe you can check different viewport when you want to play 
+  What is your verison of libgdx, should you update ? 
+  		-> 1.5.5 of  	8 December 2014
+		-> 1.9 now 24 januray 2019, yes maybe I should change
+  make a message routine, printing a message on screen 
+  		-> Libgdx Dialog See dermetfan request 19
 
 
 ECLIM 
