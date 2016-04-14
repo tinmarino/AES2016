@@ -1,7 +1,8 @@
 TODO 
+   cursor Postion good estimate, 
+   when dcursor dans les choux, make it points to the last char
    Set<display mode, change screeen orientation to work again 
    bad click should not make the app crash, 
-   html, cannot use fretypes font 
 
 
 TOREAD  (and todo less important)

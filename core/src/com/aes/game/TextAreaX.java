@@ -29,13 +29,13 @@ public class TextAreaX extends TextArea {
 		Gdx.app.log("TBF", "cursor posiriont " + iPos +"+"+ this.getCursorLine());
 
 		String res = text.substring(0, iPos );
-		res += "\n\r";
+		res += "\n";
 		res += text.substring(iPos, text.length());
 	
 		
 		Gdx.app.log("TBF", "cursor posiriont bis " + this.getCursorPosition() );
 		this.setText(res); 
-		this.setCursorPosition(0);
+		this.setCursorPosition(iPos-1);
 		this.moveCursorLine(this.getCursorLine() +1);
 	}
 
