@@ -6,11 +6,13 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
@@ -41,6 +43,15 @@ public class TutoScreen extends AbstractScreen{
 		label 	= new Label(sText, Global.getLabelStyle());
 		label.setWrap(true);
 		tbBack 	= new TextButton("OK", Global.getTextButtonStyle(disposableList));
+		tbBack.addListener(
+				new ClickListener(){
+					@Override
+					public void clicked(InputEvent event, float x, float y) {
+						super.clicked(event,x,y); 
+						(TutoScreen.this).goBack = true; 	
+					} 
+				}
+		);
 
 		// PACK 
 		table = new Table();
