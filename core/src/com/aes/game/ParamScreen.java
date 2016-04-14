@@ -31,10 +31,17 @@ public class ParamScreen extends AbstractScreen {
 	List<Disposable> disposableList = new ArrayList<Disposable>();
 
 	ScrollPane 	scrollPane, keyScrollPane;  
-	Table      	table;
+	Table      	table, tKey;
 	CheckBox 	cb1, cb2, cb3, cb4;
 	TextField 	tfNewKey, tfNewLabel;
+
+	// VARS 
+	List<KeyObject> listKeyToDelete = new ArrayList<KeyObject>();
 	
+	// STYLE 
+	CheckBoxStyle cbStyle; 
+	TextFieldStyle tfStyle; 
+	TextButtonStyle tbStyle;
 
     float sWidth ;  // slider width 
 	float sHeight;
@@ -69,47 +76,38 @@ public class ParamScreen extends AbstractScreen {
 		lStyleChapter.font 			= Global.font; 
 		lStyleChapter.fontColor 	= GuiParameter.colPChapFont;
 
-		TextFieldStyle tfStyle 	= new TextFieldStyle(); 
+		tfStyle 				= new TextFieldStyle(); 
 		tfStyle.font 			= Global.font;
 		tfStyle.cursor			= PixmapFactory.getDrawableMonocromatic(2, 16, GuiParameter.colPTextCursor, disposableList);
 		tfStyle.selection		= PixmapFactory.getDrawableMonocromatic(2, 16, GuiParameter.colPTextSelection, disposableList);
 		tfStyle.fontColor 		= GuiParameter.colPTextFont ;  
 		Texture t 				= new Texture( PixmapFactory.circle(16, GuiParameter.colPTextBck));
-		disposableList.add(t);
 		tfStyle.background 		= PixmapFactory.ninePatchFromTexture(t);
 		tfStyle.cursor.setMinWidth(2f);
+		disposableList.add(t);
 
-		CheckBoxStyle cbStyle 	= new CheckBoxStyle();
+		cbStyle 				= new CheckBoxStyle();
 		cbStyle.font 			= Global.font; 
 		cbStyle.fontColor 		= GuiParameter.colPCbFont;
 		cbStyle.checkboxOff 	= PixmapFactory.drawableCheckBoxOff(disposableList);
 		cbStyle.checkboxOn 		= PixmapFactory.drawableCheckBoxOn(disposableList);
 
-		TextButtonStyle tbStyle = new TextButtonStyle();
+		tbStyle 				= new TextButtonStyle();
 		tbStyle.font 			= Global.font; 
 		tbStyle.fontColor 		= GuiParameter.colPButtonFont;
 		Texture t1 				= new Texture(PixmapFactory.circle(32, GuiParameter.colPButton));
+		Texture t2 				= new Texture(PixmapFactory.circle(32, GuiParameter.colPButtonDown));
 		tbStyle.up 				= PixmapFactory.ninePatchFromTexture(t1); 
+		tbStyle.down			= PixmapFactory.ninePatchFromTexture(t2); 
+		disposableList.add(t1);
+		disposableList.add(t2);
 
 
-
-
-		// KEY  : Saved keys 
-		Table tKey = new Table(); 
-		for (KeyObject keyObject : Global.preferenceSaved.keyList){
-			final KeyObject keyObjectSaved = keyObject;
-			TextButton  lKey = new TextButton(keyObject.label, tbStyle);
-			lKey.addListener(
-					new ClickListener(){
-						@Override
-						public void clicked(InputEvent event, float x, float y) {
-							super.clicked(event,x,y); 
-							routineLabelKey(keyObjectSaved); 
-						} 
-					}
-			);
-			tKey.add(lKey).expandX().fill().row();
-		}
+		// SAVED Key 
+		tKey = tableSavedKey();
+		ScrollPaneStyle spStyle = Global.getScrollPaneStyle(disposableList);
+		keyScrollPane = new ScrollPane(tKey, spStyle);
+		keyScrollPane.setHeight(Gdx.graphics.getWidth()/3);
 	
 		// NEW KEY : tNewKey 
 		// New Key : key field 
@@ -124,7 +122,18 @@ public class ParamScreen extends AbstractScreen {
 					tfNewLabel 	= new TextField("", tfStyle);
 		tNewKey.add(lNewLabel).align(Align.left);
 		tNewKey.add(tfNewLabel).align(Align.left).expandX().fill().row();
-		// New Key : TExtbuttn Saved new Key 
+		// TextButton, remove selected key
+		TextButton tbRmKey = new TextButton("RmKey", tbStyle);
+		tbRmKey.addListener(
+					new ClickListener(){
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							super.clicked(event,x,y); 
+							routineRmKey(); 
+						} 
+					}
+		);
+		// TExtbuttn Saved new Key 
 		TextButton tbSaveNewKey = new TextButton("SaveKey", tbStyle);
 		tbSaveNewKey.addListener(
 					new ClickListener(){
@@ -138,7 +147,7 @@ public class ParamScreen extends AbstractScreen {
 						} 
 					}
 		);
-		// New Key : TExtbuttn Use new Key 
+		// TExtbuttn Use new Key 
 		TextButton tbUseNewKey = new TextButton("UseKey", tbStyle);
 		tbUseNewKey.addListener(
 					new ClickListener(){
@@ -153,15 +162,12 @@ public class ParamScreen extends AbstractScreen {
 					}
 		);
 		Table tUseSave = new Table();
-		tUseSave.add(tbUseNewKey);
-		tUseSave.add(tbSaveNewKey);
+		tUseSave.add(tbRmKey).pad(4);
+		tUseSave.add(tbUseNewKey).pad(4);
+		tUseSave.add(tbSaveNewKey).pad(4);
 		tNewKey.add(tUseSave).colspan(2).expandX().row();
-		//tKey.add(tNewKey).expandX().fill().row();
 		
 
-		ScrollPaneStyle spStyle = Global.getScrollPaneStyle(disposableList);
-		keyScrollPane = new ScrollPane(tKey, spStyle);
-		keyScrollPane.setHeight(lNewKey.getHeight()*3);
 
 
 		// CIPHER type 
@@ -276,6 +282,42 @@ public class ParamScreen extends AbstractScreen {
 		}
 	}
 
+
+	public Table tableSavedKey(){
+		// KEY  : Saved keys 
+		Table tRes = new Table(); 
+		for (final KeyObject keyObject : Global.preferenceSaved.keyList){
+			final CheckBox cbKey 		= new CheckBox("", cbStyle);
+			cbKey.addListener(new ClickListener(){
+				@Override
+				public void clicked(InputEvent event, float x, float y) {
+					if (cbKey.isChecked()){
+						Gdx.app.log("TBF", "adding " + keyObject + " to the delete list");
+						listKeyToDelete.add(keyObject);
+					}
+					else{
+						Gdx.app.log("TBF", "removing " + keyObject + " to the delete list");
+						listKeyToDelete.remove(keyObject);
+					}
+
+				}
+			});
+			TextButton  lKey 	= new TextButton(keyObject.label, tbStyle);
+			lKey.addListener(
+					new ClickListener(){
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							super.clicked(event,x,y); 
+							routineLabelKey(keyObject); 
+						} 
+					}
+			);
+			tRes.add(cbKey).width(Gdx.graphics.getWidth()/8).fill();
+			tRes.add(lKey).expandX().fill().row();
+		}
+		return tRes;
+	}
+
 	public void routineCipherType(Global.CTYPE cType){
 		Gdx.app.log("TBF", "routine cihper type");
 	}
@@ -295,6 +337,16 @@ public class ParamScreen extends AbstractScreen {
 	public void routineUseNewKey(KeyObject keyObject){
 		keyObject.cipherKey();
 		Global.keyObject = keyObject;
+	}
+
+	public void routineRmKey(){
+		for (KeyObject key : listKeyToDelete){
+			Global.preferenceSaved.keyList.remove(key);
+		}
+		tKey.remove();
+		tKey = tableSavedKey();
+		keyScrollPane.setWidget(tKey);
+		Global.writePref();
 	}
 
 }

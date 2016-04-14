@@ -31,6 +31,7 @@ public class GuiParameter{
 	public static Color colPCbFont			= HtmlColor.Steel;
 	public static Color colPButtonFont		= HtmlColor.Black;
 	public static Color colPButton			= HtmlColor.BlueGray;
+	public static Color colPButtonDown		= HtmlColor.Black;
 
 
 	public static int   iScroll			= 8; 
