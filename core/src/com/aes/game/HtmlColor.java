@@ -18,6 +18,8 @@ public class HtmlColor {
 	public static Color	  Pewter				= c(126, 103, 94);
 	public static Color	  Blush					= c(221, 162, 136);
 	
+	// CHEERBULL AND FRIENDLY 
+	// 68. Vintage Charm
 	
 
 

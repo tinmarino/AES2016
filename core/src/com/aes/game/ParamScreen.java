@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -48,7 +47,8 @@ public class ParamScreen extends AbstractScreen {
 
 	@Override
 	public void render(float delta){
-		Gdx.gl.glClearColor(1, 1, 1, 1);
+		Gdx.gl.glClearColor(GuiParameter.colPClear.r, 
+				GuiParameter.colPClear.g, GuiParameter.colPClear.b, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta);
 		stage.draw();
@@ -61,34 +61,34 @@ public class ParamScreen extends AbstractScreen {
 		table = new Table();
 
 		// STYLES 
-		LabelStyle lStyle = new LabelStyle();
-		lStyle.font = Global.font; 
-		lStyle.fontColor = Color.BLACK;
+		LabelStyle lStyle 	= new LabelStyle();
+		lStyle.font 		= Global.font; 
+		lStyle.fontColor 	= GuiParameter.colPLabelFont;
 
-		LabelStyle lStyleChapter = new LabelStyle();
-		lStyleChapter.font = Global.font; 
-		lStyleChapter.fontColor = Color.BLUE;
+		LabelStyle lStyleChapter 	= new LabelStyle();
+		lStyleChapter.font 			= Global.font; 
+		lStyleChapter.fontColor 	= GuiParameter.colPChapFont;
 
-		TextFieldStyle tfStyle = new TextFieldStyle(); 
-		tfStyle.font = Global.font;
-		tfStyle.cursor= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLACK, disposableList);
-		tfStyle.selection= PixmapFactory.getDrawableMonocromatic(2, 16, Color.BLUE, disposableList);
-		tfStyle.fontColor = Color.BLACK ;  
-		Texture t = new Texture( PixmapFactory.circle(16,Color.GRAY));
+		TextFieldStyle tfStyle 	= new TextFieldStyle(); 
+		tfStyle.font 			= Global.font;
+		tfStyle.cursor			= PixmapFactory.getDrawableMonocromatic(2, 16, GuiParameter.colPTextCursor, disposableList);
+		tfStyle.selection		= PixmapFactory.getDrawableMonocromatic(2, 16, GuiParameter.colPTextSelection, disposableList);
+		tfStyle.fontColor 		= GuiParameter.colPTextFont ;  
+		Texture t 				= new Texture( PixmapFactory.circle(16, GuiParameter.colPTextBck));
 		disposableList.add(t);
-		tfStyle.background = PixmapFactory.ninePatchFromTexture(t);
+		tfStyle.background 		= PixmapFactory.ninePatchFromTexture(t);
 		tfStyle.cursor.setMinWidth(2f);
 
-		CheckBoxStyle cbStyle = new CheckBoxStyle();
-		cbStyle.font = Global.font; 
-		cbStyle.fontColor = Color.BLACK;
-		cbStyle.checkboxOff = PixmapFactory.drawableCheckBoxOff(disposableList);
-		cbStyle.checkboxOn =  PixmapFactory.drawableCheckBoxOn(disposableList);
+		CheckBoxStyle cbStyle 	= new CheckBoxStyle();
+		cbStyle.font 			= Global.font; 
+		cbStyle.fontColor 		= GuiParameter.colPCbFont;
+		cbStyle.checkboxOff 	= PixmapFactory.drawableCheckBoxOff(disposableList);
+		cbStyle.checkboxOn 		= PixmapFactory.drawableCheckBoxOn(disposableList);
 
 		TextButtonStyle tbStyle = new TextButtonStyle();
 		tbStyle.font 			= Global.font; 
-		tbStyle.fontColor 		= Color.BLACK;
-		Texture t1 				= new Texture(PixmapFactory.circle(32, Color.GRAY));
+		tbStyle.fontColor 		= GuiParameter.colPButtonFont;
+		Texture t1 				= new Texture(PixmapFactory.circle(32, GuiParameter.colPButton));
 		tbStyle.up 				= PixmapFactory.ninePatchFromTexture(t1); 
 
 

@@ -1,10 +1,6 @@
 TODO 
 
-	save key
-			get invalid cipher text exception in case of wrong key during uncipher
-			Exception in thread "LWJGL Application" java.lang.RuntimeException: com.googlecode.gwt.crypto.bouncycastle.InvalidCipherTextException: pad block corrupted
-	at com.aes.game.MyCipher.MyAesCipher(MyCipher.java:202)
-
+	save key | delete key, get a nice keyList screen
   			Warning in html chekc key if keycode = 0 in html for arrow moving
 
 
