@@ -4,9 +4,6 @@ package com.aes.game.desktop;
 
 import com.aes.game.PlatformOs;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 public class PlatformDesktop implements PlatformOs {
 		
@@ -37,10 +34,13 @@ public class PlatformDesktop implements PlatformOs {
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/UbuntuMono-R.ttf"));
 		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
 	 		
-		parameter.size 	= 32;
-		BitmapFont font  			= generator.generateFont(parameter);
+		parameter.size = 32;
+		font  			= generator.generateFont(parameter1);
+				parameter2.size = 16;
+				fontButton  = generator.generateFont(parameter2);
+				break;
+		}
 		generator.dispose();
-		return font; 
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.aes.game;
 
 import java.util.List;
 
+import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
@@ -14,8 +15,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.utils.Clipboard;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 /*	Here I declare some global variables. They are accesible from anywhere. 
     They correspond to settings, parameters... 
@@ -68,29 +67,15 @@ public class Global{
 		Global.preferenceSaved  	= new PreferenceSaved();
 		Global.readPref();
 		Global.preferenceSaved.initDebug();
+		int fontsize = 32, buttonfontsize =16;
+		if (OS.ANDROID == platformOs.getOs() && 500 > Gdx.graphics.getHeight() ){
+			fontsize/=2;
+			buttonfontsize/=2;
+		}
+		Global.font 		= platformOs.getFont(fontsize);
+		Global.fontButton 	= platformOs.getFont(buttonfontsize); 
 
 		
-		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/UbuntuMono-R.ttf"));
-		FreeTypeFontParameter parameter1 = new FreeTypeFontParameter();
-		FreeTypeFontParameter parameter2 = new FreeTypeFontParameter();
-	 		
-		switch (Global.platformOs.getOs()){
-		case ANDROID : 
-			if (Gdx.graphics.getHeight() <500){
-				parameter1.size = 16;
-				font  			= generator.generateFont(parameter1);
-				parameter2.size = 8;
-				fontButton  = generator.generateFont(parameter2);
-				break;
-			}
-		default: 
-				parameter1.size = 32;
-				font  			= generator.generateFont(parameter1);
-				parameter2.size = 16;
-				fontButton  = generator.generateFont(parameter2);
-				break;
-		}
-		generator.dispose();
 	}
 
 	//

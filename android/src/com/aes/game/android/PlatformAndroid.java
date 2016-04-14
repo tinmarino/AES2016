@@ -2,8 +2,10 @@
 package com.aes.game.android;
 
 import com.aes.game.PlatformOs;
-import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -39,6 +41,17 @@ public class PlatformAndroid implements PlatformOs {
 	}
 
 
+	@Override
+	public BitmapFont getFont(int fontsize){
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("font/UbuntuMono-R.ttf"));
+		FreeTypeFontParameter parameter = new FreeTypeFontParameter();
+	 		
+		parameter.size 	= fontsize;
+		BitmapFont font  			= generator.generateFont(parameter);
+		generator.dispose();
+		return font; 
+	}
+	
 	@Override
 	public void setOrientation(Orientation orientation) {
 	   this.orientation = orientation; 
