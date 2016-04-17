@@ -74,22 +74,6 @@ public class TutoScreen extends AbstractScreen{
 	}
 
 	@Override
-	public void pause(){
-		super.pause();
-		if (null != stage){
-			Global.inputMultiplexer.removeProcessor(stage);
-		}
-	}
-
-	@Override
-	public void resume(){
-		super.resume(); 
-		if (null != stage){
-			Global.inputMultiplexer.addProcessor(stage);
-		}
-	}
-
-	@Override
 	public void resize(int width, int height){
 		stage.getViewport().update(width,height);
 	}

@@ -4,19 +4,23 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 
 
 public class AbstractScreen implements Screen, InputProcessor
  {
 
-	 private AbstractScreen nextScreen = null; 
-	 private AbstractScreen previousScreen = null; 
-	 public boolean goBack   = false; 
-	 public boolean goFoward = false; 
+	private 	AbstractScreen		nextScreen 		= null; 
+	private 	AbstractScreen 		previousScreen 	= null; 
+	public 		boolean 			goBack   		= false; 
+	public 		boolean 			goFoward 		= false; 
 
-	 public String sName = "AbstractScreen";
-	 public STATE state = STATE.UNINITIALISED;
+	public 		String 				sName 			= "AbstractScreen";
+	public 		STATE 				state 			= STATE.UNINITIALISED;
+	public 		Stage 				stage 			= null; 
+	
+
 
 	 public enum STATE{PAUSE, UNINITIALISED, RUN}
 
@@ -39,6 +43,10 @@ public class AbstractScreen implements Screen, InputProcessor
 		 this.nextScreen = abstractScreen;  
 	 }
 
+	//////////////////////////
+	// SCREEN METHODS
+	/////////////////////////
+
 	@Override
 	public void dispose() {
 		state = STATE.UNINITIALISED;
@@ -46,26 +54,27 @@ public class AbstractScreen implements Screen, InputProcessor
 
 
 	@Override
-	public void pause() {
+	public void pause(){
 		this.state = STATE.PAUSE;
+		if (null != stage){
+			Global.inputMultiplexer.removeProcessor(stage);
+		}
+	}
 
+	@Override
+	public void resume(){
+		state = STATE.RUN;
+		if (null != stage){
+			Global.inputMultiplexer.addProcessor(stage);
+		}
 	}
 
 	@Override
 	public void render(float arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public void resize(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void resume() {
-		state = STATE.RUN;
 	}
 
 	@Override

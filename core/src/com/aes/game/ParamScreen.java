@@ -266,23 +266,6 @@ public class ParamScreen extends AbstractScreen {
 
 
 
-	@Override
-	public void pause(){
-		super.pause();
-		if (null != stage){
-			Global.inputMultiplexer.removeProcessor(stage);
-		}
-	}
-
-	@Override
-	public void resume(){
-		super.resume(); 
-		if (null != stage){
-			Global.inputMultiplexer.addProcessor(stage);
-		}
-	}
-
-
 	public Table tableSavedKey(){
 		// KEY  : Saved keys 
 		Table tRes = new Table(); 

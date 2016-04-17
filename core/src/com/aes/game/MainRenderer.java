@@ -9,7 +9,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
@@ -28,11 +27,9 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class MainRenderer extends AbstractScreen
  {
-	Stage 			stage; 
 	TextAreaX  		textArea;
 	ScrollPane 		scrollPane, scrollPaneRight;
 	Table 			table, leftTable, rightTable, rightTopTable, rightBottomTable; 
-	BitmapFont 		font, fontButton; 
 	Boolean 		bAreToolsVisible = false;
 	ImageTextButton bList;
 	List<Disposable> disposableList = new ArrayList<Disposable>();
@@ -61,8 +58,6 @@ public class MainRenderer extends AbstractScreen
 		w2 			= Math.round(ibWidth + 4);
 		h0 			= Math.round(Gdx.graphics.getHeight());
 
-		font 		= Global.font;
-		fontButton 	= Global.fontButton;
 		// TABLE 
     	table 		= new Table(); 
 		leftTable 	= new Table(); 
@@ -94,15 +89,11 @@ public class MainRenderer extends AbstractScreen
 
 		// TEXT AREA
 		TextFieldStyle tfStyle = Global.getTextFieldStyle(disposableList);
-
 		textArea 	= new TextAreaX("TextAreza  azeazethis sss", tfStyle); 
 		textArea.setParent(this);
-		//textArea.setPrefRows(textArea.getLines());
-		textArea.setPrefRows(50);
+		textArea.setPrefRows(textArea.getLines());
 		textArea.setMaxLength(1000);
 		textArea.setClipboard(Global.clipboard);
-
-
 
 		
 		// PACK LEFT TABLE
@@ -112,7 +103,6 @@ public class MainRenderer extends AbstractScreen
 		leftTable.add(scrollPane).expand().fill();
 		
 		
-
 		// PACK RIGHT TABLE
 		Table tButton = new Table();
     	tButton.add(bParam		).width(ibWidth).height(ibWidth).pad(2).fill().row();
@@ -162,13 +152,8 @@ public class MainRenderer extends AbstractScreen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		// DRAW
-		//try{
-			stage.act(delta); 
-			stage.draw(); 
-		//}
-		//catch (ArrayIndexOutOfBoundsException e) {
-		//	Gdx.app.log("TBF", "Stage array out of bound error" + e);
-		//}
+		stage.act(delta); 
+		stage.draw(); 
 	}
 
 	@Override
@@ -183,25 +168,7 @@ public class MainRenderer extends AbstractScreen
 				d.dispose();
 			}
 		}
-
 	}
-
-	@Override
-	public void pause(){
-		super.pause();
-		if (null != stage){
-			Global.inputMultiplexer.removeProcessor(stage);
-		}
-	}
-
-	@Override
-	public void resume(){
-		super.resume(); 
-		if (null != stage){
-			Global.inputMultiplexer.addProcessor(stage);
-		}
-	}
-
 
 
 	@Override
@@ -225,7 +192,7 @@ public class MainRenderer extends AbstractScreen
 
 		// 1/ STYLE 
 		ImageTextButtonStyle itbStyle = new ImageTextButtonStyle(); 
-		itbStyle.font 		= fontButton; 
+		itbStyle.font 		= Global.fontButton; 
 		itbStyle.fontColor 	= GuiParameter.colFontButton;
 		switch(routineType){
 			case LIST:
