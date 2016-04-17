@@ -228,6 +228,8 @@ public class MyCipher{
 	}
 
 
+	/* Convert a Byte list to Byte array 
+	*/
 	public static byte[] toByteArray(List<Byte> in) {
 	    final int n = in.size();
 	    byte ret[] = new byte[n];
@@ -237,6 +239,8 @@ public class MyCipher{
 	    return ret;
 	}
 
+	/* Convert a Byte array to byte List 
+	*/
 	public static List<Byte> toByteList(byte[] in){
 	    final int n = in.length;
 	    List<Byte> ret  = new ArrayList<Byte>();

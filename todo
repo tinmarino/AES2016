@@ -1,17 +1,18 @@
 TODO 
-  html : switch between delete and supp, both are using backspace method
-  key : make an cipheredKey AND a savedKey so you don't directly use the saved key
-  Pretty : make 3 styles, 
-  make default bck whitter.  and button font alwyas black in default style 
-  TextArea : part tro ploin, vers le haut et on perd la vue. 
-  UNDO button 
   ANDROID, desktop replace \r par \n everywhere  and everywhen 
  
 
 
 TOREAD  (and todo less important)
-   android : the paramscreen is too wide 
+  android : the paramscreen is too wide 
   android : be able to put in paysage 
+V2: 
+  html : switch between delete and supp, both are using backspace method
+  Pretty : make 3 styles, 
+  UNDO button 
+  TextArea : part tro ploin, vers le haut et on perd la vue. 
+  make default bck whitter.  and button font alwyas black in default style 
+  Send directly to in android.
 
 
 
@@ -33,6 +34,22 @@ SOLVED
   		-> apparntly the offset in the string independanlty from cursorLine that is used for fast palcing the cursor
    get Html working not freezing cause of curosrPos
    		-> Because newline is \r in desktop and \n in android : you should have never hardcoded
+
+
+
+
+JAVADOC    https://en.wikipedia.org/wiki/Javadoc#Structure_of_a_Javadoc_comment
+			/**
+			 * Validates a chess move.
+			 *
+			 * Use {@link #doMove(int theFromFile, int theFromRank, int theToFile, int theToRank)} to move a piece.
+			 *
+			 * @param theFromFile file from which a piece is being moved
+			 * @param theFromRank rank from which a piece is being moved
+			 * @param theToFile   file to which a piece is being moved
+			 * @param theToRank   rank to which a piece is being moved
+			 * @return            true if the move is valid, otherwise false
+
 
 
 ECLIM 

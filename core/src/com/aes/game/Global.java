@@ -1,5 +1,6 @@
 package com.aes.game;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.aes.game.PlatformOs.OS;
@@ -68,6 +69,12 @@ public class Global{
 	 * Contains the Keys ... just used here 
 	*/
 	public static PreferenceSaved  	preferenceSaved; 
+
+	/* A list containing all passed text in case I wanna Undo 
+	 * and an INdex showing where I currently am in that list
+	 */
+	public static List<String> 		listUndo = new ArrayList<String>();
+	public static int 				iUndo	 = 0;
 
 
 	/* Init method, init all parameters, all required params must be setted here
