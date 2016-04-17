@@ -64,6 +64,8 @@ public class Global{
 	 * In Android i is \n and in desktop it is \r
 	*/
 	public static String 			sReturn; 
+	public static String 			ENTER_ANDROID = "\n"; 
+	public static String 			ENTER_DESKTOP = "\r"; 
 
 	/* Th epreferences I will save and load into a json file, 
 	 * Contains the Keys ... just used here 

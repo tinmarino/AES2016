@@ -4,6 +4,7 @@ package com.aes.game;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import com.aes.game.PlatformOs.OS;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -382,6 +383,12 @@ public class MainRenderer extends AbstractScreen
 				 @Override
 				 public void run() {
 					String sPaste = Global.clipboard.getContents();
+					if (OS.ANDROID == Global.platformOs.getOs()){
+						sPaste = sPaste.replaceAll(Global.ENTER_DESKTOP, Global.ENTER_ANDROID);
+					}
+					else{
+						sPaste = sPaste.replaceAll(Global.ENTER_ANDROID, Global.ENTER_DESKTOP);
+					}
 					textArea.appendText(sPaste);
 				 }
 			  });
