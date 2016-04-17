@@ -378,7 +378,13 @@ public class MainRenderer extends AbstractScreen
 	}
 
 	public void routinePaste(){
-		textArea.appendText(Global.clipboard.getContents());
+		Gdx.app.postRunnable(new Runnable() {
+				 @Override
+				 public void run() {
+					String sPaste = Global.clipboard.getContents();
+					textArea.appendText(sPaste);
+				 }
+			  });
 	}
 
 	public void routineCopy(){

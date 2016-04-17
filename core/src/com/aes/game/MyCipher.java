@@ -31,6 +31,9 @@ public class MyCipher{
 	static byte[]   key 				= null;
 
 
+	/*   Called with the textArea.getText(), 
+	 *   This is the main exported routine of this class
+	 */
 	public static String CipherMain(String sIn){
 		String sOut = "";
 		Boolean bol = false; 
@@ -91,6 +94,8 @@ public class MyCipher{
 		return cipheredKey; 
 	}
 
+	/*  Main uncipher
+	 */
 	public static  String UncipherText(String text){
 		String 	res = ""; 
 		Boolean bol = false ; 
@@ -105,32 +110,27 @@ public class MyCipher{
 
 
 		// GET IV 
-		String ivString = text.split("=")[1].split("\r")[0].split("\r")[0]; 
+		String ivString = text.split("=")[1].split("\n")[0].split("\r")[0]; 
 		byte[] IVshowed  = Base64.decode(ivString);
 		IV = new byte[iBlockSize];
 		for (int i=0; IVshowed.length > i; i++){
 			IV[i] = IVshowed[i];
 		}
 
-		Gdx.app.log("CipherMain", "tetrieving :iv  " + ivString);
-		byte [] tmp0 = ivString.getBytes();
-		Gdx.app.log("CipherMain", "retrieving Iv tmp  : " + tmp0.toString());
-
+		// Get Ciphered text
 		String[] tmp = text.split("-+",10);
-		
-		for (int i=0; i<tmp.length; i++){
-			Gdx.app.log("MyCIpher split", ""+ i + ":" + tmp[i] );
-		}
 		res = tmp[1];
 		res = res.substring(1, res.length()-1); // Delete the /n and /n at begining and end
 
+		// Uncipher text
 		res = (MyAesCipher(res, false));
-
 
 		return res; 
 	}
 
 
+	/*  Main CIpher
+	 */
 	public static String CipherText(String text){
 		String res = ""; 
 		Random rn  = new Random();
@@ -144,31 +144,21 @@ public class MyCipher{
 		}
 
 
+		// Create String to put in textArea 
 		String IV64 = new String(Base64.encode(bShowedIV));
 		res  = "IV1=";
 		res	+=  IV64;
-		res += "\r------------------------------------\r";
-		res += "";
-		
+		res += Global.sReturn + "------------------------------------" + Global.sReturn;
 		res += MyAesCipher(text, true);
+		res += Global.sReturn + "------------------------------------" + Global.sReturn;
 
-		res += "\r------------------------------------\r";
-
-		Gdx.app.log("CipherMain", "generated  IV : " + IV64 );
-		Gdx.app.log("MyCipher ", "int size " + Integer.SIZE);
-		Gdx.app.log("-----------------------", "Base 64 len is" + IV64.length() + " " + IV64);
 		return res; 
 	}
 
 
-	public static void ClearIV(){
-		Gdx.app.log("IV lenght aaaa", IV.length + "" );
-		for (int i=0; i<IV.length; i++)
-		{
-			IV[i]=0; 
-		}
-	}
 
+	/*  Clear a byte[]
+	 */
 	public static void ClearByte(byte[] bytearray){
 		for (int i=0; i<bytearray.length; i ++)
 		{
@@ -177,6 +167,9 @@ public class MyCipher{
 	}
 
 
+	/*  AES cipher and uncipher a bytearray, 
+	 *  <- Key and IV  static vars 
+	 */ 
 	public static String MyAesCipher(String sClear, Boolean bCipher){
 		Gdx.app.log("TBF", "AES ______________________________________________" + IV.length +","+ key.length);
 		String res="";
@@ -216,6 +209,9 @@ public class MyCipher{
 	}
 
 
+	/*  Internal Util function :
+	 *  Cipher byte array with a PaddedBlcok cipher. 
+	 */
 	private static byte[] cipherData(PaddedBufferedBlockCipher cipher, byte[] data) throws Exception{
 	    int minSize = cipher.getOutputSize(data.length);
 	    byte[] outBuf = new byte[minSize];

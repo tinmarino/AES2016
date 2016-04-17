@@ -14,15 +14,5 @@ public class PreferenceSaved{
 
 
 	public void initDebug(){
-		KeyObject keyObject = new KeyObject();
-		keyObject.label = "Dbg1 on Android";
-		keyObject.savedKey = "Dbg1android Key ".getBytes();
-		keyList.add(keyObject);
-
-
-		keyObject = new KeyObject();
-		keyObject.label = "Dbg2 2 on Desktop";
-		keyObject.savedKey = "Dbg2Desktop Key ".getBytes();
-		keyList.add(keyObject);
 	}
 }
