@@ -389,6 +389,7 @@ public class MainRenderer extends AbstractScreen
 					else{
 						sPaste = sPaste.replaceAll(Global.ENTER_ANDROID, Global.ENTER_DESKTOP);
 					}
+					Gdx.app.log("TBF", "I will paste "+ sPaste );
 					textArea.appendText(sPaste);
 				 }
 			  });
