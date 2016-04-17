@@ -80,7 +80,7 @@ public class MainRenderer extends AbstractScreen
 		ImageTextButton bCopy  	= CreateTextButton("Copy",		RTYPE.COPY); 
 		ImageTextButton bPaste 	= CreateTextButton("Paste",		RTYPE.PASTE); 
 		ImageTextButton bClear 	= CreateTextButton("Clear",		RTYPE.CLEAR); 
-		ImageTextButton bDbg	= CreateTextButton("Dbg",		RTYPE.DBG); 
+		//ImageTextButton bDbg	= CreateTextButton("Dbg",		RTYPE.DBG); 
 		ImageTextButton bTuto	= CreateTextButton("Tuto",		RTYPE.TUTO); 
 		ImageTextButton bUndo	= CreateTextButton("Undo",		RTYPE.UNDO); 
 		ImageTextButton bRedo	= CreateTextButton("Redo",		RTYPE.REDO); 
@@ -110,7 +110,7 @@ public class MainRenderer extends AbstractScreen
     	tButton.add(bCopy		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
     	tButton.add(bPaste		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
     	tButton.add(bClear		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
-    	tButton.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
+    	//tButton.add(bDbg		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
     	tButton.add(bTuto		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
     	tButton.add(bUndo		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
     	tButton.add(bRedo		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
@@ -274,6 +274,7 @@ public class MainRenderer extends AbstractScreen
 	}
 
 	public enum RTYPE{PARAM, CIPHER, CLEAR, PASTE, COPY, DBG, LIST, NULL, EXIT, TUTO, UNDO, REDO}
+
 	public void routineDispatch(RTYPE routineType){
 		Gdx.app.log("TBF", "Rgith button presses :" + routineType);
 		Global.iUndo +=1; 
@@ -385,29 +386,6 @@ public class MainRenderer extends AbstractScreen
 	}
 
 	public void routineDbg(){
-
-		//Gdx.app.log("TBF", "scrollPane" +   scrollPane.getScrollPercentX() );
-		Gdx.app.log("TBF", "text height " +   textArea.getHeight() );
-		Gdx.app.log("TBF", "line number  " +   textArea.getLines() );
-		Gdx.app.log("TBF", "Pixel DEnsity  " +   Gdx.graphics.getDensity());
-		Gdx.app.log("TBF", "Curosr " +   textArea.getCursorPosition() +"+"+ textArea.getCursorLine());
-		//textArea.setCursorPosition(textArea.getCursorPosition()+3);
-		//textArea.moveCursorLine(1);
-		////textArea.setHeight(1000);
-		////scrollPane.layout();
-		//scrollPane.setScrollPercentX( scrollPane.getScrollPercentX() + 10 );
-
-		//if (null == Global.preferenceSaved){
-		//	Global.preferenceSaved = new PreferenceSaved();	
-		//	Gdx.app.log("TBF", "PreferencesSaved is null");
-		//}
-
-		//KeyObject toAdd = new KeyObject();
-		//toAdd.cipheredKey = new byte[10]; 
-		//toAdd.label = "This is the label I want to see";
-		//Global.preferenceSaved.keyList.add(toAdd);
-		//Global.writePref();
-	
 	}
 
 }

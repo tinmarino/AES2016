@@ -130,3 +130,26 @@ Right-Click Project --> Build Path --> Configure Build Path
 
 XML commments 
    '<!--' ((Char - '-') | ('-' (Char - '-')))* '-->'
+
+
+DBG OLD 
+-               Gdx.app.log("TBF", "text height " +   textArea.getHeight() );
+-               Gdx.app.log("TBF", "line number  " +   textArea.getLines() );
+-               Gdx.app.log("TBF", "Pixel DEnsity  " +   Gdx.graphics.getDensity());
+-               Gdx.app.log("TBF", "Curosr " +   textArea.getCursorPosition() +"+"+ textArea.getCursorLin
+-               //textArea.setCursorPosition(textArea.getCursorPosition()+3);
+-               //textArea.moveCursorLine(1);
+-               ////textArea.setHeight(1000);
+-               ////scrollPane.layout();
+-               //scrollPane.setScrollPercentX( scrollPane.getScrollPercentX() + 10 );
+-
+-               //if (null == Global.preferenceSaved){
+-               //      Global.preferenceSaved = new PreferenceSaved(); 
+-               //      Gdx.app.log("TBF", "PreferencesSaved is null");
+-               //}
+-
+-               //KeyObject toAdd = new KeyObject();
+-               //toAdd.cipheredKey = new byte[10]; 
+-               //toAdd.label = "This is the label I want to see";
+-               //Global.preferenceSaved.keyList.add(toAdd);
+-               //Global.writePref();
