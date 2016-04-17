@@ -6,10 +6,11 @@ TODO
 TOREAD  (and todo less important)
   android : the paramscreen is too wide 
   android : be able to put in paysage 
+  andoird : make enable send by sms
 V2: 
   html : switch between delete and supp, both are using backspace method
   Pretty : make 3 styles, 
-  UNDO button 
+  UNDO and REDO button better. 
   TextArea : part tro ploin, vers le haut et on perd la vue. 
   make default bck whitter.  and button font alwyas black in default style 
   Send directly to in android.
