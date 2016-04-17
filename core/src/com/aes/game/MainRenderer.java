@@ -23,6 +23,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 
+/*  MainRenderer : This is the main Screen, everything important should happen here. 
+ */
 
 
 

@@ -22,7 +22,6 @@ public class DesktopLauncher {
 
 		Global.platformOs = new PlatformDesktop();
 		Global.clipboard  = new LwjglClipboard();
-		//cfg.fullscreen = false;
 		new LwjglApplication(new MyAesGame(), config);
 	}
 }

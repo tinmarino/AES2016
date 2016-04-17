@@ -16,18 +16,23 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
+/* TutoScreen : Screen for small tutorial  
+ *    Read an internal file and show it as a string in a label. 
+ */
+
+
 public class TutoScreen extends AbstractScreen{
-	ScrollPane 	scrollPane;
-	Table 		table;
-	Label 		label; 
-	TextButton  tbBack; 
-	String 		sText;
 	List<Disposable> disposableList = new ArrayList<Disposable>();
 
 
 	@Override
 	public void show(){
-
+		// USED VARS 
+		ScrollPane 	scrollPane;
+		Table 		table;
+		Label 		label; 
+		TextButton  tbBack; 
+		String 		sText;
 
 		// READ 
 		FileHandle handle = Gdx.files.internal("text/tuto.txt");

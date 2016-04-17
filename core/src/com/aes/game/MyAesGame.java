@@ -3,6 +3,14 @@ package com.aes.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 
+
+/*  MyAesGame: First called class, 
+ *  		Just sending intruction pointer to MainRenderer 
+ *			And has some code in render to change screen pausing the last one
+ *			Dispose is never used. So the app must stay small.
+ */
+
+
 public class MyAesGame extends Game {
 	public  AbstractScreen 		currentScreen; 
 

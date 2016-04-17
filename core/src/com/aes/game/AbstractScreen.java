@@ -7,6 +7,12 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 
+/* AbstractScreen, to unify my screen: 
+ *    Basically used to change screeen 
+ *    Pause, Resume, with a state and a stage with Global.inputMultiplexer
+ *    Change Screen fct. 
+ *
+*/
 
 public class AbstractScreen implements Screen, InputProcessor
  {

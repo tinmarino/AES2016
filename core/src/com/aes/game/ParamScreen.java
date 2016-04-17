@@ -24,6 +24,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
+
+/*  ParamScreen : Setting and saving some parameters
+ *      Key, 
+ *      Cipher type (not implemented yet TODO)
+ *      Style (not implemented yet TODO)
+ */
+
 public class ParamScreen extends AbstractScreen {
 
 	// DISPOSABLE 

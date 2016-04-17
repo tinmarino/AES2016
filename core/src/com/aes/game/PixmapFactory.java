@@ -15,8 +15,9 @@ import com.badlogic.gdx.scenes.scene2d.utils.NinePatchDrawable;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Disposable;
 
-/*
- * WARNING, pixmaps must be disposed
+/* PixmapFactory :  My static pixmap methods
+ *     Pixmap, Texture, Drawable, NinePatchDrawable can be drawn 
+ *     WARNING, pixmaps must be disposed
  * */
 
 public class PixmapFactory{

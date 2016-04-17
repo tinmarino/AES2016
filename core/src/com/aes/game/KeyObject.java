@@ -2,6 +2,9 @@ package com.aes.game;
 
 import com.badlogic.gdx.Gdx;
 
+
+/* Key Object : Keep the key
+ */
 public class KeyObject{
 		public String label; 
 		public byte[] savedKey;

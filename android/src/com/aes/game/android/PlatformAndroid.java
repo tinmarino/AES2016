@@ -12,6 +12,8 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.view.inputmethod.InputMethodManager;
 
+/* PlatformAndroid, used for platform dependant operation like clipboard or orientation
+*/
 
 public class PlatformAndroid implements PlatformOs {
 	public  Activity activity;

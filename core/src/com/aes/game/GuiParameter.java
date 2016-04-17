@@ -2,6 +2,11 @@ package com.aes.game;
 
 import com.badlogic.gdx.graphics.Color;
 
+/* GuiParameters : Parameters controlling the color, style of the GUI. 
+ * The motor of the app is independant from these parameters, See Global or MyCipher to change the motor
+*/
+
+
 
 // Make one style for night, and one fo rbeach 
 public class GuiParameter{
