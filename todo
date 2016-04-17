@@ -8,6 +8,7 @@ TOREAD  (and todo less important)
   android : be able to put in paysage 
   andoird : make enable send by sms
 V2: 
+  html: when return from other screen, I cannot push buttons
   html : switch between delete and supp, both are using backspace method
   Pretty : make 3 styles, 
   UNDO and REDO button better. 

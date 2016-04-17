@@ -27,7 +27,6 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 public class ParamScreen extends AbstractScreen {
 
 	// DISPOSABLE 
-	Stage stage; 
 	List<Disposable> disposableList = new ArrayList<Disposable>();
 
 	ScrollPane 	scrollPane, keyScrollPane;  

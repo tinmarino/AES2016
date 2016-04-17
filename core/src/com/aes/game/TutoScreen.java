@@ -17,7 +17,6 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class TutoScreen extends AbstractScreen{
-	Stage 		stage;
 	ScrollPane 	scrollPane;
 	Table 		table;
 	Label 		label; 

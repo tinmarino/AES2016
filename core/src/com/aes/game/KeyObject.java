@@ -15,6 +15,7 @@ public class KeyObject{
 		*/ 
 		public void cipherKey(){
 			byte[] key4Save;
+			savedKey = new byte[MyCipher.iBlockSize];
 
 			if (null == clearKey || "".equals(clearKey)){
 				Gdx.app.log("TBF", "ERROR in keyObject: Cannot cipher null clearKey");
