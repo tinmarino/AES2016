@@ -45,9 +45,6 @@ public class TextAreaX extends TextArea {
 		
 		Gdx.app.log("TBF", "cursor posiriont bis " + this.getCursorPosition() );
 		if(this.getText().length()>= iPos){this.setCursorPosition(iPos+1);}
-		//else{ this.setCursorPosition(this.getText().length()-3);}
-		//this.setCursorPosition(this.getText().length()-3);
-		//this.moveCursorLine(this.getCursorLine() +1);
 	}
 
 	public void backspace(){
@@ -71,14 +68,15 @@ public class TextAreaX extends TextArea {
 
     		@Override
     		public boolean keyTyped(InputEvent event, char c) {
-				// Handle a newline properly. If not handled here, the TextField
+				/* Handle a newline properly. If not handled here, the TextField
 				// will advance to the next field.
 				// 0 if for enter in html
-				// ENTER_DESKTOP is \r and android is \n
+				 ENTER_DESKTOP is \r and android is \n
+				*/
 					Gdx.app.log("TBF", "Key pressed in TextAreaX.this :" + c +  "+ " +((int) c)  );
 					Gdx.app.log("TBF", "Curor:" + TextAreaX.this.getCursorPosition() +  "+ cursorline " + TextAreaX.this.getCursorLine() +"Line number/" +TextAreaX.this.getLines() +"+"+ TextAreaX.this.getLinesShowing() + "+" + TextAreaX.this.getMaxLength() );
-					if (c == '\n' || c == '\r' || 8 == c || 127 == c || 0 == c)
-					{
+
+					if (ENTER_ANDROID == c|| ENTER_DESKTOP == c || 127 == c || 8 == c || 0 == c){
 						p.stage.setKeyboardFocus(TextAreaX.this);
 						TextAreaX.this.getOnscreenKeyboard().show(true);
 						if (c == '\n' || c == '\r' || c == 0){

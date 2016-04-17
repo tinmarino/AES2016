@@ -1,9 +1,7 @@
 package com.aes.game;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 
 public class MyAesGame extends Game {
 	public  AbstractScreen 		currentScreen; 
@@ -14,11 +12,6 @@ public class MyAesGame extends Game {
 	public void create () {
 
 		Global.init();
-		// To prevent backKey from returning
-		Gdx.input.setCatchBackKey(true);
-		Gdx.input.setInputProcessor(Global.inputMultiplexer);
-		Gdx.app.setLogLevel(Application.LOG_DEBUG);
-
 
 		currentScreen = new MainRenderer(); 
 		currentScreen.show();
@@ -26,8 +19,10 @@ public class MyAesGame extends Game {
 
 	@Override
 	public void render () {
-		currentScreen.render(Gdx.graphics.getDeltaTime()); // Calling mainScreen.render()
+ 		// Calling mainScreen.render()
+		currentScreen.render(Gdx.graphics.getDeltaTime());
 
+		// GO BACK 
     	if (currentScreen.goBack) {
 			currentScreen.goBack = false; 
 			
@@ -54,6 +49,7 @@ public class MyAesGame extends Game {
 			}
     	} 
 
+		// GO FOWARD
 		else if (currentScreen.goFoward) {
 			currentScreen.goFoward  = false; 
 

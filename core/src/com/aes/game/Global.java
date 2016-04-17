@@ -3,6 +3,7 @@ package com.aes.game;
 import java.util.List;
 
 import com.aes.game.PlatformOs.OS;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Preferences;
@@ -57,11 +58,20 @@ public class Global{
 	 * Putting that here enable me to put non static var in MyChiper class
 	*/
 	public static MyCipher 			myCipher; 
+	
+	/* Due to a problem that the newline string is diffferent according to platform 
+	 * In Android i is \n and in desktop it is \r
+	*/
+	public static String 			sReturn; 
 
-
+	/* Th epreferences I will save and load into a json file, 
+	 * Contains the Keys ... just used here 
+	*/
 	public static PreferenceSaved  	preferenceSaved; 
 
 
+	/* Init method, init all parameters, all required params must be setted here
+	*/
 	public static void init(){
 		Global.inputMultiplexer 	= new InputMultiplexer();
 		Global.preferenceSaved  	= new PreferenceSaved();
@@ -72,8 +82,16 @@ public class Global{
 		Global.font 		= platformOs.getFont(fontsize);
 		Global.fontButton 	= platformOs.getFont(8); 
 
-		
+		// To prevent backKey from returning
+		Gdx.input.setCatchBackKey(true);
+		Gdx.input.setInputProcessor(Global.inputMultiplexer);
+		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+
+		// Return Key 
+		if (OS.ANDROID == platformOs.getOs()){sReturn = "\n";}
+		else {sReturn = "\r";}
 	}
+
 
 	//
 	// STYLES 
@@ -122,6 +140,9 @@ public class Global{
 	}
 
 
+	//
+	// PREFERENCES
+	//
 	public static void writePref(){
 		Json json = new Json();
 		String sTosave = json.toJson(preferenceSaved);
@@ -149,6 +170,3 @@ public class Global{
 
 	public enum CTYPE{AES, TBF, RSA, TRIPLEDES}
 }
-	/* My keyList, thiese are saved in the game preferences
-	*/
-	//public static List<KeyObject>	keyList; 

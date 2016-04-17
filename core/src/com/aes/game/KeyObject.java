@@ -4,22 +4,31 @@ import com.badlogic.gdx.Gdx;
 
 public class KeyObject{
 		public String label; 
-		public byte[] cipheredKey;
+		public byte[] savedKey;
+		public byte[] aesKey;
 		public String clearKey; 
 
 
 
 
+		/* To cipher the key to save
+		*/ 
 		public void cipherKey(){
+			byte[] key4Save;
+
 			if (null == clearKey || "".equals(clearKey)){
-				Gdx.app.log("TBF", "Cannot cipher null clearKey");
+				Gdx.app.log("TBF", "ERROR in keyObject: Cannot cipher null clearKey");
+				return;
 			}
 
-			byte[] bClear = clearKey.getBytes(); 
-			cipheredKey = new byte[bClear.length];
-			for (int i = 0; i<bClear.length; i++){
-				cipheredKey[i] = bClear[bClear.length- 1 - i];  
+			byte[] key4Key 		= new byte[MyCipher.iBlockSize];
+			byte[] clear4Key 	= clearKey.getBytes(); 
+
+			key4Save = MyCipher.CipherKey(key4Key, clear4Key);
+
+			for (int i = 0; i<MyCipher.iBlockSize; i++){
+				savedKey[i] = key4Save[i];
 			}
-			clearKey = "";
+			return;
 		}
 }
