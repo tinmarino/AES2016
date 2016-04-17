@@ -61,14 +61,6 @@ ECLIM
   Vim, make a nice buffer go backward and foward., make a list of buffer 
 
 
-HTML 
-	./gradlew html:dist
-	cd html/build/dist
-	python -m SimpleHTTPServer
-	firefox html/webapp/index.html
-
-It's either in /var/{http,www} or in /srv/{http,www}. Putting it in /var breaks with the FSH, but a lot of especially old distros do not really care.
-https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#running-the-html-project
 
 TEXTT FIELD STYLE
 		public BitmapFont font;
@@ -89,30 +81,57 @@ make exc work./gradlew desktop:run
 
 
 GRADLE 
-	NB : on android if double Dex defined, clean the core 
-	gradlew android:installDebug android:run
-	./gradlew app:dependencies
-       println 'compiling source'
+	HTML 
+		./gradlew html:dist
+		cd html/build/dist
+		python -m SimpleHTTPServer
+		firefox html/webapp/index.html
 
-	defaultConfig {
-	    //applicationId
-	    minSdkVersion 14
-	    targetSdkVersion 22
-	    versionCode 1
-	    versionName "1.0"
-	
-	    multiDexEnabled true
-	}
+		It's either in /var/{http,www} or in /srv/{http,www}. Putting it in /var breaks with the FSH, but a lot of especially old distros do not really care.
+		https://github.com/libgdx/libgdx/wiki/Gradle-on-the-Commandline#running-the-html-project
 
-	add in anroid build.gradle 
-			dexOptions {
-			    preDexLibraries = false
-			}
+	ANDROID  RElease  http://developer.android.com/tools/publishing/app-signing.html at the end 
+		# 0/ assemble 
+		gradlew android:assembleRelease	
+				-> This will create an unsigned APK file in the android/build/outputs/apk folder
 
-	//dexOptions {
-	//    preDexLibraries = false
-	//}
-	//multiDexEnabled true
+		# 1/ RSA KEYS 
+		keytool -genkey -v -keystore my-release-key.keystore -alias tinmarino -keyalg RSA -keysize 2048 -validity 10000
+
+		# 2/ Sign with RSA 
+		jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ../../key/aes1.keystore v1-release-unsigned.apk tinmarino
+
+		# 3/ Verify that it is signed 
+		jarsigner -verify -verbose -certs v1-release-unsigned.apk
+
+		# 4/
+
+
+	ANDROID 
+		NB : on android if double Dex defined, clean the core 
+		gradlew android:installDebug android:run
+		./gradlew app:dependencies
+		   println 'compiling source'
+
+		defaultConfig {
+			//applicationId
+			minSdkVersion 14
+			targetSdkVersion 22
+			versionCode 1
+			versionName "1.0"
+
+			multiDexEnabled true
+		}
+
+		add in anroid build.gradle 
+				dexOptions {
+					preDexLibraries = false
+				}
+
+		//dexOptions {
+		//    preDexLibraries = false
+		//}
+		//multiDexEnabled true
 
 
 FONT 
