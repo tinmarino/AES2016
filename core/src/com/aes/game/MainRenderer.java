@@ -118,7 +118,6 @@ public class MainRenderer extends AbstractScreen
     	tButton.add(bUndo		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
     	tButton.add(bRedo		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
     	tButton.add(bExit		).width(ibWidth).height(ibWidth).pad(2).fill().row(); 
-    	tButton.add(bNull	).width(ibWidth).height(Gdx.graphics.getHeight() - 9*(ibWidth+4)).pad(2).fill().row(); 
 		ScrollPaneStyle spStyleButton = new ScrollPaneStyle();
 		spStyleButton.background = PixmapFactory.getDrawableMonocromatic(1,1, GuiParameter.colSpButtonBck, disposableList);
 		scrollPaneRight = new ScrollPane(tButton, spStyleButton)	;
@@ -319,8 +318,8 @@ public class MainRenderer extends AbstractScreen
 		else{
 			// RIGHT
 			rightTable.reset();
-			rightTable.add(rightTopTable).width(w2).height(ibWidth+4).fill().row(); 
-			rightTable.add(rightBottomTable).width(w2).height(h0-ibWidth-4).fill().row(); 
+			rightTable.add(rightTopTable).width(w2).height(ibWidth+4).expand().fill().row(); 
+			rightTable.add(rightBottomTable).width(w2).expand().fill(); 
 			// LEFT 
 			leftTable.reset();
 			leftTable.add(scrollPane).expand().fill();
