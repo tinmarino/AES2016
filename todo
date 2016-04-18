@@ -1,13 +1,13 @@
 TODO 
+	Overwirte TextAreaX for ENTER shit
+  	ANDROID, desktop replace \r par \n everywhere  and everywhen 
  
 
 
 TOREAD  (and todo less important)
 	maybe make a pad around the main window in desktop gui
-  	android : the paramscreen is too wide 
-  	android : be able to put in paysage 
+	android : autoscorll when return because I want to see the text, it will become hidden behind the keyboard
   	andoird : make enable send by sms
-  	ANDROID, desktop replace \r par \n everywhere  and everywhen 
 V2	: 
   	html: when return from other screen, I cannot push buttons
   	html : switch between delete and supp, both are using backspace method
@@ -41,6 +41,10 @@ SOLVED
   NB : on desktop I use 0d for newline and 0a at the end of the file
   The paste on android freezes : 
   		-> Error Excepetion java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
+		must be run on main uiThread and not in gdx mainLoop : cant refer to activity in gdx mainloop
+  android : be able to put in paysage 
+  		-> Just remove the thing in androidManifest
+	 	
 
 
 
