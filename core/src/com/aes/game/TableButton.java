@@ -242,6 +242,10 @@ public class TableButton extends Table{
 
 	public void routinePaste(){
 					Gdx.app.log("TBF", "I will paste called");
+						if (null == Global.clipboard.getContents()){
+							Gdx.app.log("TBF", "Your content to paste is null returning ");
+							return;
+						}
 					String sPaste = Global.clipboard.getContents();
 					Gdx.app.log("TBF", "I will paste "+ sPaste );
 					textArea.appendText(sPaste);

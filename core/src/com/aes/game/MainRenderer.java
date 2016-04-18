@@ -90,8 +90,8 @@ public class MainRenderer extends AbstractScreen
 		
 
 		
-			table.add(leftTable).width(w1).expand().fill(); 
-			table.add(rightTable).width(w2).expand().fill(); 
+		table.add(leftTable).width(w1).expand().fill(); 
+		table.add(rightTable).width(w2).expand().fill(); 
 
 		bList					= rightTable.CreateTextButton("", 			RTYPE.LIST);
 		bList.setX(stage.getWidth() - bList.getWidth());

@@ -1,23 +1,22 @@
 TODO 
   ANDROID, desktop replace \r par \n everywhere  and everywhen 
-  automatically remove clearKey when enterred
  
 
 
 TOREAD  (and todo less important)
 	maybe make a pad around the main window in desktop gui
-  android : the paramscreen is too wide 
-  android : be able to put in paysage 
-  andoird : make enable send by sms
-V2: 
-  html: when return from other screen, I cannot push buttons
-  html : switch between delete and supp, both are using backspace method
-  Pretty : make 3 styles, 
-  UNDO and REDO button better. 
-  TextArea : part tro ploin, vers le haut et on perd la vue. 
-  make default bck whitter.  and button font alwyas black in default style 
-  Send directly to in android.
-  Make textAreaHeight also reduce when deleteing, increase when pasting .... set it at each button press
+  	android : the paramscreen is too wide 
+  	android : be able to put in paysage 
+  	andoird : make enable send by sms
+V2	: 
+  	html: when return from other screen, I cannot push buttons
+  	html : switch between delete and supp, both are using backspace method
+  	Pretty : make 3 styles, 
+  	UNDO and REDO button better. 
+  	TextArea : part tro ploin, vers le haut et on perd la vue. 
+  	make default bck whitter.  and button font alwyas black in default style 
+  	Send directly to in android.
+  	Make textAreaHeight also reduce when deleteing, increase when pasting .... set it at each button press
 
 
 

@@ -33,6 +33,7 @@ public class KeyObject{
 			for (int i = 0; i<MyCipher.iBlockSize; i++){
 				savedKey[i] = key4Save[i];
 			}
+			clearKey = "";
 			return;
 		}
 }
