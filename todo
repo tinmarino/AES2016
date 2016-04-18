@@ -1,9 +1,11 @@
 TODO 
   ANDROID, desktop replace \r par \n everywhere  and everywhen 
+  automatically remove clearKey when enterred
  
 
 
 TOREAD  (and todo less important)
+	maybe make a pad around the main window in desktop gui
   android : the paramscreen is too wide 
   android : be able to put in paysage 
   andoird : make enable send by sms
@@ -59,6 +61,7 @@ JAVADOC    https://en.wikipedia.org/wiki/Javadoc#Structure_of_a_Javadoc_comment
 ECLIM 
   NEXT ERROR :lnext, :lprev, :lopen, etc.(see :h location-list for more info).
   Vim, make a nice buffer go backward and foward., make a list of buffer 
+  JavaSearch and JavaCallHierarchy to map
 
 
 
@@ -104,7 +107,7 @@ GRADLE
 		# 3/ Verify that it is signed 
 		jarsigner -verify -verbose -certs v1-release-unsigned.apk
 
-		# 4/
+		# 4/ Align 
 
 
 	ANDROID 

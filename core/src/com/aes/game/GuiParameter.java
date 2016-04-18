@@ -23,7 +23,7 @@ public class GuiParameter{
 	public static Color colTextCursor		= HtmlColor.Steel;
 	public static Color colTextSelection	= HtmlColor.Blue;
 	public static Color colSpButtonBck		= HtmlColor.Pewter;
-	public static Color colClear			= HtmlColor.Steel;
+	public static Color colClear			= HtmlColor.Red;
 
 	// PARAM 
 	public static Color colPClear			= HtmlColor.Blush;
