@@ -22,7 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField.TextFieldStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 
 /*  ParamScreen : Setting and saving some parameters
@@ -67,11 +67,16 @@ public class ParamScreen extends AbstractScreen {
 		stage.draw();
 	}
 
+	public void resize(int width, int height) {
+		stage.getViewport().update(width, height, true);
+	}
+
 	@Override
 	public void show(){
-		stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight())); 
+		stage = new Stage(new ScreenViewport()); 
 		Global.inputMultiplexer.addProcessor(stage);
 		table = new Table();
+		table.setFillParent(true);
 
 		// STYLES 
 		LabelStyle lStyle 	= new LabelStyle();
