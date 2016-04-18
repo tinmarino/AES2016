@@ -71,7 +71,7 @@ public class MainRenderer extends AbstractScreen
 
 		// STAGE 
 		stage = new Stage(); 
-		stage.setViewport(new StretchViewport(w0, h0));
+		stage.setViewport(new ScreenViewport());
 		Global.inputMultiplexer.addProcessor(stage);
 		disposableList.add(stage);
 
