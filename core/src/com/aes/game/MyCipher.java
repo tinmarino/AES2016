@@ -113,7 +113,7 @@ public class MyCipher{
 		String ivString = text.split("=")[1].split("\n")[0].split("\r")[0]; 
 		byte[] IVshowed  = Base64.decode(ivString);
 		IV = new byte[iBlockSize];
-		for (int i=0; IVshowed.length > i; i++){
+		for (int i=0; (IVshowed.length > i) & (IV.length > i); i++){
 			IV[i] = IVshowed[i];
 		}
 
