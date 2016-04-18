@@ -1,5 +1,4 @@
 TODO 
-  ANDROID, desktop replace \r par \n everywhere  and everywhen 
  
 
 
@@ -8,6 +7,7 @@ TOREAD  (and todo less important)
   	android : the paramscreen is too wide 
   	android : be able to put in paysage 
   	andoird : make enable send by sms
+  	ANDROID, desktop replace \r par \n everywhere  and everywhen 
 V2	: 
   	html: when return from other screen, I cannot push buttons
   	html : switch between delete and supp, both are using backspace method
@@ -39,6 +39,8 @@ SOLVED
    get Html working not freezing cause of curosrPos
    		-> Because newline is \r in desktop and \n in android : you should have never hardcoded
   NB : on desktop I use 0d for newline and 0a at the end of the file
+  The paste on android freezes : 
+  		-> Error Excepetion java.lang.RuntimeException: Can't create handler inside thread that has not called Looper.prepare()
 
 
 

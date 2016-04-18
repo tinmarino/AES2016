@@ -14,6 +14,7 @@ public interface PlatformOs {
   public Orientation getOrientation(); 
   public int[] getSize(); 
   
+  public void runOnUiThread(Runnable runnable);
   public BitmapFont getFont(int fontsize);
 
   public static enum Orientation{

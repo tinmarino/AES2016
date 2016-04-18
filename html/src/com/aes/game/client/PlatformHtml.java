@@ -12,6 +12,11 @@ public class PlatformHtml implements PlatformOs {
 	}
 
 	@Override
+	public void runOnUiThread(Runnable runnable){
+		runnable.run();
+	}
+
+	@Override
 	public BitmapFont getFont(int fontsize){
 		BitmapFont font;
 		switch(fontsize){

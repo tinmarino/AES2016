@@ -23,6 +23,12 @@ public class PlatformAndroid implements PlatformOs {
 	}
 
 	@Override
+	public void runOnUiThread(Runnable runnable){
+		this.activity.runOnUiThread(runnable);
+	}
+
+
+	@Override
 	public OS getOs(){
 		return OS.ANDROID;
 	}

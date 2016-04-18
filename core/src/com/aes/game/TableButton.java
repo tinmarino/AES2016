@@ -241,28 +241,21 @@ public class TableButton extends Table{
 	}
 
 	public void routinePaste(){
-					Gdx.app.log("TBF", "I will paste called");
-						if (null == Global.clipboard.getContents()){
-							Gdx.app.log("TBF", "Your content to paste is null returning ");
-							return;
-						}
-					String sPaste = Global.clipboard.getContents();
-					Gdx.app.log("TBF", "I will paste "+ sPaste );
-					textArea.appendText(sPaste);
-		//Gdx.app.postRunnable(new Runnable() {
-		//		 @Override
-		//		 public void run() {
-		//			String sPaste = Global.clipboard.getContents();
-		//			if (OS.ANDROID == Global.platformOs.getOs()){
-		//				sPaste = sPaste.replaceAll(Global.ENTER_DESKTOP, Global.ENTER_ANDROID);
-		//			}
-		//			else{
-		//				sPaste = sPaste.replaceAll(Global.ENTER_ANDROID, Global.ENTER_DESKTOP);
-		//			}
-		//			Gdx.app.log("TBF", "I will paste "+ sPaste );
-		//			textArea.appendText(sPaste);
-		//		 }
-		//	  });
+		Runnable runnable = new Runnable() {
+			 @Override
+			 public void run() {
+				String sPaste = Global.clipboard.getContents();
+				if (OS.ANDROID == Global.platformOs.getOs()){
+					sPaste = sPaste.replaceAll(Global.ENTER_DESKTOP, Global.ENTER_ANDROID);
+				}
+				else{
+					sPaste = sPaste.replaceAll(Global.ENTER_ANDROID, Global.ENTER_DESKTOP);
+				}
+				Gdx.app.log("TBF", "I will paste "+ sPaste );
+				textArea.appendText(sPaste);
+			 }
+		  };
+		Global.platformOs.runOnUiThread(runnable);
 	}
 
 	public void routineCopy(){
