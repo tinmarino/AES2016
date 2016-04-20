@@ -13,6 +13,9 @@ public class KeyObject{
 
 
 
+		public KeyObject(){
+			label = "NoKey";
+		}
 
 		/* To cipher the key to save
 		*/ 

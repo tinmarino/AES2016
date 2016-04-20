@@ -1,5 +1,5 @@
 TODO 
-	ParamScreen : add a label with the curren tKey in use
+	ParamScreen : add a label with the curren tKey in use init keyObject label anyway 
 	make the cipher , uncipher in a try catch 
 	
  

@@ -91,6 +91,9 @@ public class Global{
 		if (preferenceSaved.keyList != null && preferenceSaved.keyList.size() > 0){
 			keyObject = preferenceSaved.keyList.get(0);
 		}
+		else{
+			keyObject = new KeyObject();
+		}
 		// FONT 
 		int fontsize = 32;
 		if (OS.ANDROID == platformOs.getOs() && 500 > Gdx.graphics.getHeight() ){fontsize/=2;}

@@ -40,6 +40,7 @@ public class ParamScreen extends AbstractScreen {
 	Table      	table, tKey;
 	CheckBox 	cb1, cb2, cb3, cb4;
 	TextField 	tfNewKey, tfNewLabel;
+	Label 		lCurrentKey;
 
 	// VARS 
 	List<KeyObject> listKeyToDelete = new ArrayList<KeyObject>();
@@ -178,6 +179,12 @@ public class ParamScreen extends AbstractScreen {
 		tUseSave.add(tbSaveNewKey).pad(4);
 		tNewKey.add(tUseSave).colspan(2).expandX().row();
 		
+		// LABEL KEY IN USE
+		Table tCurrentKey       = new Table(); 
+		Label lCurrentKeyPrefix = new Label("Using key labelled :", lStyle);
+		lCurrentKey = new Label(Global.keyObject.label, lStyle);
+		tCurrentKey.add(lCurrentKeyPrefix);
+		tCurrentKey.add(lCurrentKey).expand().fill();
 
 
 
@@ -245,6 +252,8 @@ public class ParamScreen extends AbstractScreen {
 		table.add(keyScrollPane).height(iKeyScrollPaneHeight).expandX().fill().row();
 		table.add(new Label("New Key---------------------------------", lStyleChapter) ).expandX().fill().row();
 		table.add(tNewKey).expandX().fill().row();
+		table.add(new Label("Current Key---------------------------------", lStyleChapter) ).expandX().fill().row();
+		table.add(tCurrentKey).expandX().fill().row();
 		//table.add(new Label("Misc--------------------------------", lStyleChapter) ).expandX().fill().row();
 		//table.add(tCipherType).expandX().fill().row();
 		//table.add(isDebuggingCheckBox).expandX().fill().row();
@@ -318,7 +327,7 @@ public class ParamScreen extends AbstractScreen {
 
 	public void routineLabelKey(KeyObject keyObject){
 		Gdx.app.log("TBF", "You choosed key:" + keyObject.label);
-		Global.keyObject = keyObject;
+		setKey(keyObject);
 	}
 
 	public void routineSaveNewKey(KeyObject keyObject){
@@ -328,12 +337,18 @@ public class ParamScreen extends AbstractScreen {
 		tKey.remove();
 		tKey = tableSavedKey();
 		keyScrollPane.setWidget(tKey);
-		Global.keyObject = keyObject;
+		keyObject.cipherKey();
+		setKey(keyObject);
 	}
 
 	public void routineUseNewKey(KeyObject keyObject){
 		keyObject.cipherKey();
+		setKey(keyObject);
+	}
+
+	public void setKey(KeyObject keyObject){
 		Global.keyObject = keyObject;
+		lCurrentKey.setText(keyObject.label);
 	}
 
 	public void routineRmKey(){
