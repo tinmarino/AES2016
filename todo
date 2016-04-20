@@ -15,6 +15,7 @@ TOREAD  (and todo less important)
 V2	: 
   	html: when return from other screen, I cannot push buttons
   	html : switch between delete and supp, both are using backspace method
+	html : manage the copy paste otherwise it is useless 
   	Pretty : make 3 styles, 
   	UNDO and REDO button better. (with trees, nice style linked list UI )
   	TextArea : part tro ploin, vers le haut et on perd la vue. 
@@ -122,6 +123,7 @@ GRADLE
 		jarsigner -verify -verbose -certs v1-release-unsigned.apk
 
 		# 4/ Align 
+		/home2/tourneboeuf/Software/Android/SDK/android-sdk-linux/build-tools/22.0.1/zipalign  -v 4 v1-release-unsigned.apk v1-release-aligned.apk
 
 
 	ANDROID 
