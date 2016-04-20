@@ -97,33 +97,35 @@ public class MyCipher{
 	/*  Main uncipher
 	 */
 	public static  String UncipherText(String text){
-		String 	res = ""; 
-		Boolean bol = false ; 
+		String 	res 			= ""; 
+		String 	cipheredText 	= ""; 
+		String 	header  		= "";
+		Boolean bol 			= false ; 
 
+		// DIVIDE TEXT 
+		String[] listChapter = text.split("--+",10);
+	 	// TODO check if we got something 	
+		header 		 = listChapter[0];
+		cipheredText = listChapter[1];
+		cipheredText = cipheredText.substring(1, cipheredText.length()-1); // Delete the /n and /n at begining and end
+		// HEADER 
 		// TEST if starting by IV (again)
-		bol  = 2 < text.length() ;
-		if (bol){bol &= "IV".equals(text.substring(0,2)) ;}
+		bol  = 2 < header.length() ;
+		if (bol){bol &= "IV".equals(header.substring(0,2)) ;}
 		if (!bol){
 			Gdx.app.log("MyCipher", "No IV, I cannot uncipher :" + text);
 			return "No IV I cannot uncipher !!";
 		}
-
-
 		// GET IV 
-		String ivString = text.split("=")[1].split("\n")[0].split("\r")[0]; 
+		String ivString = header.split("=")[1].split("-")[0]; // between = and - 
 		byte[] IVshowed  = Base64.decode(ivString);
 		IV = new byte[iBlockSize];
 		for (int i=0; (IVshowed.length > i) & (IV.length > i); i++){
 			IV[i] = IVshowed[i];
 		}
 
-		// Get Ciphered text
-		String[] tmp = text.split("-+",10);
-		res = tmp[1];
-		res = res.substring(1, res.length()-1); // Delete the /n and /n at begining and end
-
 		// Uncipher text
-		res = (MyAesCipher(res, false));
+		res = (MyAesCipher(cipheredText, false));
 
 		return res; 
 	}
@@ -146,11 +148,10 @@ public class MyCipher{
 
 		// Create String to put in textArea 
 		String IV64 = new String(Base64.encode(bShowedIV));
-		res  = "IV1=";
-		res	+=  IV64;
-		res += Global.sReturn + "------------------------------------" + Global.sReturn;
-		res += MyAesCipher(text, true);
-		res += Global.sReturn + "------------------------------------" + Global.sReturn;
+		res  = "IV1=" + IV64 + "-" + Global.sReturn;
+		res += "------------------------------------" ;
+		res +=  Global.sReturn + MyAesCipher(text, true) + Global.sReturn;
+		res += "------------------------------------" + Global.sReturn;
 
 		return res; 
 	}
