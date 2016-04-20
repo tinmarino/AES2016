@@ -31,7 +31,7 @@ public class GuiParameter{
 	public static Color colPTextCursor		= HtmlColor.Steel;
 	public static Color colPTextSelection	= HtmlColor.DarkBlue;
 	public static Color colPTextBck			= HtmlColor.Pewter;
-	public static Color colPChapFont		= HtmlColor.DarkBlue;
+	public static Color colPChapFont		= HtmlColor.Steel;
 	public static Color colPLabelFont		= HtmlColor.DarkBlue;
 	public static Color colPCbFont			= HtmlColor.Steel;
 	public static Color colPButtonFont		= HtmlColor.Black;

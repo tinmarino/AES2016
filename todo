@@ -1,12 +1,10 @@
 TODO 
-	ParamScreen : add a label with the curren tKey in use init keyObject label anyway 
-	make the cipher , uncipher in a try catch 
 	
  
 
 
 TOREAD  (and todo less important)
-  	vim : abreviation for GDX.app.log
+  	vim : abreviation for GDX.app.log libgdx make error and log 
 	vim : better fold, 
 	vim : ctrl + move to move faster
 	vim : commit changes well
@@ -18,11 +16,13 @@ V2	:
   	html: when return from other screen, I cannot push buttons
   	html : switch between delete and supp, both are using backspace method
   	Pretty : make 3 styles, 
-  	UNDO and REDO button better. 
+  	UNDO and REDO button better. (with trees, nice style linked list UI )
   	TextArea : part tro ploin, vers le haut et on perd la vue. 
   	make default bck whitter.  and button font alwyas black in default style 
   	Send directly to in android.
   	Make textAreaHeight also reduce when deleteing, increase when pasting .... set it at each button press
+	paramscrenen : and some misc params like dbg and style (= colors)
+	global : make the styles in their own class
 
 
 
@@ -52,6 +52,7 @@ SOLVED
   		-> Just remove the thing in androidManifest
   ANDROID, desktop replace \r par \n everywhere  and everywhen 
        -> This pb should be solved with overritting the setText of TExtArea, 
+  make the cipher , uncipher in a try catch 
 	 	
 
 
@@ -191,3 +192,9 @@ DBG OLD
 -               //toAdd.label = "This is the label I want to see";
 -               //Global.preferenceSaved.keyList.add(toAdd);
 -               //Global.writePref();
+
+
+IN PARMA SCREN 
+		//table.add(new Label("Misc--------------------------------", lStyleChapter) ).expandX().fill().row();
+		//table.add(tCipherType).expandX().fill().row();
+		//table.add(isDebuggingCheckBox).expandX().fill().row();

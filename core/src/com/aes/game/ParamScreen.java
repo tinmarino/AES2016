@@ -181,7 +181,7 @@ public class ParamScreen extends AbstractScreen {
 		
 		// LABEL KEY IN USE
 		Table tCurrentKey       = new Table(); 
-		Label lCurrentKeyPrefix = new Label("Using key labelled :", lStyle);
+		Label lCurrentKeyPrefix = new Label( "--->", lStyle);
 		lCurrentKey = new Label(Global.keyObject.label, lStyle);
 		tCurrentKey.add(lCurrentKeyPrefix);
 		tCurrentKey.add(lCurrentKey).expand().fill();
@@ -239,8 +239,6 @@ public class ParamScreen extends AbstractScreen {
 
 
 
-		// SAVE PARAMS 
-
 		
 		// PACK 
 		Table tCipherType = new Table();
@@ -248,21 +246,15 @@ public class ParamScreen extends AbstractScreen {
 		tCipherType.add(cb2).expandX().fill().row();
 
 		int iKeyScrollPaneHeight = (int) Math.max(Gdx.graphics.getWidth()/4, lNewKey.getHeight()*5) ;
-		table.add(new Label("Saved Key---------------------------------", lStyleChapter) ).expandX().fill().row();
+		table.add(new Label("Saved Key----", lStyleChapter) ).expandX().fill().row();
 		table.add(keyScrollPane).height(iKeyScrollPaneHeight).expandX().fill().row();
-		table.add(new Label("New Key---------------------------------", lStyleChapter) ).expandX().fill().row();
+		table.add(new Label("New Key------", lStyleChapter) ).expandX().fill().row();
 		table.add(tNewKey).expandX().fill().row();
-		table.add(new Label("Current Key---------------------------------", lStyleChapter) ).expandX().fill().row();
+		table.add(new Label("Current Key--", lStyleChapter) ).expandX().fill().row();
 		table.add(tCurrentKey).expandX().fill().row();
-		//table.add(new Label("Misc--------------------------------", lStyleChapter) ).expandX().fill().row();
-		//table.add(tCipherType).expandX().fill().row();
-		//table.add(isDebuggingCheckBox).expandX().fill().row();
-		table.add(new Label("Return------------------------------", lStyleChapter) ).expandX().fill().row();
+		table.add(new Label("Return-------", lStyleChapter) ).expandX().fill().row();
 		table.add(tBackExit).row();
 		table.add(new Label("------", lStyleChapter) ).expandX().fill().row();
-		//for(int  i= 0; i<30; i++){
-		//	table.add(new Label("Alea jacta est",lStyle)).row();
-		//}
 
 
 		scrollPane = new ScrollPane(table); 
@@ -326,7 +318,6 @@ public class ParamScreen extends AbstractScreen {
 	}
 
 	public void routineLabelKey(KeyObject keyObject){
-		Gdx.app.log("TBF", "You choosed key:" + keyObject.label);
 		setKey(keyObject);
 	}
 

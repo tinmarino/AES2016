@@ -49,15 +49,14 @@ public class MyCipher{
 		}
 
 		// TEST if starting by IV
-		bol  = 2 < sIn.length() ;
-		if (bol){bol &= "IV".equals(sIn.substring(0,2)) ;}
+		bol = doCipher(sIn);
 
 		// CIPHER KEY 
 		key = CipherKey(Global.keyObject.savedKey, Global.keyObject.savedKey);
 		
 
 		// UNCIPHER
-		if (bol){
+		if (!bol){
 			Gdx.app.log("MainRendered ", "Unciphereing"); 
 			sOut = UncipherText(sIn);
 		}
@@ -75,23 +74,25 @@ public class MyCipher{
 
 	}
 
-	/* The sizes of the input must be good, expecially key4Key!!!
-	 */ 
-	public static byte[] CipherKey(byte[] key4Key, byte[] clear4Key){
-		byte[] cipheredKey = new byte[iBlockSize];
-
-
-		CipherParameters paramKey = new KeyParameter(key4Key);
-    	PaddedBufferedBlockCipher aes = new PaddedBufferedBlockCipher(
-			new CBCBlockCipher(new AESEngine()));
-		aes.init(true, paramKey);
-		try {
-			cipheredKey = cipherData(aes, clear4Key);
-		} catch (Exception e) {
-			Gdx.app.log("TBF", "ERROR at CipherKey "  + e);
-			e.printStackTrace();
+	public static Boolean doCipher(String sIn){
+		String[] listChapter = sIn.split("--+",10);
+		if ( 2 > listChapter.length){
+			Gdx.app.log("TBF", "doCipher, split trop courtin");
+			return true;
 		}
-		return cipheredKey; 
+
+		String header 		 = listChapter[1];
+		if (3 > header.length()) {
+			Gdx.app.log("TBF", "doCipher, header trop courtin" + header);
+			return true;
+		}
+
+		header 		 		 = header.substring(1,header.length());
+		if (!"IV".equals(header.substring(0,2))){
+			Gdx.app.log("TBF", "doCipher, header not starttin by IV" + header);
+			return true;
+		}
+		return false;
 	}
 
 	/*  Main uncipher
@@ -104,13 +105,14 @@ public class MyCipher{
 
 		// DIVIDE TEXT 
 		String[] listChapter = text.split("--+",10);
-		if ( 2 > listChapter.length){
+		if ( 3 > listChapter.length){
 			res = "Not good unciphered Text, must be divided by -------";
 			Gdx.app.log("TBF", res);
 			return res; 
 		}
-		header 		 = listChapter[0];
-		cipheredText = listChapter[1];
+		header 		 = listChapter[1];
+		header 		 = header.substring(1,header.length());
+		cipheredText = listChapter[2];
 		cipheredText = cipheredText.substring(1, cipheredText.length()-1); // Delete the /n and /n at begining and end
 
 
@@ -150,11 +152,11 @@ public class MyCipher{
 			IV[i] 		 = (byte) rn.nextInt(); 
 			bShowedIV[i] = IV[i]; 
 		}
-
+		String IV64 = new String(Base64.encode(bShowedIV));
 
 		// Create String to put in textArea 
-		String IV64 = new String(Base64.encode(bShowedIV));
-		res  = "IV1=" + IV64 + "-" + Global.sReturn;
+		res += "------------------------------------" ;
+		res +=  Global.sReturn + "IV1=" + IV64 + "-" + Global.sReturn;
 		res += "------------------------------------" ;
 		res +=  Global.sReturn + MyAesCipher(text, true) + Global.sReturn;
 		res += "------------------------------------" + Global.sReturn;
@@ -215,6 +217,24 @@ public class MyCipher{
 		return res;
 	}
 
+	/* The sizes of the input must be good, expecially key4Key!!!
+	 */ 
+	public static byte[] CipherKey(byte[] key4Key, byte[] clear4Key){
+		byte[] cipheredKey = new byte[iBlockSize];
+
+
+		CipherParameters paramKey = new KeyParameter(key4Key);
+    	PaddedBufferedBlockCipher aes = new PaddedBufferedBlockCipher(
+			new CBCBlockCipher(new AESEngine()));
+		aes.init(true, paramKey);
+		try {
+			cipheredKey = cipherData(aes, clear4Key);
+		} catch (Exception e) {
+			Gdx.app.log("TBF", "ERROR at CipherKey "  + e);
+			e.printStackTrace();
+		}
+		return cipheredKey; 
+	}
 
 	/*  Internal Util function :
 	 *  Cipher byte array with a PaddedBlcok cipher. 
