@@ -20,6 +20,16 @@ public class TextAreaX extends TextArea {
 
 
 
+	@Override 
+	public void setText(String str){
+		if (OS.ANDROID == Global.platformOs.getOs()){
+			str = str.replaceAll( "" + ENTER_DESKTOP, "" + ENTER_ANDROID);
+		}
+		else{
+			str = str.replaceAll( "" + ENTER_ANDROID, "" + ENTER_DESKTOP);
+		}
+		super.setText(str);
+	}
 
 
 
