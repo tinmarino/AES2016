@@ -1,12 +1,14 @@
 TODO 
 	SAy what key you used When only one key, cipher with taht key. 
 	make the cipher , uncipher in a try catch 
+	
   	ANDROID, desktop replace \r par \n everywhere  and everywhen 
 	make a script to eclim / prepare you vom terminal to be here and launch session 
  
 
 
 TOREAD  (and todo less important)
+  	vim : abreviation for GDX.app.log
 	maybe make a pad around the main window in desktop gui
 	android : autoscorll when return because I want to see the text, it will become hidden behind the keyboard
   	andoird : make enable send by sms

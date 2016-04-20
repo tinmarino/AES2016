@@ -104,6 +104,7 @@ public class MyCipher{
 
 		// DIVIDE TEXT 
 		String[] listChapter = text.split("--+",10);
+	 	// TODO check if we got something 	
 		if ( 2 > listChapter.length){
 			res = "Not good unciphered Text, must be divided by -------";
 			Gdx.app.log("TBF", res);
@@ -112,6 +113,7 @@ public class MyCipher{
 		header 		 = listChapter[0];
 		cipheredText = listChapter[1];
 		cipheredText = cipheredText.substring(1, cipheredText.length()-1); // Delete the /n and /n at begining and end
+		Gdx.app.log("TBF", "listChapter 3 : " + listChapter[3] );
 
 
 		// HEADER 
