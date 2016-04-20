@@ -1,14 +1,16 @@
 TODO 
-	SAy what key you used When only one key, cipher with taht key. 
+	ParamScreen : add a label with the curren tKey in use
 	make the cipher , uncipher in a try catch 
 	
-  	ANDROID, desktop replace \r par \n everywhere  and everywhen 
-	make a script to eclim / prepare you vom terminal to be here and launch session 
  
 
 
 TOREAD  (and todo less important)
   	vim : abreviation for GDX.app.log
+	vim : better fold, 
+	vim : ctrl + move to move faster
+	vim : commit changes well
+	vim : make a script to eclim / prepare you vom terminal to be here and launch session 
 	maybe make a pad around the main window in desktop gui
 	android : autoscorll when return because I want to see the text, it will become hidden behind the keyboard
   	andoird : make enable send by sms
@@ -48,6 +50,8 @@ SOLVED
 		must be run on main uiThread and not in gdx mainLoop : cant refer to activity in gdx mainloop
   android : be able to put in paysage 
   		-> Just remove the thing in androidManifest
+  ANDROID, desktop replace \r par \n everywhere  and everywhen 
+       -> This pb should be solved with overritting the setText of TExtArea, 
 	 	
 
 
