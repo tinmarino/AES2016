@@ -82,10 +82,16 @@ public class Global{
 	/* Init method, init all parameters, all required params must be setted here
 	*/
 	public static void init(){
+		// INPUT 
 		Global.inputMultiplexer 	= new InputMultiplexer();
+		Gdx.input.setInputProcessor(Global.inputMultiplexer);
+		// PREF, KEY
 		Global.preferenceSaved  	= new PreferenceSaved();
 		Global.readPref();
-		Global.preferenceSaved.initDebug();
+		if (preferenceSaved.keyList != null && preferenceSaved.keyList.size() > 0){
+			keyObject = preferenceSaved.keyList.get(0);
+		}
+		// FONT 
 		int fontsize = 32;
 		if (OS.ANDROID == platformOs.getOs() && 500 > Gdx.graphics.getHeight() ){fontsize/=2;}
 		Global.font 		= platformOs.getFont(fontsize);
@@ -93,7 +99,6 @@ public class Global{
 
 		// To prevent backKey from returning
 		Gdx.input.setCatchBackKey(true);
-		Gdx.input.setInputProcessor(Global.inputMultiplexer);
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
 		// Return Key 
